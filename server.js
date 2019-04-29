@@ -47,10 +47,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.get('/', (req, res)=>{
-  console.log('Hello')
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-})
+// app.get('/', (req, res)=>{
+//   console.log('Hello')
+//   res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
 // app.get("/", (req, res) => res.send("Welcome to Announce API"));
 

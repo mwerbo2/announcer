@@ -2,12 +2,12 @@ import auth0 from 'auth0-js';
 
 class Auth {
   constructor() {
-    console.log('auth.js', process.env.MEOW);
+    console.log('auth.js', process.env);
     this.auth0 = new auth0.WebAuth({
         domain: `${process.env.REACT_APP_Auth0_Domain}`,
         audience: `https://${process.env.REACT_APP_Auth0_Domain}/userinfo`,
         clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
-        redirectUri: process.env.ENVIRONMENT === 'development' ? `http://announcesign.devsmithone.com:3000/callback` : `http://localhost:3000/callback`,
+        redirectUri: process.env.NODE_ENV === 'development' ? `http://localhost:3000/callback`: `http://announcesign.devsmithone.com:3000/callback`,
         responseType: `id_token`,
         scope: `openid profile`
     });
@@ -67,7 +67,7 @@ class Auth {
     localStorage.removeItem('isLoggedIn')
 
     this.auth0.logout({
-      returnTo: process.env.ENVIRONMENT === 'development' ? `http://announcesign.devsmithone.com:3000` : `http://localhost:3000/`,
+      returnTo: process.env.NODE_ENV === 'development' ? `http://localhost:3000/` : `http://announcesign.devsmithone.com:3000`,
       clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
     });
   }
