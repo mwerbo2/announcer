@@ -10,13 +10,17 @@ sudo apt-get install -y nodejs
 
 sudo apt-get install -y postgresql postgresql-contrib
 
-sudo -u postgres psql postgres
+su - postgres
 
-\password postgres
+createuser --interactive --pwprompt
+
+exit 
 
 sudo -u postgres createdb announcetwo
 
 npm install -g nodemon
+
+cd ~/announcer
 
 npm install
 
