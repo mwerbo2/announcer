@@ -16,5 +16,7 @@ cd client
 
 npm install
 
+cd ..
+
 npm run serve
 
