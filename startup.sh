@@ -3,8 +3,10 @@ echo "hello world"
 chmod +x startup.sh 
 
 sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get dist-upgrade
+
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+sudo apt-get install -y nodejs
 
 sudo apt-get install postgresql postgresql-contrib
 
