@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "hello world" 
+echo "Setting up announcement" 
 chmod +x startup.sh 
 
 sudo apt-get update
@@ -10,17 +10,11 @@ sudo apt-get install -y nodejs
 
 sudo apt-get install -y postgresql postgresql-contrib
 
-createuser -P -D -R -S announcedbuser
+sudo su postgres
 
-psql -f 
+psql -f init.sql 
 
-
-
-su - postgres
-
-createuser --interactive --pwprompt 
-
-sudo -u postgres createdb announcetwo
+exit 
 
 npm install -g nodemon
 
