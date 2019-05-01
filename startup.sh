@@ -10,11 +10,15 @@ sudo apt-get install -y nodejs
 
 sudo apt-get install -y postgresql postgresql-contrib
 
+createuser -P -D -R -S announcedbuser
+
+psql -f 
+
+
+
 su - postgres
 
-createuser --interactive --pwprompt
-
-exit 
+createuser --interactive --pwprompt 
 
 sudo -u postgres createdb announcetwo
 
@@ -31,4 +35,5 @@ npm install
 cd ..
 
 npm run serve
+
 
