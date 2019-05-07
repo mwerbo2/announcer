@@ -49,8 +49,9 @@ class AnnouncementPlaceholder extends React.Component {
       )
       .then(response => {
         // console.log("saved ann: ", response.data[0].id);
+        console.log("ap.js 52", response.data)
 
-        this.setState({post_id: response.data[0].id, openModal: true, title:"", body:""})
+        this.setState({post_id: response.data.id, openModal: true, title:"", body:""})
         // console.log("state", this.state.post_id)
         // console.log(this.state.openModal);
       })
@@ -132,7 +133,9 @@ class AnnouncementPlaceholder extends React.Component {
             />
             <Modal
             open={this.state.openModal}
-              // trigger={<Icon name="calendar times outline" size="large" />}
+            // closeOnEscape={this.closeOnEscape}
+            // closeOnDimmerClick={this.closeOnDimmerClick}
+            // onClose={this.closeModal}
             >
               <Modal.Header>Schedule your announcement</Modal.Header>
               <Modal.Content>
