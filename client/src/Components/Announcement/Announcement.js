@@ -44,12 +44,11 @@ class Announcement extends React.Component {
     // if (this.state)
     const postId = this.props.post_id;
     axios
-      .post("/announcements", {
+      .put(`/announcements/${postId}`, {
         user_id: 999999993,
         announcement_title: this.state.title,
         announcement_body: this.state.body,
-        status: "active",
-        announcementId: postId
+        status: "active"
       })
       .then((res) => this.openModal(res))
       .catch(function(error) {

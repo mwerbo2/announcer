@@ -6,7 +6,7 @@ const Op = Sequelize.Op;
 const createAnnouncement = async (req, res) => {
   try {
     const post = await Announcement.create({
-      user_id: req.user.user_id,
+      user_id: req.body.user_id,
       announcement_title: req.body.announcement_title,
       announcement_body: req.body.announcement_body,
       status: req.body.status
@@ -87,7 +87,7 @@ const updateAnnoucement = async (req, res) => {
       },
       {
         where: {
-          id: req.body.announcementId
+          id: req.params.id
         }
       }
     );
