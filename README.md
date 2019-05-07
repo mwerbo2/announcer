@@ -1,1 +1,2 @@
-# sqlize
+# Announcer
+## Make announcements with ease. 
