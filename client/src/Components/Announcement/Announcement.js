@@ -153,7 +153,10 @@ class Announcement extends React.Component {
             <Icon name="calendar times outline" size="large" />
             <Modal
               open={this.state.openModal}
+              // closeOnEscape={this.closeOnEscape}
+              closeOnDimmerClick={this.closeOnDimmerClick}
               trigger={<Icon name="calendar times outline" size="large" />}
+              onClose={this.closeModal}
             >
               <Modal.Header>Schedule your announcement</Modal.Header>
               <Modal.Content>

@@ -132,10 +132,7 @@ class AnnouncementPlaceholder extends React.Component {
               onClick={this.saveAnnouncement}
             />
             <Modal
-            open={this.state.openModal}
-            // closeOnEscape={this.closeOnEscape}
-            // closeOnDimmerClick={this.closeOnDimmerClick}
-            // onClose={this.closeModal}
+            open={this.state.openModal}            
             >
               <Modal.Header>Schedule your announcement</Modal.Header>
               <Modal.Content>
