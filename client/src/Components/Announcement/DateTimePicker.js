@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, List, Header, Icon, Message} from 'semantic-ui-react';
+import { Button, List, Header, Icon, Message } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
@@ -29,39 +29,48 @@ class DateAndTimePickers extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleStartTime = this.handleStartTime.bind(this);
     this.handleEndTime = this.handleEndTime.bind(this);
-    
 
     this.state = {
       // defaultDate: new Date('2019-03-27T10:30'),
       startTime: "date",
       endTime: "date",
       currentSchedule: [],
-      postMessage: ""
+      postMessage: "",
+      scheduleDeleted: false
     };
   }
   closeModal(res) {
-    this.setState({ postMessage: res.statusText})
+    this.setState({ postMessage: res.statusText });
     this.props.closeMod();
     console.log(this.state.postMessage);
-    
   }
   componentDidMount() {
-    console.log("mount: ", this.props.post_id)
-    axios.get(`/schedules/${this.props.post_id}`)
-    .catch(error => console.log(error))
-    .then(res => this.setState({currentSchedule: res.data}))
+    console.log("mount: ", this.props.post_id);
+    axios
+      .get(`/schedules/${this.props.post_id}`)
+      .catch(error => console.log(error))
+      .then(res => this.setState({ currentSchedule: res.data }));
   }
 
-  handleSubmit = e => { 
-    console.log("dt.js ", this.props.post_id)   
-    // console.log("line 49", this.props.post_id.props.post_id); 
+  deleteSchedule = () => {
+    axios
+      .delete(`/announcements/${this.props.post_id}`)
+      .catch(error => console.log(error))
+      .then(res => this.setState({ scheduleDeleted: true }));
+  };
+
+  handleSubmit = e => {
+    console.log("dt.js ", this.props.post_id);
+    // console.log("line 49", this.props.post_id.props.post_id);
     e.preventDefault();
     const p_id = this.props.post_id;
     const start = new Date(this.state.startTime);
     const end = new Date(this.state.endTime);
     // console.log("pid", p_id);
 
-    axios.post("/schedules",
+    axios
+      .post(
+        "/schedules",
         {
           date_time_start: start,
           date_time_end: end,
@@ -71,7 +80,7 @@ class DateAndTimePickers extends React.Component {
           headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
         }
       )
-      .then((res) =>  this.closeModal(res))
+      .then(res => this.closeModal(res))
       .catch(err => console.log(err));
 
     // axios.get(`/announcements/schedule/${p_id}`)
@@ -91,91 +100,102 @@ class DateAndTimePickers extends React.Component {
     if (this.state.currentSchedule.length === 0) {
       return (
         <div>
-        <div className={this.props.classes.flexcontainer}>
-        <form
-          className={this.props.container}
-          noValidate
-          onSubmit={this.handleSubmit}
-        >
-          <TextField
-            id="datetime-local"
-            label="Day / time to start"
-            type="datetime-local"
-            defaultValue="2019-03-27T10:30"
-            className={this.props.classes.textField}
-            onChange={this.handleStartTime}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            id="datetime-local"
-            label="Day / time to end"
-            type="datetime-local"
-            defaultValue="2019-03-27T10:30"
-            className={this.props.classes.textField}
-            onChange={this.handleEndTime}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <Button type='submit' positive>Save</Button>
-        </form>
-        <Header as="h3">{this.state.postMessage}</Header>
+          <div className={this.props.classes.flexcontainer}>
+            <form
+              className={this.props.container}
+              noValidate
+              onSubmit={this.handleSubmit}
+            >
+              <TextField
+                id="datetime-local"
+                label="Day / time to start"
+                type="datetime-local"
+                defaultValue="2019-03-27T10:30"
+                className={this.props.classes.textField}
+                onChange={this.handleStartTime}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <TextField
+                id="datetime-local"
+                label="Day / time to end"
+                type="datetime-local"
+                defaultValue="2019-03-27T10:30"
+                className={this.props.classes.textField}
+                onChange={this.handleEndTime}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <Button type="submit" positive>
+                Save
+              </Button>
+            </form>
+            <Header as="h3">{this.state.postMessage}</Header>
+          </div>
+          <Header as="h2">
+            <Icon name="calendar" />
+            <Header.Content>No Schedules</Header.Content>
+          </Header>
         </div>
-        <Header as='h2'>
-        <Icon name='calendar' />
-        <Header.Content>No Schedules</Header.Content>
-      </Header>
-      
-      </div>
-      )
+      );
     } else {
       return (
         <div>
-        <div className={this.props.classes.flexcontainer}>
-        <form
-          className={this.props.container}
-          noValidate
-          onSubmit={this.handleSubmit}
-        >
-          <TextField
-            id="datetime-local"
-            label="Day / time to start"
-            type="datetime-local"
-            defaultValue="2019-03-27T10:30"
-            className={this.props.classes.textField}
-            onChange={this.handleStartTime}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            id="datetime-local"
-            label="Day / time to end"
-            type="datetime-local"
-            defaultValue="2019-03-27T10:30"
-            className={this.props.classes.textField}
-            onChange={this.handleEndTime}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <Button type='submit' positive>Save</Button>
-        </form>
-        <Header as="h3">{this.state.postMessage}</Header>
-      </div>
-        <Header as="h2">Current Schedule</Header>
-        {this.state.currentSchedule.map(schedule => {
-          return (<Header as='h3'><Icon name='calendar' /><Header.Content>{schedule.date_time_start}   {schedule.date_time_end}</Header.Content></Header>)
-        })}
-        
-      </div>
-      )
-
+          <div className={this.props.classes.flexcontainer}>
+            <form
+              className={this.props.container}
+              noValidate
+              onSubmit={this.handleSubmit}
+            >
+              <TextField
+                id="datetime-local"
+                label="Day / time to start"
+                type="datetime-local"
+                defaultValue="2019-03-27T10:30"
+                className={this.props.classes.textField}
+                onChange={this.handleStartTime}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <TextField
+                id="datetime-local"
+                label="Day / time to end"
+                type="datetime-local"
+                defaultValue="2019-03-27T10:30"
+                className={this.props.classes.textField}
+                onChange={this.handleEndTime}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <Button type="submit" positive>
+                Save
+              </Button>
+            </form>
+            <Header as="h3">{this.state.postMessage}</Header>
+          </div>
+          <Header as="h2">Current Schedule</Header>
+          {this.state.currentSchedule.map(schedule => {
+            return (
+              <Header as="h3">
+                <Icon name="calendar" />
+                <Header.Content>
+                  {schedule.date_time_start} {schedule.date_time_end}
+                </Header.Content>{" "}
+                <Icon
+                  name="trash alternate"
+                  size="large"
+                  onClick={this.deleteSchedule}
+                />
+              </Header>
+            );
+          })}
+        </div>
+      );
     }
-
-    
   }
 }
 
