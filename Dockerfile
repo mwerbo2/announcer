@@ -1,18 +1,20 @@
-FROM node:10
-
-RUN mkdir /app
-
-RUN cp . ./app
+FROM node
 
 WORKDIR /app
 
-RUN npm install
-
-RUN cd /client
+COPY package*.json ./
 
 RUN npm install
 
-RUN CD ..
+COPY . .
+
+RUN ls
+
+RUN cd client
+
+RUN npm install
+
+RUN cd ..
 
 EXPOSE 3001
 
