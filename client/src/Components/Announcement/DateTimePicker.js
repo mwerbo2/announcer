@@ -59,7 +59,12 @@ class DateAndTimePickers extends React.Component {
       .then(res => this.setState({ scheduleDeleted: true }));
   };
 
+  checkSchedule = () => {
+    this.state.currentSchedule ? console.log('a') : console.log('meow')
+  }
+
   handleSubmit = e => {
+    this.checkSchedule();
     console.log("dt.js ", this.props.post_id);
     // console.log("line 49", this.props.post_id.props.post_id);
     e.preventDefault();
@@ -67,7 +72,19 @@ class DateAndTimePickers extends React.Component {
     const start = new Date(this.state.startTime);
     const end = new Date(this.state.endTime);
     // console.log("pid", p_id);
-
+    if (this.state.currentSchedule.length > 0) {
+      axios.put(`/schedules/${p_id}`,
+      {
+        date_time_start: start,
+        date_time_end: end,
+      },
+      {
+        headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
+      }
+    )
+    .then(res => this.closeModal(res))
+    .catch(err => console.log(err));
+  } else {
     axios
       .post(
         "/schedules",
@@ -82,10 +99,7 @@ class DateAndTimePickers extends React.Component {
       )
       .then(res => this.closeModal(res))
       .catch(err => console.log(err));
-
-    // axios.get(`/announcements/schedule/${p_id}`)
-    // .then(res => console.log("line 66 dtp.js", res))
-    // .catch(err => console.log(err))
+  }
   };
 
   handleStartTime = e => {
