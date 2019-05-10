@@ -17,8 +17,8 @@ import Schedule from "./models/schedulemodel";
 import Board from './models/boardModel';
 import { job } from './controllers/CronJobs';
 import { getAllAnnouncements } from './controllers/announcementcontroller';
-Announcement.hasOne(Schedule);
-Schedule.belongsTo(Announcement);
+Announcement.hasOne(Schedule, {unique:true});
+// Schedule.belongsTo(Announcement, {unique:true});
 Board.hasMany(Announcement);
 sequelize.sync();
 sequelize
@@ -53,7 +53,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // })
 
 // app.get("/", (req, res) => res.send("Welcome to Announce API"));
-
+// /
 // require('./Routes/userRoutes')(app);
 require("./Routes/weatherRoutes")(app);
 require("./Routes/announcementRoutes")(app);
