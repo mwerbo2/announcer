@@ -5,26 +5,25 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://user:pass@postgres:5432/db
+      username: user
+      password: pass
+      database: announcetwo
+      DATABASE_URL: postgres://user:pass@postgres:5432/announcetwo
       NODE_ENV: development
       PORT: 3000
     ports:
-      - "3000:3000"
+      - "3000:3001"
     command: npm run dev
     volumes:
       - .:/app/
       - /app/node_modules
 
   postgres:
+    container_name: "postgres_db"
     image: postgres:10.4
     ports:
-      - "35432:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
-      POSTGRES_DB: db
-
-
-      docker exec -it demo2 psql -U postgres
-
-      docker run --name announcedb -e POSTGRES_PASSWORD=test -d announcedb -p 7015:5432
+      POSTGRES_DB: announcetwo
