@@ -22,7 +22,7 @@ class DateTime extends React.Component {
   render() {
     return (
       <Container>
-        <Header as="h2">{this.state.dateTime}</Header>
+        <Header as="h2" inverted>{this.state.dateTime}</Header>
       </Container>
     );
   }

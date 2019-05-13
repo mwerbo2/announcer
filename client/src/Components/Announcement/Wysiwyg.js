@@ -25,7 +25,7 @@ class Wysiwyg extends React.Component {
             height: "500",
             plugins: "link image code lists",
             toolbar:
-              "undo redo | bold italic | alignleft aligncenter alignright | code image | numlist bullist"
+              "undo redo | bold italic | alignleft aligncenter alignright | code image | numlist bullist forecolor backcolor"
           }}
           //    onChange={this.handleEditChange}
         />

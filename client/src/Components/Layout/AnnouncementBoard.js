@@ -11,7 +11,7 @@ const boardStyle = {
   width: "1024px",
   margin: "0 auto",
   padding: "4em",
-  backgroundColor: "#748CAB"
+  backgroundColor: "#000000"
 };
 
 class AnnouncementBoard extends React.Component {
