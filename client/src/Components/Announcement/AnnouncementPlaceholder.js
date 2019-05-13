@@ -124,12 +124,14 @@ class AnnouncementPlaceholder extends React.Component {
               name="trash alternate"
               size="large"
               onClick={this.deleteAnnouncement}
+              inverted
             />
             <Icon
-              type="Submit"
+              // type="Submit"
               name="save"
               size="large"
               onClick={this.saveAnnouncement}
+              inverted
             />
             <Modal
             open={this.state.openModal}            

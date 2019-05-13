@@ -142,16 +142,18 @@ class Announcement extends React.Component {
               name="trash alternate"
               size="large"
               onClick={this.deleteAnnouncement}
+              inverted
             />
             <Icon
               data-post_id={this.props.post_id}
-              type="Submit"
+              // type="Submit"
               name="save"
               size="large"
               onClick={this.saveAnnouncement}
+              inverted
             />
             <Icon name="calendar times outline" size="large"
-              onClick={this.openModal}
+              onClick={this.openModal} inverted
             />
             <Modal
               open={this.state.openModal}
