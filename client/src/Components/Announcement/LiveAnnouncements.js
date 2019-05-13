@@ -9,19 +9,25 @@ import {
   Header
 } from "semantic-ui-react";
 
+const liveContainerStyle = { 
+  backgroundColor: "#000000",
+  color: '#ffffff'
+}
 const LiveAnnouncement = props => {
   return (
     <Grid>
       <Grid.Row>
         <Grid.Column width={16}>
-          <Container>
+          <Container style={liveContainerStyle}>
             <div
               name="title"
+              style={{color: '#ffffff'}}
               className="title"
               dangerouslySetInnerHTML={{ __html: props.title }}
             />
             <div
               name="body"
+              style={{color: '#ffffff'}}
               className="body"
               dangerouslySetInnerHTML={{ __html: props.body }}
             />

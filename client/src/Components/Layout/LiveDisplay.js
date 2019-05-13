@@ -8,6 +8,12 @@ import LiveAnnouncement from "../Announcement/LiveAnnouncements";
 import DisplayHeader from "./DisplayHeader";
 import axios from "axios";
 
+
+const displayStyle = {
+  backgroundColor: "#000000",
+  padding: "3em 0em 0em"
+}
+
 class Display extends React.Component {
   state = {
     fullAnnouncement: [],
@@ -31,7 +37,7 @@ class Display extends React.Component {
 
   render() {
     return (
-      <Container key={this.props.key} style={{ padding: "3em 0em 0em" }}>
+      <Container style={displayStyle} key={this.props.key}>
         <Grid>
           <DisplayHeader />
           <Grid.Row>

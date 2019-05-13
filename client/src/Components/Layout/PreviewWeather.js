@@ -2,6 +2,10 @@ import React from "react";
 import { Container, Header } from "semantic-ui-react";
 import axios from "axios";
 
+const weatherStyle = {
+  color: '#ffffff'
+}
+
 class Weather extends React.Component {
   state = {
     currentWeather: "",
@@ -39,8 +43,8 @@ class Weather extends React.Component {
   render() {
     return (
       <Container>
-        <Header as="h2">{this.state.conditions}</Header>
-        <Header as="h3">
+        <Header as="h2" inverted>{this.state.conditions}</Header>
+        <Header as="h3" inverted>
           {Math.floor(this.state.temp_min)}&#176;{" "}
           {Math.floor(this.state.temp_max)}&#176;
         </Header>

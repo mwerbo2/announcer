@@ -97,9 +97,9 @@ class AnnouncementPlaceholder extends React.Component {
                 ref="body"
                 inline
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline;'>Title</span></h1>"
-                plugins="link table wordcount"
-                toolbar="bold link table"
+                initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
+                plugins="link table wordcount textcolor"
+                toolbar="bold link table forecolor backcolor"
                 onEditorChange={this.handleTitleChange}
                 init={{browser_spellcheck: true}}
               />
@@ -109,11 +109,11 @@ class AnnouncementPlaceholder extends React.Component {
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                 initialValue="<ul>
                 <li>
-                <h3>Body</h3>
+                <h3 style='color: #ffffff'>Body</h3>
                 </li>
                 </ul>"
-                plugins="link table wordcount lists"
-                toolbar="bold link tablenumlist bullist"
+                plugins="link table wordcount lists textcolor"
+                toolbar="bold link table numlist bullist forecolor backcolor"
                 onEditorChange={this.handleBodyChange}
               />
             </Container>

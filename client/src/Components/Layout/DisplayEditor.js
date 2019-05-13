@@ -21,7 +21,7 @@ const boardStyle = {
   height: "10",
   width: "px",
   margin: "40px 10px",
-  backgroundColor: "#FF0000"
+  backgroundColor: "#000000"
 };
 class Display extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Display extends React.Component {
   render() {
     return (
       <div>
-        <Container key={this.props.key} style={{ padding: "3em 0em 0em" }}>
+        <Container key={this.props.key} style={{ padding: "3em 0em 0em", backgroundColor: "#000000"}}>
           <Navbar />
           <AnnouncementBoard />
         </Container>
