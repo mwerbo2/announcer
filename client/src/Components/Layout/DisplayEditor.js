@@ -16,12 +16,16 @@ import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import AnnouncementBoard from "./AnnouncementBoard";
 import SidebarEditor from "./SidebarEditor";
+import EditorBarContainer from '../EditorBar/EditorBarContainer';
 
 const boardStyle = {
   height: "10",
   width: "px",
-  margin: "40px 10px",
-  backgroundColor: "#000000"
+  marginTop: "7em",
+  marginLeft: "10px",
+  marginRight: "10px",
+  // margin: "40px 10px",
+  backgroundColor: ""
 };
 class Display extends React.Component {
   constructor(props) {
@@ -43,8 +47,9 @@ class Display extends React.Component {
   render() {
     return (
       <div>
-        <Container key={this.props.key} style={{ padding: "3em 0em 0em", backgroundColor: "#000000"}}>
+        <Container key={this.props.key} style={{ padding: "3em 0em 0em", backgroundColor: "white", marginTop: '5em'}}>
           <Navbar />
+          <EditorBarContainer />
           <AnnouncementBoard />
         </Container>
         <Footer />

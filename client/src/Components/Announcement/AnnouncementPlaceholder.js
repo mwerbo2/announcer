@@ -107,7 +107,7 @@ class AnnouncementPlaceholder extends React.Component {
                 ref="body"
                 inline
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<ul>
+                initialValue="<ul style='color: #ffffff'>
                 <li>
                 <h3 style='color: #ffffff'>Body</h3>
                 </li>

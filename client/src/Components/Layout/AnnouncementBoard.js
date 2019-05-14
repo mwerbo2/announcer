@@ -4,13 +4,12 @@ import ReactDOM from 'react-dom'
 import { withRouter } from "react-router-dom";
 import Announcements from "../Announcement/Announcements";
 import DisplayHeader from "./DisplayHeader";
-import SidebarEditor from './SidebarEditor'
 
 const boardStyle = {
   height: "768px",
   width: "1024px",
   margin: "0 auto",
-  padding: "4em",
+  padding: "1em",
   backgroundColor: "#000000"
 };
 
@@ -82,11 +81,10 @@ class AnnouncementBoard extends React.Component {
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
         <Grid>
           <DisplayHeader />
-          {/* <Ref ref={this.annRef}> */}
+          <h1 style={{color:'white'}}>fuck you</h1>
           <Grid.Row>
             <Announcements ref={this.annRef} boardBotto={this.state.boardBottom} getBottom={this.getAnnouncementSize} />
           </Grid.Row>
-          {/* </Ref> */}
         </Grid>
       </div>
     );
