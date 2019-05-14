@@ -25,14 +25,17 @@ const createBoard = async (req, res) => {
 const updateBackground = async (req, res) => {
     try {
         const board = await Board.update({
-            
+            background_color: res.body.background_color,
+            background_image: res.body.background_image
         })
+        return res.status(200).send(board);
     } catch (error) {
-        
+        return res.status(400).send(error);
     }
 }
 
 export {
     getAllBoards,
-    createBoard
+    createBoard,
+    updateBackground
 }

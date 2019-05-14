@@ -3,6 +3,7 @@ import { Button, Container, Modal, Input, Grid, Header, Image } from "semantic-u
 import { SketchPicker } from "react-color";
 import axios from 'axios'
 
+
 class BackgroundEditorButton extends React.Component {
     inputRef = createRef()
     state = {
@@ -15,14 +16,15 @@ class BackgroundEditorButton extends React.Component {
         this.setState({modalOpen: true})
     }
     
-    close = () => this.setState({ modalOpen: false })
+    close = (res) => { this.setState({ modalOpen: false }); console.log(res)}
 
     submitBackground = () => {
+        console.log(this.state)
         axios.put('/board', {
             background_color: this.state.backgroundColor,
             background_image: this.state.imageURL
         })
-        .then((res)=> console.log(res))
+        .then((response)=> this.close(response))
         .catch((err) => console.log(err))
     }
 
