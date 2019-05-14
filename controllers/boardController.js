@@ -22,6 +22,16 @@ const createBoard = async (req, res) => {
     }
 }
 
+const updateBackground = async (req, res) => {
+    try {
+        const board = await Board.update({
+            
+        })
+    } catch (error) {
+        
+    }
+}
+
 export {
     getAllBoards,
     createBoard

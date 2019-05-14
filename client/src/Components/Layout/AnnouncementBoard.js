@@ -81,7 +81,6 @@ class AnnouncementBoard extends React.Component {
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
         <Grid>
           <DisplayHeader />
-          <h1 style={{color:'white'}}>fuck you</h1>
           <Grid.Row>
             <Announcements ref={this.annRef} boardBotto={this.state.boardBottom} getBottom={this.getAnnouncementSize} />
           </Grid.Row>
