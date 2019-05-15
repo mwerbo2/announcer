@@ -107,7 +107,7 @@ class AnnouncementPlaceholder extends React.Component {
                 ref="body"
                 inline
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<ul>
+                initialValue="<ul style='color: #ffffff'>
                 <li>
                 <h3 style='color: #ffffff'>Body</h3>
                 </li>
@@ -124,12 +124,14 @@ class AnnouncementPlaceholder extends React.Component {
               name="trash alternate"
               size="large"
               onClick={this.deleteAnnouncement}
+              inverted
             />
             <Icon
-              type="Submit"
+              // type="Submit"
               name="save"
               size="large"
               onClick={this.saveAnnouncement}
+              inverted
             />
             <Modal
             open={this.state.openModal}            

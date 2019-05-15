@@ -1,16 +1,18 @@
-require('dotenv').config();
+const devInfo = {
+  username: "michaelwerbowsky",
+  password: "",
+  host: "localhost"
+}
 
 const Sequelize = require('sequelize');
 console.log('config.js')
 
 const sequelize = new Sequelize({
   database: 'announcetwo',
-  username: 'user',
-  // username: process.env.psqlUSER || 'user',
-  password: 'pass',
-  // password: process.env.psqlPASSWORD || 'pass',
+  username: devInfo.username || 'user',
+  password: devInfo.password || 'pass',
   dialect: 'postgres',
-  host: 'postgres'
+  host: devInfo.host || 'postgres'
 });
 
 export { sequelize };

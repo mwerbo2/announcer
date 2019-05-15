@@ -10,10 +10,12 @@ Board.init({
     autoIncrement: true,
   },
   user_id: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
-  board_background: {
+  background_color: {
+    type: Sequelize.STRING
+  },
+  background_image: {
     type: Sequelize.STRING
   },
   status: {
