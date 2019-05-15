@@ -2,27 +2,52 @@ import React, {createRef} from "react";
 import { Button, Container, Modal, Input, Grid, Header, Image } from "semantic-ui-react";
 import { SketchPicker } from "react-color";
 import axios from 'axios'
+import Axios from "axios";
 
 
 class BackgroundEditorButton extends React.Component {
-    inputRef = createRef()
-    state = {
+  constructor(props) {
+    super(props);
+   
+   this.inputRef = createRef()
+    this.state = {
         modalOpen:false,
         imageURL: "",
         backgroundColor: ""
     };
+    console.log(props)
+  }
+   
 
     openModal = () => {
         this.setState({modalOpen: true})
     }
     
-    close = (res) => { this.setState({ modalOpen: false }); console.log(res)}
+    close = (res) => { 
+      this.setState({ modalOpen: false });
+      console.log("Beb.js 22", res);
+      // this.getBackground()
+      // this.props.didEdit;
+      const backgroundInfo = {
+        backgroundColor: this.state.backgroundColor,
+        backgroundImage: this.state.imageURL
+      }
+      this.props.didBackgroundUpdate(backgroundInfo);
+    }
+
+
+    // getBackground = () => {
+    //   Axios.get('/boards')
+    //   .then(response => console.log(response))
+    //   .catch(err => console.log(err));
+    // }
 
     submitBackground = () => {
-        console.log(this.state)
-        axios.put('/board', {
+
+        axios.put('/boards', {
             background_color: this.state.backgroundColor,
-            background_image: this.state.imageURL
+            background_image: this.state.imageURL,
+            id: 1
         })
         .then((response)=> this.close(response))
         .catch((err) => console.log(err))
@@ -54,7 +79,7 @@ class BackgroundEditorButton extends React.Component {
               Cancel
             </Button>
             <Button
-              onClick={this.close}
+              onClick={this.submitBackground}
               positive
               labelPosition='right'
               icon='checkmark'

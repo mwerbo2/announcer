@@ -1,17 +1,11 @@
 import React from "react";
 import { Grid, Button, Icon, Ref } from "semantic-ui-react";
-import ReactDOM from 'react-dom'
 import { withRouter } from "react-router-dom";
 import Announcements from "../Announcement/Announcements";
 import DisplayHeader from "./DisplayHeader";
+import Axios from "axios";
 
-const boardStyle = {
-  height: "768px",
-  width: "1024px",
-  margin: "0 auto",
-  padding: "1em",
-  backgroundColor: "#000000"
-};
+
 
 class AnnouncementBoard extends React.Component {
   constructor(props) {
@@ -19,20 +13,49 @@ class AnnouncementBoard extends React.Component {
     this.myRef = React.createRef();
     this.annRef = React.createRef();
     // this.announcementRef = React.createRef();
-   
-    this.state={
+   console.log("ab.js 16",this.props)
+    
+   this.state={
       announcementBottom: "",
-      boardBottom: ""
+      boardBottom: "",
+      backgroundColor: "#000000",
+      backgroundImage: "",
+      backgroundUpdated: false
     }
-    // ReactDOM.findDOMNode().getBoundingClientRect()
-
+    // this.boardStyle = {
+    //   height: "768px",
+    //   width: "1024px",
+    //   margin: "0 auto",
+    //   padding: "1em",
+    //   backgroundColor: this.state.backgroundColor
+    // };
+    // console.log("ab.js 31", boardStyle.backgroundColor)
+    
   }
+
+
+  componentDidUpdate(prevProps) {
+    // console.log("ab.js 36", boardStyle.backgroundColor)
+    if (this.props.backgroundColor != prevProps.backgroundColor) {
+      // const myColor = this.props.backgroundColor
+      // console.log("ab.js 48", myColor)
+      // boardStyle.backgroundColor = myColor;
+      this.setState({backgroundColor: this.props.backgroundColor})
+    }
+   }
+
 
   editBackground = () => {
       console.log("editing background")
   };
   componentDidMount() {
+    
+console.log("Ab.js 41", this.boardStyle);
+    Axios.get('/boards')
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error))
 
+    // this.setState({backgroundColor: response.data[0].background_color})
     //Get height of announcements component
     //Check if announcements exceeds the heigh
     // const node = this.myRef.current;
@@ -64,19 +87,16 @@ class AnnouncementBoard extends React.Component {
     
   }
 
-  componentDidUpdate(){
-    
-    // console.log(this.myRef.current.getBoundingClientRect().height)
-    
-    // if (!this.state.boardBottom) {
-    //   console.log('waiting')
-    // } else {
-    //   this.setState({boardBottom: "yes"})
-    // }
-    
-  }
-
   render() {
+
+    var boardStyle = {
+      height: "768px",
+      width: "1024px",
+      margin: "0 auto",
+      padding: "1em",
+      backgroundColor: this.state.backgroundColor
+    };
+    
     return (
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
         <Grid>

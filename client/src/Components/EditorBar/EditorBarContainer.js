@@ -12,7 +12,7 @@ class EditorBarContainer extends React.Component {
     render() {
         return (
             <Container style={editorStyle}>
-                <BackgroundEditorButton />
+                <BackgroundEditorButton didBackgroundUpdate={this.props.didBackgroundUpdate} />
             </Container>
         )
     }

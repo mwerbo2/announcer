@@ -25,8 +25,11 @@ const boardStyle = {
   marginLeft: "10px",
   marginRight: "10px",
   // margin: "40px 10px",
-  backgroundColor: ""
+  backgroundColor: "",
+  backgroundImage: ""
 };
+
+
 class Display extends React.Component {
   constructor(props) {
     super(props);
@@ -37,11 +40,25 @@ class Display extends React.Component {
       body: "true",
       content: "",
       live: true,
-      add: false
+      add: false, 
+      backgroundColor: "",
+      backgroundImage: ""
     };
   }
   componentDidMount() {
     // console.log(ReactDOM.findDOMNode().getBoundingClientRect())
+
+  }
+
+
+
+  getBackground = (updated) => {
+    console.log('DE.js 50', updated)
+    // this.setState({
+    //   backgroundColor: color,
+    //   backgroundImage: img
+    // })
+    this.setState({backgroundColor: updated.backgroundColor, backgroundImage:updated.backgroundImage})
   }
 
   render() {
@@ -49,8 +66,8 @@ class Display extends React.Component {
       <div>
         <Container key={this.props.key} style={{ padding: "3em 0em 0em", backgroundColor: "white", marginTop: '5em'}}>
           <Navbar />
-          <EditorBarContainer />
-          <AnnouncementBoard />
+          <EditorBarContainer didBackgroundUpdate={this.getBackground} />
+          <AnnouncementBoard  backgroundColor={this.state.backgroundColor} backgroundImage={this.state.backgroundImage}/>
         </Container>
         <Footer />
       </div>
