@@ -22,7 +22,8 @@ class Display extends React.Component {
   };
 
   componentDidMount() {
-    axios
+    setInterval(() => {
+      axios
       .get("/announcements/liveStatus")
       .then(announcement => {
         this.setState({
@@ -33,6 +34,7 @@ class Display extends React.Component {
         console.log(this.state.fullAnnouncement);
       })
       .catch(error => console.log(error));
+    }, 5000);
   }
 
   render() {
