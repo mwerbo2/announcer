@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "server": "node -r esm server.js",
+    "server": "nodemon -r esm server.js",
     "client": "npm start --prefix client",
     "serve": "concurrently \"npm run server\" \" npm run client\"",
     "dev": "node -r esm server.js"

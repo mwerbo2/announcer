@@ -14,7 +14,6 @@ const createSchedule = async (req, res) => {
 };
 
 const getAllScheduled = async (req, res) => {
-  console.log("this one");
   try {
     const schedule = await Schedule.findAll({});
     return res.status(200).send(schedule);
@@ -24,8 +23,6 @@ const getAllScheduled = async (req, res) => {
 };
 
 const getScheduleById = async (req, res) => {
-  console.log("params", req.params.id);
-  console.log("req ", req.query);
   try {
     const schedule = await Schedule.findAll({
       where: {
