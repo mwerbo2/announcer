@@ -62,12 +62,20 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
       include: [
         {
           model: Schedule,
-          where: {
-            date_time_start: {
-              [Op.lt]: endOfDay,
-              [Op.gt]: beginningOfDay
+          where: [
+            {
+              date_time_start: {
+                [Op.lt]: endOfDay,
+                [Op.gt]: beginningOfDay
+              }
+            },
+            {
+              date_time_end: {
+                [Op.lt]: endOfDay,
+                [Op.gt]: beginningOfDay
+              }
             }
-          }
+          ]
         }
       ]
     });
