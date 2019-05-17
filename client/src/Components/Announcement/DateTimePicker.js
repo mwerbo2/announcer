@@ -4,6 +4,7 @@ import { Button, List, Header, Icon, Message } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
+import moment from 'moment'
 import auth0Client from "../../Auth/Auth";
 
 const styles = theme => ({
@@ -32,12 +33,14 @@ class DateAndTimePickers extends React.Component {
 
     this.state = {
       // defaultDate: new Date('2019-03-27T10:30'),
-      startTime: "date",
-      endTime: "date",
+      startTime: moment().format("YYYY-MM-DDTHH:mm:ss"),
+      endTime: moment().format("YYYY-MM-DDTHH:mm:ss"),
       currentSchedule: [],
       postMessage: "",
       scheduleDeleted: false
     };
+
+    
   }
   closeModal(res) {
     this.setState({ postMessage: res.statusText });
@@ -45,7 +48,6 @@ class DateAndTimePickers extends React.Component {
     console.log(this.state.postMessage);
   }
   componentDidMount() {
-    console.log("mount: ", this.props.post_id);
     axios
       .get(`/schedules/${this.props.post_id}`)
       .catch(error => console.log(error))
@@ -111,6 +113,7 @@ class DateAndTimePickers extends React.Component {
   };
 
   render() {
+    console.log("dtp.js 117", this.currentIsoDate)
     if (this.state.currentSchedule.length === 0) {
       return (
         <div>
@@ -124,7 +127,7 @@ class DateAndTimePickers extends React.Component {
                 id="datetime-local"
                 label="Day / time to start"
                 type="datetime-local"
-                defaultValue="2019-03-27T10:30"
+                defaultValue={moment().format("YYYY-MM-DDTHH:mm:ss")}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
                 InputLabelProps={{
@@ -135,7 +138,7 @@ class DateAndTimePickers extends React.Component {
                 id="datetime-local"
                 label="Day / time to end"
                 type="datetime-local"
-                defaultValue="2019-03-27T10:30"
+                defaultValue={moment().format("YYYY-MM-DDTHH:mm:ss")}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}
                 InputLabelProps={{
@@ -167,7 +170,7 @@ class DateAndTimePickers extends React.Component {
                 id="datetime-local"
                 label="Day / time to start"
                 type="datetime-local"
-                defaultValue="2019-03-27T10:30"
+                defaultValue={this.state.startTime}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
                 InputLabelProps={{
@@ -178,7 +181,7 @@ class DateAndTimePickers extends React.Component {
                 id="datetime-local"
                 label="Day / time to end"
                 type="datetime-local"
-                defaultValue="2019-03-27T10:30"
+                defaultValue={this.state.endTime}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}
                 InputLabelProps={{
