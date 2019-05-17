@@ -1,4 +1,4 @@
-import { createAnnouncement, getAllAnnouncements, getLiveAnnouncements, updateAnnoucement, updateOrCreateAnnouncement, setAnnouncementStatus, getLiveAnnouncementWithStatus} from '../controllers/announcementcontroller';
+import { createAnnouncement, getAllAnnouncements, getLiveAnnouncements, updateAnnoucement, updateOrCreateAnnouncement, setAnnouncementStatus, getLiveAnnouncementWithStatus, getLiveAnnouncementsRonak} from '../controllers/announcementcontroller';
 import checkJwt from '../authConfig';
 
 module.exports = (app) => {
@@ -9,4 +9,5 @@ module.exports = (app) => {
     app.get('/announcements/live', getLiveAnnouncements)
     app.post('/announcements/status', setAnnouncementStatus)
     app.get('/announcements/liveStatus', getLiveAnnouncementWithStatus)
+    app.get('/fuck', getLiveAnnouncementsRonak);
 }
