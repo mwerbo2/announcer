@@ -72,7 +72,6 @@ class App extends Component {
   }
   render() {
     return (
-      
         <Router history={history}>
         <div>
         <Route path="/" exact render={props => <WelcomeMain auth={auth0Client} {...props}/>}/>
@@ -80,10 +79,8 @@ class App extends Component {
         <Route path="/displayeditor" render={props => <DisplayEditor auth={auth0Client} didBackgroundUpdate={this.getBackground} {...props} />}/>
         <Route path="/profile" render={props => <Profile auth={auth0Client} {...props} />}/>
         <Route exact path="/callback" component={Callback} />
-        
         </div>
         </Router>
-      
     );
   }
 }

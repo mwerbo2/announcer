@@ -79,6 +79,10 @@ class Announcements extends React.Component {
 
   }
 
+  clickDelete = () => {
+    this.setState({add: false, showAddButton: true})
+  }
+
   getActivePosts = () => {
     axios
       .get("/announcements/liveStatus")
@@ -165,7 +169,7 @@ updateAfterDelete = () => {
             <Grid.Column width={16}>
                 {this.renderAnnouncement()}
                 {this.state.showAddButton && <AddButton buttonClick={this.clickAdd} />}
-                {this.state.add && <AnnouncementPlaceholder boardB={this.props.boardBotto} onSave={this.updateAfterSave} onDelete={this.deleteAnnouncement} />}
+                {this.state.add && <AnnouncementPlaceholder onDelete={this.clickDelete} boardB={this.props.boardBotto} onSave={this.updateAfterSave} />}
             </Grid.Column>
           </Grid.Row>
         </Grid>
