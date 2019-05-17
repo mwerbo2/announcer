@@ -19,7 +19,7 @@ class AnnouncementBoard extends React.Component {
       announcementBottom: "",
       boardBottom: "",
       backgroundColor: "#000000",
-      backgroundImage: "",
+      backgroundImg: "https://i.imgur.com/8SnDm0P.jpg",
       backgroundUpdated: false
     }
     // this.boardStyle = {
@@ -41,6 +41,10 @@ class AnnouncementBoard extends React.Component {
       // console.log("ab.js 48", myColor)
       // boardStyle.backgroundColor = myColor;
       this.setState({backgroundColor: this.props.backgroundColor})
+    }
+
+    if (this.props.backgroundImage != prevProps.backgroundImage) {
+      this.setState({backgroundImg: this.props.backgroundImage})
     }
    }
 
@@ -94,7 +98,9 @@ console.log("Ab.js 41", this.boardStyle);
       width: "1024px",
       margin: "0 auto",
       padding: "1em",
-      backgroundColor: this.state.backgroundColor
+      // backgroundColor: this.state.backgroundColor,
+      backgroundImage: `url(${this.state.backgroundImg})`
+      
     };
     
     return (
