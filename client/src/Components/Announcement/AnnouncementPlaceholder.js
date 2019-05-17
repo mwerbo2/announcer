@@ -123,7 +123,7 @@ class AnnouncementPlaceholder extends React.Component {
             <Icon
               name="trash alternate"
               size="large"
-              onClick={this.deleteAnnouncement}
+              onClick={this.props.onDelete}
               inverted
             />
             <Icon
