@@ -211,6 +211,7 @@ class Announcement extends React.Component {
                 inverted
               />
               <Modal
+              size="small"
                 open={this.state.openModal}
                 // closeOnEscape={this.closeOnEscape}
                 closeOnDimmerClick={this.closeOnDimmerClick}
