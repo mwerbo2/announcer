@@ -12,7 +12,7 @@ import {
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import MaterialUIPickers from "../Announcement/DateTimePicker";
-import auth0Client from '../../Auth/Auth'
+import auth0Client from "../../Auth/Auth";
 
 class Announcement extends React.Component {
   constructor(props) {
@@ -31,14 +31,14 @@ class Announcement extends React.Component {
       live: true,
       target_post_id: "",
       deleted: false,
-      openModal:false
+      openModal: false
     };
   }
 
   saveAnnouncement = () => {
     // console.log("this 35 a.js", this)
     //conditional to check if null don't send
-    
+
     // console.log(this.props.body)
     // console.log(this.props.post_id)
     // if (this.state)
@@ -50,33 +50,33 @@ class Announcement extends React.Component {
         announcement_body: this.state.body,
         status: "active"
       })
-      .then((res) => this.openModal(res))
+      .then(res => this.openModal(res))
       .catch(function(error) {
         console.log(error);
       });
   };
 
-  openModal = (res) => {
+  openModal = res => {
     // console.log(`a.js 57: ${res}`)
-    this.setState({openModal: true, title:"", body:""})
-  }
+    this.setState({ openModal: true, title: "", body: "" });
+  };
 
   closeModal = () => {
     this.props.onSave();
-    this.setState({openModal:false})
+    this.setState({ openModal: false });
     // console.log(`a.js 64 ${this.state.openModal}`);
-  }
+  };
 
   deleteAnnouncement = () => {
     // console.log("a.js 68", this)
     axios
-    .post("/announcements/status", {
-      user_id: 999992,
-      id: this.props.post_id,
-      status: "archive"
-    })
-    .then(post => this.props.afterDelete())
-    .catch(err => console.log(err));
+      .post("/announcements/status", {
+        user_id: 999992,
+        id: this.props.post_id,
+        status: "archive"
+      })
+      .then(post => this.props.afterDelete())
+      .catch(err => console.log(err));
     // this.props.onDelete();
     this.props.afterDelete();
     // this.setState({deleted:true})
@@ -97,79 +97,111 @@ class Announcement extends React.Component {
     // console.log(node.getBoundingClientRect());
   }
   render() {
-    return (
-      <Grid>
-        <Grid.Row key={this.props.post_id} >
-          <Grid.Column width={14}>
-          <Ref innerRef={this.announcementRef}>
-            <Container>
-              <Editor
-                ref="body"
-                inline
-                apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue={this.props.title}
-                plugins="link table wordcount textcolor"
-                toolbar="bold link table forecolor backcolor"
-                onEditorChange={this.handleTitleChange}
+    if (!auth0Client.isAuthenticated()) {
+      return (
+        <Grid>
+          <Grid.Row key={this.props.post_id}>
+            <Grid.Column width={14}>
+              <Ref innerRef={this.announcementRef}>
+                <Container>
+                    <div
+                      ref="title"
+                      name="title"
+                      className="title"
+                      dangerouslySetInnerHTML={{ __html: this.props.title }}
+                    />
+                    <div
+                      name="body"
+                      className="body"
+                      dangerouslySetInnerHTML={{ __html: this.props.body }}
+                    />
+                </Container>
+              </Ref>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid>
+          <Grid.Row key={this.props.post_id}>
+            <Grid.Column width={14}>
+              <Ref innerRef={this.announcementRef}>
+                <Container>
+                  <Editor
+                    ref="body"
+                    inline
+                    apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
+                    initialValue={this.props.title}
+                    plugins="link table wordcount textcolor"
+                    toolbar="bold link table forecolor backcolor"
+                    onEditorChange={this.handleTitleChange}
+                  >
+                    <div
+                      ref="title"
+                      name="title"
+                      className="title"
+                      dangerouslySetInnerHTML={{ __html: this.props.title }}
+                    />
+                  </Editor>
+                  <Editor
+                    ref="body"
+                    inline
+                    apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
+                    initialValue={this.props.body}
+                    plugins="link table wordcount lists textcolor"
+                    toolbar="bold link table numlist bullist forecolor backcolor"
+                    onEditorChange={this.handleBodyChange}
+                  >
+                    <div
+                      name="body"
+                      className="body"
+                      dangerouslySetInnerHTML={{ __html: this.props.body }}
+                    />
+                  </Editor>
+                </Container>
+              </Ref>
+            </Grid.Column>
+            <Grid.Column floated="right" verticalAlign="middle" width={2}>
+              <Icon
+                name="trash alternate"
+                size="large"
+                onClick={this.deleteAnnouncement}
+                inverted
+              />
+              <Icon
+                data-post_id={this.props.post_id}
+                // type="Submit"
+                name="save"
+                size="large"
+                onClick={this.saveAnnouncement}
+                inverted
+              />
+              <Icon
+                name="calendar times outline"
+                size="large"
+                onClick={this.openModal}
+                inverted
+              />
+              <Modal
+                open={this.state.openModal}
+                // closeOnEscape={this.closeOnEscape}
+                closeOnDimmerClick={this.closeOnDimmerClick}
+                onClose={this.closeModal}
               >
-                <div
-                  ref="title"
-                  name="title"
-                  className="title"
-                  dangerouslySetInnerHTML={{ __html: this.props.title }}
-                />
-              </Editor>
-              <Editor
-                ref="body"
-                inline
-                apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue={this.props.body}
-                plugins="link table wordcount lists textcolor"
-                toolbar="bold link table numlist bullist forecolor backcolor"
-                onEditorChange={this.handleBodyChange}
-              >
-                <div
-                  name="body"
-                  className="body"
-                  dangerouslySetInnerHTML={{ __html: this.props.body }}
-                />
-              </Editor>
-            </Container>
-          </Ref>
-          </Grid.Column>
-          <Grid.Column floated="right" verticalAlign="middle" width={2}>
-            <Icon
-              name="trash alternate"
-              size="large"
-              onClick={this.deleteAnnouncement}
-              inverted
-            />
-            <Icon
-              data-post_id={this.props.post_id}
-              // type="Submit"
-              name="save"
-              size="large"
-              onClick={this.saveAnnouncement}
-              inverted
-            />
-            <Icon name="calendar times outline" size="large"
-              onClick={this.openModal} inverted
-            />
-            <Modal
-              open={this.state.openModal}
-              // closeOnEscape={this.closeOnEscape}
-              closeOnDimmerClick={this.closeOnDimmerClick}
-              onClose={this.closeModal}
-            >
-              <Modal.Header>Schedule your announcement</Modal.Header>
-              <Modal.Content>
-                <MaterialUIPickers closeMod={this.closeModal} post_id={this.props.post_id} />
-              </Modal.Content>
-            </Modal>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    );
+                <Modal.Header>Schedule your announcement</Modal.Header>
+                <Modal.Content>
+                  <MaterialUIPickers
+                    closeMod={this.closeModal}
+                    post_id={this.props.post_id}
+                  />
+                </Modal.Content>
+              </Modal>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      );
+    }
   }
 }
 
