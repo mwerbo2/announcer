@@ -11,6 +11,9 @@ import axios from "axios";
 
 const displayStyle = {
   backgroundColor: "#000000",
+  height: "768px",
+  width: "1024px",
+  // marginTop: 
   padding: "3em 0em 0em"
 }
 
