@@ -43,7 +43,31 @@ class Announcement extends React.Component {
     // console.log(this.props.post_id)
     // if (this.state)
     const postId = this.props.post_id;
-    axios
+
+    if (!this.state.body) {
+      axios
+      .put(`/announcements/${postId}`, {
+        user_id: 999999993,
+        announcement_title: this.state.title,
+        status: "active"
+      })
+      .then(res => this.openModal(res))
+      .catch(function(error) {
+        console.log(error);
+      });
+    } else if (!this.state.title) {
+      axios
+      .put(`/announcements/${postId}`, {
+        user_id: 999999993,
+        announcement_body: this.state.body,
+        status: "active"
+      })
+      .then(res => this.openModal(res))
+      .catch(function(error) {
+        console.log(error);
+      });
+    } else {
+      axios
       .put(`/announcements/${postId}`, {
         user_id: 999999993,
         announcement_title: this.state.title,
@@ -54,6 +78,7 @@ class Announcement extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
+    }
   };
 
   openModal = res => {

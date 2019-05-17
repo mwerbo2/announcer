@@ -8,6 +8,6 @@ module.exports = (app) => {
     // app.post('/announcements', updateOrCreateAnnouncement)
     app.get('/announcements/live', getLiveAnnouncements)
     app.post('/announcements/status', setAnnouncementStatus)
-    app.get('/announcements/liveStatus', getLiveAnnouncementWithStatus)
-    app.get('/fuck', getLiveAnnouncementsRonak);
+    // app.get('/announcements/liveStatus', getLiveAnnouncementWithStatus)
+    app.get('/announcements/liveStatus', getLiveAnnouncementsRonak);
 }

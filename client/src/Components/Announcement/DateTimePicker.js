@@ -33,8 +33,8 @@ class DateAndTimePickers extends React.Component {
 
     this.state = {
       // defaultDate: new Date('2019-03-27T10:30'),
-      startTime: moment().format("YYYY-MM-DDTHH:mm:ss"),
-      endTime: moment().format("YYYY-MM-DDTHH:mm:ss"),
+      startTime: moment().format("YYYY-MM-DD"),
+      endTime: moment().format("YYYY-MM-DD"),
       currentSchedule: [],
       postMessage: "",
       scheduleDeleted: false
@@ -77,8 +77,8 @@ class DateAndTimePickers extends React.Component {
     if (this.state.currentSchedule.length > 0) {
       axios.put(`/schedules/${p_id}`,
       {
-        date_time_start: start,
-        date_time_end: end,
+        date_time_start: this.state.startTime,
+        date_time_end: this.state.endTime,
       },
       {
         headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
@@ -91,8 +91,8 @@ class DateAndTimePickers extends React.Component {
       .post(
         "/schedules",
         {
-          date_time_start: start,
-          date_time_end: end,
+          date_time_start: this.state.startTime,
+          date_time_end: this.state.endTime,
           AnnouncementId: p_id
         },
         {
@@ -123,11 +123,11 @@ class DateAndTimePickers extends React.Component {
               noValidate
               onSubmit={this.handleSubmit}
             >
-              <TextField
-                id="datetime-local"
-                label="Day / time to start"
-                type="datetime-local"
-                defaultValue={moment().format("YYYY-MM-DDTHH:mm:ss")}
+          <TextField
+                id="date"
+                label="Day to start"
+                type="date"
+                defaultValue={this.state.startTime}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
                 InputLabelProps={{
@@ -135,10 +135,10 @@ class DateAndTimePickers extends React.Component {
                 }}
               />
               <TextField
-                id="datetime-local"
-                label="Day / time to end"
-                type="datetime-local"
-                defaultValue={moment().format("YYYY-MM-DDTHH:mm:ss")}
+                id="date"
+                label="Day to end"
+                type="date"
+                defaultValue={this.state.endTime}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}
                 InputLabelProps={{
@@ -167,9 +167,9 @@ class DateAndTimePickers extends React.Component {
               onSubmit={this.handleSubmit}
             >
               <TextField
-                id="datetime-local"
-                label="Day / time to start"
-                type="datetime-local"
+                id="date"
+                label="Day to start"
+                type="date"
                 defaultValue={this.state.startTime}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
@@ -178,9 +178,9 @@ class DateAndTimePickers extends React.Component {
                 }}
               />
               <TextField
-                id="datetime-local"
-                label="Day / time to end"
-                type="datetime-local"
+                id="date"
+                label="Day to end"
+                type="date"
                 defaultValue={this.state.endTime}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}

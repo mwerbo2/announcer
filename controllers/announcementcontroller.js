@@ -87,8 +87,6 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
 
 const getLiveAnnouncementsRonak = async (req, res) => {
   const currentDate = new Date();
-  const beginningOfDay = currentDate.setHours(0, 0, 0, 0);
-  const endOfDay = currentDate.setHours(23, 59, 59, 59);
   try {
     const post = await Announcement.findAll({
       where: {
@@ -105,7 +103,7 @@ const getLiveAnnouncementsRonak = async (req, res) => {
             },
             {
               date_time_end: {
-                [Op.gt]: currentDate
+                [Op.gte]: currentDate
               }
             }
           ]
