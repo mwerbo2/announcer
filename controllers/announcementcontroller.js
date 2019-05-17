@@ -85,6 +85,37 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
   }
 };
 
+const getLiveAnnouncementsRonak = async (req, res) => {
+  const currentDate = new Date();
+  try {
+    const post = await Announcement.findAll({
+      where: {
+        status: "active"
+      },
+      include: [
+        {
+          model: Schedule,
+          where: [
+            {
+              date_time_start: {
+                [Op.lte]: currentDate,
+              }
+            },
+            {
+              date_time_end: {
+                [Op.gte]: currentDate
+              }
+            }
+          ]
+        }
+      ]
+    });
+    return res.status(200).send(post);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+};
+
 const updateAnnoucement = async (req, res) => {
   try {
     const post = await Announcement.update(
@@ -145,5 +176,6 @@ export {
   updateAnnoucement,
   updateOrCreateAnnouncement,
   setAnnouncementStatus,
-  getLiveAnnouncementWithStatus
+  getLiveAnnouncementWithStatus,
+  getLiveAnnouncementsRonak
 };
