@@ -134,7 +134,8 @@ class AnnouncementPlaceholder extends React.Component {
               inverted
             />
             <Modal
-            open={this.state.openModal}            
+            open={this.state.openModal}
+            size="small"            
             >
               <Modal.Header>Schedule your announcement</Modal.Header>
               <Modal.Content>

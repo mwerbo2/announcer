@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, List, Header, Icon, Message } from "semantic-ui-react";
+import { Button, List, Header, Icon, Message, Grid } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
@@ -114,6 +114,7 @@ class DateAndTimePickers extends React.Component {
 
   render() {
     console.log("dtp.js 117", this.currentIsoDate)
+    const today = new Date();
     if (this.state.currentSchedule.length === 0) {
       return (
         <div>
@@ -127,6 +128,7 @@ class DateAndTimePickers extends React.Component {
                 id="date"
                 label="Day to start"
                 type="date"
+                minDate='2019-05-17'
                 defaultValue={this.state.startTime}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
@@ -138,6 +140,7 @@ class DateAndTimePickers extends React.Component {
                 id="date"
                 label="Day to end"
                 type="date"
+                minDate={today}
                 defaultValue={this.state.endTime}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}
@@ -170,6 +173,7 @@ class DateAndTimePickers extends React.Component {
                 id="date"
                 label="Day to start"
                 type="date"
+                minDate={today}
                 defaultValue={this.state.startTime}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
@@ -181,6 +185,7 @@ class DateAndTimePickers extends React.Component {
                 id="date"
                 label="Day to end"
                 type="date"
+                minDate='now'
                 defaultValue={this.state.endTime}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}
@@ -188,26 +193,32 @@ class DateAndTimePickers extends React.Component {
                   shrink: true
                 }}
               />
-              <Button type="submit" positive>
+              <Button type="submit" size='big' positive>
                 Save
               </Button>
             </form>
             <Header as="h3">{this.state.postMessage}</Header>
           </div>
-          <Header as="h2">Current Schedule</Header>
+          <Header as="h3"> <Icon name="calendar check outline"></Icon>Current schedule</Header>
           {this.state.currentSchedule.map(schedule => {
             return (
-              <Header as="h3">
-                <Icon name="calendar" />
-                <Header.Content>
-                  {schedule.date_time_start} {schedule.date_time_end}
-                </Header.Content>{" "}
-                <Icon
-                  name="trash alternate"
-                  size="large"
-                  onClick={this.deleteSchedule}
-                />
-              </Header>
+              <Grid columns={2}>
+                <Grid.Row>
+                  <Grid.Column width={3}>
+                  <Header as="h4">Date start</Header>
+                  <Header as="h4">{schedule.date_time_start}</Header>
+                  </Grid.Column>
+                  <Grid.Column width={3}>
+                    <Header as="h4"> Date end</Header>
+                    <Header as="h4">{schedule.date_time_end}</Header>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+              // {schedule}
+              // schedule.date_time_start ? <h1>Date Start</h1> : <h1>Date End</h1>
+
+
+              
             );
           })}
         </div>
