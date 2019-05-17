@@ -35,6 +35,8 @@ class Announcement extends React.Component {
     };
   }
 
+  
+
   saveAnnouncement = () => {
     // console.log("this 35 a.js", this)
     //conditional to check if null don't send

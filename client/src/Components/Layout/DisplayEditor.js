@@ -55,9 +55,9 @@ class Display extends React.Component {
     //   backgroundImage: img
     // })
     this.setState({
-      backgroundColor: updated.backgroundColor,
       backgroundImage: updated.backgroundImage
-    });
+    }); 
+    this.props.didBackgroundUpdate(updated)
   };
 
   render() {

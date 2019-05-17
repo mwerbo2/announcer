@@ -20,6 +20,20 @@ import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
 
 class App extends Component {
+  state = {backgroundImage: ""}
+
+  getBackground = updated => {
+    console.log("app.js 50", updated);
+    console.log('app.js 27', this.state)
+    // this.setState({
+    //   backgroundColor: color,
+    //   backgroundImage: img
+    // })
+    this.setState({
+      backgroundColor: updated.backgroundColor,
+      backgroundImage: updated.backgroundImage
+    });
+  };
   // state={checkingSession: true}
 
   // goTo(route) {
@@ -63,7 +77,7 @@ class App extends Component {
         <div>
         <Route path="/" exact render={props => <WelcomeMain auth={auth0Client} {...props}/>}/>
         <Route path="/display" render={props => <Display auth={auth0Client} {...props} />}/>
-        <Route path="/displayeditor" render={props => <DisplayEditor auth={auth0Client} {...props} />}/>
+        <Route path="/displayeditor" render={props => <DisplayEditor auth={auth0Client} didBackgroundUpdate={this.getBackground} {...props} />}/>
         <Route path="/profile" render={props => <Profile auth={auth0Client} {...props} />}/>
         <Route exact path="/callback" component={Callback} />
         
