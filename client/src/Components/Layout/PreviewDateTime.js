@@ -4,7 +4,8 @@ import moment from "moment";
 
 class DateTime extends React.Component {
   state = {
-    dateTime: moment().format("LLLL")
+    date: moment().format("MMMM D, YYYY"),
+    time: moment().format("h:mm A"),
   };
 
   componentDidMount() {
@@ -22,7 +23,8 @@ class DateTime extends React.Component {
   render() {
     return (
       <Container>
-        <Header as="h2" inverted>{this.state.dateTime}</Header>
+        <p style={{color: 'white', fontSize: "17px", margin: "0", textAlign: 'center'}}>{this.state.date}</p>
+        <p style={{color: 'white', fontSize: "17px", textAlign: 'center'}}>{this.state.time}</p>
       </Container>
     );
   }
