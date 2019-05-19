@@ -61,10 +61,11 @@ class Display extends React.Component {
     const displayStyle = {
       // backgroundColor: "#000000",
       backgroundImage: `url(${this.props.bk})`,
+      backgroundImage: `url(https://media.wired.com/photos/5bfedea686ef9a0ff73f01e4/master/pass/Porsche-911.jpg)`,
       height: "768px",
       width: "1024px",
       // marginTop: 
-      padding: "3em 0em 0em"
+      // padding: "3em 0em 0em"
     }
     return (
       <Container style={displayStyle} key={this.props.key}>

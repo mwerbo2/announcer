@@ -9,7 +9,7 @@ const DisplayHeader = () => (
       <Weather />
     </Grid.Column>
     <Grid.Column width={8}>
-      <Header textAlign="center" as="h1" inverted>
+      <Header textAlign="center" as="h1" inverted style={{fontSize: "45px", fontWeight: "200"}}>
         Announcements
       </Header>
     </Grid.Column>
