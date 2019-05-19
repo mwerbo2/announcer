@@ -65,9 +65,8 @@ class BackgroundEditorButton extends React.Component {
         <Modal open={modalOpen}>
           <Modal.Header>Edit Background</Modal.Header>
           <Modal.Content>
-              <Grid columns={2} divided>
+              <Grid>
                   <Grid.Row>
-                  <Grid.Column><Header>Background Color</Header><SketchPicker color={backgroundColor} onChangeComplete={ this.handleChangeComplete} /></Grid.Column>
                   <Grid.Column><Header>Add image as background</Header><Input ref={this.inputRef} onChange={e => this.setState({imageURL: e.target.value})} placeholder='url'/> <Image src={this.state.imageURL} size='small' centered style={{marginTop:'1em'}}/></Grid.Column>
                   </Grid.Row>
               </Grid>

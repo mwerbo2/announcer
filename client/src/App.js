@@ -24,16 +24,28 @@ class App extends Component {
 
   getBackground = updated => {
     console.log("app.js 50", updated);
-    console.log('app.js 27', this.state)
+    console.log("app.js 51", this.props);
+    
     // this.setState({
     //   backgroundColor: color,
     //   backgroundImage: img
     // })
     this.setState({
-      backgroundColor: updated.backgroundColor,
       backgroundImage: updated.backgroundImage
     });
+    console.log('app.js 35', this.state)
   };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log(this.props)
+    if (this.state.backgroundImage !== prevState.backgroundImage) {
+      console.log('state upda')
+      // this.setState({backgroundImage: this.})
+      // this.getBackground()
+    } 
+
+    console.log("**app.js 39", this.state.backgroundImage)
+  }
   // state={checkingSession: true}
 
   // goTo(route) {
@@ -75,9 +87,9 @@ class App extends Component {
         <Router history={history}>
         <div>
         <Route path="/" exact render={props => <WelcomeMain auth={auth0Client} {...props}/>}/>
-        <Route path="/display" render={props => <Display auth={auth0Client} {...props} />}/>
+        <Route path="/display" render={props => <Display auth={auth0Client} bk={this.state.backgroundImage} {...props} />}/>
         <Route path="/displayeditor" render={props => <DisplayEditor auth={auth0Client} didBackgroundUpdate={this.getBackground} {...props} />}/>
-        <Route path="/profile" render={props => <Profile auth={auth0Client} {...props} />}/>
+        <Route path="/profile" render={props => <Profile auth={auth0Client} bk={this.state.backgroundImage} {...props} />}/>
         <Route exact path="/callback" component={Callback} />
         </div>
         </Router>
