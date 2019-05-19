@@ -4,8 +4,10 @@ import { Button, List, Header, Icon, Message, Grid } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import moment from 'moment'
+import moment from "moment";
 import auth0Client from "../../Auth/Auth";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const styles = theme => ({
   flexcontainer: {
@@ -33,14 +35,12 @@ class DateAndTimePickers extends React.Component {
 
     this.state = {
       // defaultDate: new Date('2019-03-27T10:30'),
-      startTime: moment().format("YYYY-MM-DD"),
-      endTime: moment().format("YYYY-MM-DD"),
+      startTime: new Date(),
+      endTime: new Date(),
       currentSchedule: [],
       postMessage: "",
       scheduleDeleted: false
     };
-
-    
   }
   closeModal(res) {
     this.setState({ postMessage: res.statusText });
@@ -54,6 +54,13 @@ class DateAndTimePickers extends React.Component {
       .then(res => this.setState({ currentSchedule: res.data }));
   }
 
+  handleChange = date => {
+    this.setState({
+      startTime: date
+    });
+    console.log(this.state.startTime);
+  };
+
   deleteSchedule = () => {
     axios
       .delete(`/announcements/${this.props.post_id}`)
@@ -62,8 +69,8 @@ class DateAndTimePickers extends React.Component {
   };
 
   checkSchedule = () => {
-    this.state.currentSchedule ? console.log('a') : console.log('meow')
-  }
+    this.state.currentSchedule ? console.log("a") : console.log("meow");
+  };
 
   handleSubmit = e => {
     this.checkSchedule();
@@ -75,37 +82,45 @@ class DateAndTimePickers extends React.Component {
     const end = new Date(this.state.endTime);
     // console.log("pid", p_id);
     if (this.state.currentSchedule.length > 0) {
-      axios.put(`/schedules/${p_id}`,
-      {
-        date_time_start: this.state.startTime,
-        date_time_end: this.state.endTime,
-      },
-      {
-        headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
-      }
-    )
-    .then(res => this.closeModal(res))
-    .catch(err => console.log(err));
-  } else {
-    axios
-      .post(
-        "/schedules",
-        {
-          date_time_start: this.state.startTime,
-          date_time_end: this.state.endTime,
-          AnnouncementId: p_id
-        },
-        {
-          headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
-        }
-      )
-      .then(res => this.closeModal(res))
-      .catch(err => console.log(err));
-  }
+      axios
+        .put(
+          `/schedules/${p_id}`,
+          {
+            date_time_start: this.state.startTime,
+            date_time_end: this.state.endTime
+          },
+          {
+            headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
+          }
+        )
+        .then(res => this.closeModal(res))
+        .catch(err => console.log(err));
+    } else {
+      axios
+        .post(
+          "/schedules",
+          {
+            date_time_start: this.state.startTime,
+            date_time_end: this.state.endTime,
+            AnnouncementId: p_id
+          },
+          {
+            headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
+          }
+        )
+        .then(res => this.closeModal(res))
+        .catch(err => console.log(err));
+    }
   };
 
   handleStartTime = e => {
     this.setState({ startTime: e.target.value });
+  };
+  handleStartDate = date => {
+    this.setState({ startTime: date });
+  };
+  handleEndDate = date => {
+    this.setState({ endTime: date });
   };
 
   handleEndTime = e => {
@@ -113,7 +128,7 @@ class DateAndTimePickers extends React.Component {
   };
 
   render() {
-    console.log("dtp.js 117", this.currentIsoDate)
+    console.log("dtp.js 117", this.currentIsoDate);
     const today = new Date();
     if (this.state.currentSchedule.length === 0) {
       return (
@@ -124,33 +139,57 @@ class DateAndTimePickers extends React.Component {
               noValidate
               onSubmit={this.handleSubmit}
             >
-          <TextField
+              <Grid centered textAlign="center" columns={3}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Header as="h5">Date Start</Header>
+                    <DatePicker
+                      selected={this.state.startTime}
+                      onChange={this.handleStartDate}
+                      dateFormat="yyyy-MM-dd"
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Header as="h5">Date End</Header>
+                    <DatePicker
+                      selected={this.state.endTime}
+                      onChange={this.handleEndDate}
+                      dateFormat="yyyy-MM-dd"
+                      minDate={new Date()}
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Button type="submit" positive>
+                      Save
+                    </Button>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+
+              {/* <TextField
                 id="date"
                 label="Day to start"
                 type="date"
-                minDate='2019-05-17'
+                min='2019-05-17'
                 defaultValue={this.state.startTime}
                 className={this.props.classes.textField}
                 onChange={this.handleStartTime}
                 InputLabelProps={{
                   shrink: true
                 }}
-              />
-              <TextField
+              /> */}
+              {/* <TextField
                 id="date"
                 label="Day to end"
                 type="date"
-                minDate={today}
+                min={today}
                 defaultValue={this.state.endTime}
                 className={this.props.classes.textField}
                 onChange={this.handleEndTime}
                 InputLabelProps={{
                   shrink: true
                 }}
-              />
-              <Button type="submit" positive>
-                Save
-              </Button>
+              /> */}
             </form>
             <Header as="h3">{this.state.postMessage}</Header>
           </div>
@@ -169,44 +208,47 @@ class DateAndTimePickers extends React.Component {
               noValidate
               onSubmit={this.handleSubmit}
             >
-              <TextField
-                id="date"
-                label="Day to start"
-                type="date"
-                minDate={today}
-                defaultValue={this.state.startTime}
-                className={this.props.classes.textField}
-                onChange={this.handleStartTime}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-              <TextField
-                id="date"
-                label="Day to end"
-                type="date"
-                minDate='now'
-                defaultValue={this.state.endTime}
-                className={this.props.classes.textField}
-                onChange={this.handleEndTime}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-              <Button type="submit" size='big' positive>
-                Save
-              </Button>
+              <Grid centered textAlign="center" columns={3}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Header as="h5">Date Start</Header>
+                    <DatePicker
+                      selected={this.state.startTime}
+                      onChange={this.handleStartDate}
+                      dateFormat="yyyy-MM-dd"
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Header as="h5">Date End</Header>
+                    <DatePicker
+                      selected={this.state.endTime}
+                      onChange={this.handleEndDate}
+                      dateFormat="yyyy-MM-dd"
+                      minDate={new Date()}
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Button type="submit" positive>
+                      Save
+                    </Button>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </form>
             <Header as="h3">{this.state.postMessage}</Header>
           </div>
-          <Header as="h3"> <Icon name="calendar check outline"></Icon>Current schedule</Header>
+          <Header as="h3">
+            {" "}
+            <Icon name="calendar check outline" />
+            Current schedule
+          </Header>
           {this.state.currentSchedule.map(schedule => {
             return (
               <Grid columns={2}>
                 <Grid.Row>
                   <Grid.Column width={3}>
-                  <Header as="h4">Date start</Header>
-                  <Header as="h4">{schedule.date_time_start}</Header>
+                    <Header as="h4">Date start</Header>
+                    <Header as="h4">{schedule.date_time_start}</Header>
                   </Grid.Column>
                   <Grid.Column width={3}>
                     <Header as="h4"> Date end</Header>
@@ -216,9 +258,6 @@ class DateAndTimePickers extends React.Component {
               </Grid>
               // {schedule}
               // schedule.date_time_start ? <h1>Date Start</h1> : <h1>Date End</h1>
-
-
-              
             );
           })}
         </div>
