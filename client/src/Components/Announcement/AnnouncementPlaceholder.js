@@ -98,10 +98,12 @@ class AnnouncementPlaceholder extends React.Component {
                 inline
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                 initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
-                plugins="link table wordcount textcolor"
-                toolbar="bold link table forecolor backcolor"
+                init={{
+                  "menubar": false,
+                }}
+                plugins="link table wordcount textcolor visualblocks spellchecker"
+                toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
                 onEditorChange={this.handleTitleChange}
-                init={{browser_spellcheck: true}}
               />
               <Editor
                 ref="body"
@@ -112,8 +114,11 @@ class AnnouncementPlaceholder extends React.Component {
                 <h3 style='color: #ffffff'>Body</h3>
                 </li>
                 </ul>"
-                plugins="link table wordcount lists textcolor"
-                toolbar="bold link table numlist bullist forecolor backcolor"
+                init={{
+                  "menubar": false,
+                }}
+                plugins="link table wordcount lists textcolor image"
+                toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
                 onEditorChange={this.handleBodyChange}
               />
             </Container>

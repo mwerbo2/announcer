@@ -160,8 +160,11 @@ class Announcement extends React.Component {
                     inline
                     apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                     initialValue={this.props.title}
-                    plugins="link table wordcount textcolor"
-                    toolbar="bold link table forecolor backcolor"
+                    init={{
+                      "menubar": false,
+                    }}
+                    plugins="link table wordcount textcolor visualblocks spellchecker"
+                    toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
                     onEditorChange={this.handleTitleChange}
                   >
                     <div
@@ -176,8 +179,11 @@ class Announcement extends React.Component {
                     inline
                     apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                     initialValue={this.props.body}
-                    plugins="link table wordcount lists textcolor"
-                    toolbar="bold link table numlist bullist forecolor backcolor"
+                    init={{
+                      "menubar": false,
+                    }}
+                    plugins="link table wordcount lists textcolor image"
+                    toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
                     onEditorChange={this.handleBodyChange}
                   >
                     <div
