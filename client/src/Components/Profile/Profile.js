@@ -9,7 +9,7 @@ class Profile extends React.Component {
     console.log(this.props)
     return (
       <div>
-        <Container style={{ marginTop: "7em" }}>
+        <Container style={{ marginTop: "7em", minHeight: '100vh', flex: 1 }}>
           <Navbar />
           <Header>Welcome {this.props.name}</Header>
           <Search />

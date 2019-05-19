@@ -162,7 +162,7 @@ updateAfterDelete = () => {
     return (
       // <div ref={this.setAnnouncementRef}>
       <Ref innerRef={this.setAnnouncementRef}>
-      <Container className='announcementsCont' key={this.props.key} style={{ padding: "3em 0em 0em" }}>
+      <Container className='announcementsCont' key={this.props.key} style={{ padding: "3em 0em 0em", height: "100%" }}>
       {/* <div ref={this.announcementsRef}> */}
         <Grid>
           <Grid.Row>

@@ -9,7 +9,8 @@ import auth0Client from "../../Auth/Auth";
 class WelcomeMain extends React.Component {
   render() {
     return (
-      <Segment className="MainStyle" style={{ marginTop: "3em" }}>
+      <div>
+      <Segment className="MainStyle" style={{ marginTop: "3em", minHeight: '100vh', flex: 1 }}>
         <Navbar />
         <Grid
           textAlign="center"
@@ -63,8 +64,9 @@ class WelcomeMain extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Footer />
       </Segment>
+      <Footer />
+      </div>
     );
   }
 }
