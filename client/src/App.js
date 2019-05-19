@@ -7,6 +7,7 @@ import {
   Link,
   Switch
 } from "react-router-dom";
+import './index.css'
 import { Header, Button, Grid, Segment } from "semantic-ui-react";
 // import {Link, Router, withRouter} from 'react-router-dom'
 import Navbar from "./Components/Layout/Navbar";

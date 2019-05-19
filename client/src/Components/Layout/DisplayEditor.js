@@ -19,6 +19,7 @@ import SidebarEditor from "./SidebarEditor";
 import EditorBarContainer from "../EditorBar/EditorBarContainer";
 
 const boardStyle = {
+  minHeight: "100%",
   height: "10",
   width: "px",
   marginTop: "7em",
@@ -67,9 +68,12 @@ class Display extends React.Component {
           <Container
             key={this.props.key}
             style={{
+              minHeight: "100%",
+              height:"100%",
               padding: "3em 0em 0em",
               backgroundColor: "white",
-              marginTop: "5em"
+              marginTop: "5em",
+              flex: 1
             }}
           >
             <Navbar />
@@ -87,9 +91,12 @@ class Display extends React.Component {
           <Container
             key={this.props.key}
             style={{
+              minHeight: "100vh",
               padding: "3em 0em 0em",
               backgroundColor: "white",
-              marginTop: "5em"
+              marginTop: "5em",
+              marginBottom: "5em",
+              flex: 1
             }}
           >
             <Navbar />

@@ -99,7 +99,8 @@ console.log("Ab.js 41", this.boardStyle);
       margin: "0 auto",
       padding: "1em",
       // backgroundColor: this.state.backgroundColor,
-      backgroundImage: `url(${this.state.backgroundImg})`
+      backgroundImage: `url(${this.state.backgroundImg})`,
+      flex: 1
       
     };
     
