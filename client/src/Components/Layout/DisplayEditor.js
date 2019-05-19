@@ -73,7 +73,6 @@ class Display extends React.Component {
             }}
           >
             <Navbar />
-            {/* <EditorBarContainer didBackgroundUpdate={this.getBackground} /> */}
             <AnnouncementBoard
               backgroundColor={this.state.backgroundColor}
               backgroundImage={this.state.backgroundImage}
