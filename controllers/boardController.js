@@ -14,7 +14,7 @@ const createBoard = async (req, res) => {
         const board = await Board.create({
             user_id: req.body.user_id,
             background_color: req.body.background_color,
-            background_color: req.body.background_color,
+            background_image: req.body.background_image,
             status: req.body.status
         })
         return res.status(200).send(board);
