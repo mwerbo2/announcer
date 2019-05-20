@@ -19,7 +19,7 @@ class AnnouncementBoard extends React.Component {
       announcementBottom: "",
       boardBottom: "",
       backgroundColor: "#000000",
-      backgroundImg: "https://i.imgur.com/8SnDm0P.jpg",
+      backgroundImg: "https://www.solidbackgrounds.com/images/1024x768/1024x768-black-solid-color-background.jpg",
       backgroundUpdated: false
     }
     // this.boardStyle = {
@@ -56,7 +56,7 @@ class AnnouncementBoard extends React.Component {
     
 console.log("Ab.js 41", this.boardStyle);
     Axios.get('/boards')
-    .then((response) => console.log(response))
+    .then((response) => this.setState({backgroundImg:response.data[0].background_image}))
     .catch((error) => console.log(error))
 
     // this.setState({backgroundColor: response.data[0].background_color})

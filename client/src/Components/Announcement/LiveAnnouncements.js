@@ -10,9 +10,9 @@ import {
 } from "semantic-ui-react";
 
 const liveContainerStyle = { 
-  backgroundColor: "#000000",
+  // backgroundColor: "#000000",
   color: '#ffffff',
-  opacity: '.7'
+  opacity: '.9'
 }
 const LiveAnnouncement = props => {
   return (

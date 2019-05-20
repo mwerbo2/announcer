@@ -24,8 +24,7 @@ class App extends Component {
   state = {backgroundImage: ""}
 
   getBackground = updated => {
-    console.log("app.js 50", updated);
-    console.log("app.js 51", this.props);
+
     
     // this.setState({
     //   backgroundColor: color,
@@ -34,13 +33,13 @@ class App extends Component {
     this.setState({
       backgroundImage: updated.backgroundImage
     });
-    console.log('app.js 35', this.state)
+ 
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    console.log(this.props)
+    
     if (this.state.backgroundImage !== prevState.backgroundImage) {
-      console.log('state upda')
+
       // this.setState({backgroundImage: this.})
       // this.getBackground()
     } 
