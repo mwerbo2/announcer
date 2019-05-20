@@ -15,7 +15,6 @@ class BackgroundEditorButton extends React.Component {
         imageURL: "",
         backgroundColor: ""
     };
-    console.log(props)
   }
    
 
@@ -25,7 +24,6 @@ class BackgroundEditorButton extends React.Component {
     
     close = (res) => { 
       this.setState({ modalOpen: false });
-      console.log("Beb.js 22", res);
       // this.getBackground()
       // this.props.didEdit;
       const backgroundInfo = {
@@ -54,7 +52,6 @@ class BackgroundEditorButton extends React.Component {
 
     handleChangeComplete = (color, event) => { 
         this.setState({backgroundColor: color.hex})
-        console.log(this.state.backgroundColor)
     }
 
   render() {

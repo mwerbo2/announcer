@@ -48,7 +48,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // app.get('/', (req, res)=>{
-//   console.log('Hello')
 //   res.sendFile(path.join(__dirname, './client/build/index.html'));
 // })
 

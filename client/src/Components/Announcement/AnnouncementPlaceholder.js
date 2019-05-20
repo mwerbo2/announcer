@@ -48,12 +48,8 @@ class AnnouncementPlaceholder extends React.Component {
         }
       )
       .then(response => {
-        // console.log("saved ann: ", response.data[0].id);
-        console.log("ap.js 52", response.data)
 
         this.setState({post_id: response.data.id, openModal: true, title:"", body:""})
-        // console.log("state", this.state.post_id)
-        // console.log(this.state.openModal);
       })
       .catch(function(error) {
         console.log(error);
@@ -63,7 +59,6 @@ class AnnouncementPlaceholder extends React.Component {
   closeModal = () => {
     this.setState({openModal:false})
     this.props.onSave();
-    // console.log(`ap.js 62 ${this.state.openModal}`);
   }
 
 
@@ -74,15 +69,13 @@ class AnnouncementPlaceholder extends React.Component {
 
   handleTitleChange(event) {
     this.setState({ title: event });
-    // console.log("Updating title to: ", this.state.title);
   }
   handleBodyChange(event) {
     this.setState({ body: event });
-    // console.log("Updating body to: ", this.state.body);
   }
   componentDidMount(){
-    console.log(this.placeHolderRef.current.getBoundingClientRect().height);
-    console.log(this.props.boardB)
+    // console.log(this.placeHolderRef.current.getBoundingClientRect().height);
+    // console.log(this.props.boardB)
     if (this.placeHolderRef.current.getBoundingClientRect().bottom < this.props.boardB) { console.log('I fit')} else { console.log('i do not fit')}
   }
 

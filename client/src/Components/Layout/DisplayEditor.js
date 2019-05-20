@@ -50,15 +50,14 @@ class Display extends React.Component {
   }
 
   getBackground = updated => {
-    console.log("DE.js 50", updated);
     // this.setState({
     //   backgroundColor: color,
     //   backgroundImage: img
     // })
     this.setState({
       backgroundImage: updated.backgroundImage
-    }); 
-    this.props.didBackgroundUpdate(updated)
+    });
+    this.props.didBackgroundUpdate(updated);
   };
 
   render() {
@@ -69,7 +68,7 @@ class Display extends React.Component {
             key={this.props.key}
             style={{
               minHeight: "100%",
-              height:"100%",
+              height: "100%",
               padding: "3em 0em 0em",
               backgroundColor: "white",
               marginTop: "5em",

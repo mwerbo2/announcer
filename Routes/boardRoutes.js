@@ -1,6 +1,7 @@
 import {
     getAllBoards, createBoard, updateBackground, getBackground
 } from '../controllers/boardController';
+import checkJwt from '../authConfig';
 
 module.exports = (app) => {
     // app.get('/boards', getAllBoards);

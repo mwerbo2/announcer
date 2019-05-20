@@ -2,7 +2,6 @@ import auth0 from 'auth0-js';
 
 class Auth {
   constructor() {
-    console.log('auth.js', process.env);
     this.auth0 = new auth0.WebAuth({
         domain: `${process.env.REACT_APP_Auth0_Domain}`,
         audience: `https://${process.env.REACT_APP_Auth0_Domain}/userinfo`,

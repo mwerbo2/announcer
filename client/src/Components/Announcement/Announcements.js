@@ -49,7 +49,6 @@ class Announcements extends React.Component {
 
   handleEditorChange(content) {
     this.setState({ content });
-    // console.log(this.state.content);
   }
 
   renderAnnouncement = () => {
@@ -75,7 +74,6 @@ class Announcements extends React.Component {
     this.getActivePosts()
     this.setState({add:false, showAddButton:true, })
     this.setState({showAddButton:true});
-    // console.log(`A.js 66 ${this.state.savedSchedule}`)
 
   }
 
@@ -99,7 +97,6 @@ class Announcements extends React.Component {
 updateAfterDelete = () => {
   this.setState({deleted: true})
   this.getActivePosts();
-  // console.log("as.js 91", this.state.deleted)
 }
   // deleteAnnouncement() {
   
@@ -142,7 +139,6 @@ updateAfterDelete = () => {
   //   console.log(this.announcementsRef.current.getBoundingClientRect())
   //   console.log(this.announcementsRef.current.clientHeight)
 
-  console.log(this.announcementRef)
   }
 
 

@@ -6,7 +6,6 @@ import Footer from "../Layout/Footer";
 
 class Profile extends React.Component {
   render() {
-    console.log(this.props)
     return (
       <div>
         <Container style={{ marginTop: "7em", minHeight: '100vh', flex: 1 }}>

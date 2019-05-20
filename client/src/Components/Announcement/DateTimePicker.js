@@ -45,7 +45,6 @@ class DateAndTimePickers extends React.Component {
   closeModal(res) {
     this.setState({ postMessage: res.statusText });
     this.props.closeMod();
-    console.log(this.state.postMessage);
   }
   componentDidMount() {
     axios
@@ -58,7 +57,6 @@ class DateAndTimePickers extends React.Component {
     this.setState({
       startTime: date
     });
-    console.log(this.state.startTime);
   };
 
   deleteSchedule = () => {
@@ -69,18 +67,14 @@ class DateAndTimePickers extends React.Component {
   };
 
   checkSchedule = () => {
-    this.state.currentSchedule ? console.log("a") : console.log("meow");
   };
 
   handleSubmit = e => {
     this.checkSchedule();
-    console.log("dt.js ", this.props.post_id);
-    // console.log("line 49", this.props.post_id.props.post_id);
     e.preventDefault();
     const p_id = this.props.post_id;
     const start = new Date(this.state.startTime);
     const end = new Date(this.state.endTime);
-    // console.log("pid", p_id);
     if (this.state.currentSchedule.length > 0) {
       axios
         .put(
@@ -128,7 +122,6 @@ class DateAndTimePickers extends React.Component {
   };
 
   render() {
-    console.log("dtp.js 117", this.currentIsoDate);
     const today = new Date();
     if (this.state.currentSchedule.length === 0) {
       return (
