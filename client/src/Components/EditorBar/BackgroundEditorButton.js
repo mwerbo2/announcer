@@ -43,11 +43,10 @@ class BackgroundEditorButton extends React.Component {
     // }
 
     submitBackground = () => {
-
         axios.put('/boards', {
             background_color: this.state.backgroundColor,
             background_image: this.state.imageURL,
-            id: 1
+            id: 2
         })
         .then((response)=> this.close(response))
         .catch((err) => console.log(err))

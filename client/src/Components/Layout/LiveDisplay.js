@@ -41,6 +41,14 @@ class Display extends React.Component {
     })
 
 
+     axios.get("/boards")
+     .then(board => {
+       console.log(board.data)
+       this.setState({
+         backgroundImage: board.data[0].background_image
+       })
+     })
+
 
     // setInterval(() => {
     //   axios
@@ -60,8 +68,10 @@ class Display extends React.Component {
     console.log(this.props)
     const displayStyle = {
       // backgroundColor: "#000000",
-      backgroundImage: `url(${this.props.bk})`,
-      backgroundImage: `url(https://media.wired.com/photos/5bfedea686ef9a0ff73f01e4/master/pass/Porsche-911.jpg)`,
+      // backgroundImage: `url(${this.props.bk})`,
+      backgroundImage: `url(${this.state.backgroundImage})`,
+      // opacity:'.7',
+      // backgroundImage: `url(https://media.wired.com/photos/5bfedea686ef9a0ff73f01e4/master/pass/Porsche-911.jpg)`,
       height: "768px",
       width: "1024px",
       // marginTop: 

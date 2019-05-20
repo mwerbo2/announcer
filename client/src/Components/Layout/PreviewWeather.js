@@ -107,11 +107,11 @@ class Weather extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container textAlign='center'>
         <span style={{ fontSize: "3em", color: "white" }}>
           <i className={`wi ${this.state.iconImage}`} />
         </span>
-        <p style={{ color: "white", fontSize: "20px" }}>
+        <p style={{ color: "white", fontSize: "18px" }}>
           {Math.round(this.state.temp)}&deg;F
         </p>
       </Container>
