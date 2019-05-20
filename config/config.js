@@ -1,17 +1,25 @@
-const devInfo = {
-  username: "michaelwerbowsky",
-  password: "",
-  host: "localhost"
-}
+// const devInfo = {
+//   username: "michaelwerbowsky",
+//   password: "",
+//   host: "localhost"
+// }
 
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize({
   database: 'announcetwo',
-  username: devInfo.username || 'user',
-  password: devInfo.password || 'pass',
+  username: 'user',
+  password: 'pass',
   dialect: 'postgres',
-  host: devInfo.host || 'postgres'
+  host:'postgres'
 });
+
+// const sequelize = new Sequelize({
+//   database: 'announcetwo',
+//   username: devInfo.username || 'user',
+//   password: devInfo.password || 'pass',
+//   dialect: 'postgres',
+//   host: devInfo.host || 'postgres'
+// });
 
 export { sequelize };
