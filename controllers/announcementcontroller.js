@@ -137,7 +137,6 @@ const updateAnnoucement = async (req, res) => {
 };
 
 const updateOrCreateAnnouncement = async (req, res) => {
-  console.log(req.user);
   try {
     const post = await Announcement.upsert(
       {

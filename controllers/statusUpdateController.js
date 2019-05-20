@@ -26,9 +26,7 @@ const SetInactiveStatus = async () => {
         ]
       }
     );
-    return console.log("it worked", post);
   } catch (error) {
-    return console.log("it did not", error);
   }
 };
 

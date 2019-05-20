@@ -1,8 +1,6 @@
 import React from "react";
-import { Grid, Container, Header } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 import {withRouter} from 'react-router-dom'
-import Weather from "./PreviewWeather";
-import DateTime from "./PreviewDateTime";
 // import Announcement from './Announcement/PreviewAnnouncements';
 import LiveAnnouncement from "../Announcement/LiveAnnouncements";
 import DisplayHeader from "./DisplayHeader";
@@ -20,15 +18,12 @@ class Display extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    console.log("LD.js 23", this.props.backgroundImg)
     if (this.props.backgroundImg !== prevProps.backgroundImg) {
       this.setState({backgroundImage: this.props.backgroundImg})
       }
-      console.log("LD.js 26", this.state.backgroundImage)
     } 
 
   componentDidMount() {
-    console.log("LD.js 28", this.props)
     axios
     .get("/announcements/liveStatus")
     .then(announcement => {
@@ -37,13 +32,11 @@ class Display extends React.Component {
         title: announcement.title,
         body: announcement.body
       });
-      console.log(this.state.fullAnnouncement);
     })
 
 
      axios.get("/boards")
      .then(board => {
-       console.log(board.data)
        this.setState({
          backgroundImage: board.data[0].background_image
        })
@@ -65,7 +58,6 @@ class Display extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const displayStyle = {
       // backgroundColor: "#000000",
       // backgroundImage: `url(${this.props.bk})`,

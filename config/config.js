@@ -5,7 +5,6 @@ const devInfo = {
 }
 
 const Sequelize = require('sequelize');
-console.log('config.js')
 
 const sequelize = new Sequelize({
   database: 'announcetwo',

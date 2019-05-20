@@ -1,14 +1,11 @@
 import React from "react";
-import { Container, Header } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import axios from "axios";
 // import WeatherIcon from 'react-icons-weather';
 // import WeatherIcons from 'react-weathericons';
 // import WeatherIcons from 'react-weathericons';
 import "weather-icons/css/weather-icons.css";
 
-const weatherStyle = {
-  color: "#ffffff"
-};
 
 class Weather extends React.Component {
   state = {

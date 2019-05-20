@@ -1,8 +1,6 @@
 import React, {createRef} from "react";
 import { Button, Container, Modal, Input, Grid, Header, Image } from "semantic-ui-react";
-import { SketchPicker } from "react-color";
 import axios from 'axios'
-import Axios from "axios";
 
 
 class BackgroundEditorButton extends React.Component {
@@ -15,7 +13,6 @@ class BackgroundEditorButton extends React.Component {
         imageURL: "",
         backgroundColor: ""
     };
-    console.log(props)
   }
    
 
@@ -23,9 +20,8 @@ class BackgroundEditorButton extends React.Component {
         this.setState({modalOpen: true})
     }
     
-    close = (res) => { 
+    close = () => { 
       this.setState({ modalOpen: false });
-      console.log("Beb.js 22", res);
       // this.getBackground()
       // this.props.didEdit;
       const backgroundInfo = {
@@ -52,13 +48,12 @@ class BackgroundEditorButton extends React.Component {
         .catch((err) => console.log(err))
     }
 
-    handleChangeComplete = (color, event) => { 
+    handleChangeComplete = (color) => { 
         this.setState({backgroundColor: color.hex})
-        console.log(this.state.backgroundColor)
     }
 
   render() {
-      const {modalOpen, imageURL, backgroundColor} = this.state;
+      const {modalOpen} = this.state;
     return (
       <Container>
         <Modal open={modalOpen}>

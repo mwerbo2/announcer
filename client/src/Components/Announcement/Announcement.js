@@ -4,9 +4,6 @@ import {
   Grid,
   Icon,
   Modal,
-  Button,
-  Image,
-  Header,
   Ref
 } from "semantic-ui-react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -38,11 +35,7 @@ class Announcement extends React.Component {
   
 
   saveAnnouncement = () => {
-    // console.log("this 35 a.js", this)
     //conditional to check if null don't send
-
-    // console.log(this.props.body)
-    // console.log(this.props.post_id)
     // if (this.state)
     const postId = this.props.post_id;
 
@@ -52,6 +45,9 @@ class Announcement extends React.Component {
         user_id: 999999993,
         announcement_title: this.state.title,
         status: "active"
+      },
+      {
+        headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
       })
       .then(res => this.openModal(res))
       .catch(function(error) {
@@ -63,6 +59,9 @@ class Announcement extends React.Component {
         user_id: 999999993,
         announcement_body: this.state.body,
         status: "active"
+      },
+      {
+        headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
       })
       .then(res => this.openModal(res))
       .catch(function(error) {
@@ -75,6 +74,9 @@ class Announcement extends React.Component {
         announcement_title: this.state.title,
         announcement_body: this.state.body,
         status: "active"
+      },
+      {
+        headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
       })
       .then(res => this.openModal(res))
       .catch(function(error) {
@@ -83,26 +85,26 @@ class Announcement extends React.Component {
     }
   };
 
-  openModal = res => {
-    // console.log(`a.js 57: ${res}`)
+  openModal = () => {
     this.setState({ openModal: true, title: "", body: "" });
   };
 
   closeModal = () => {
     this.props.onSave();
     this.setState({ openModal: false });
-    // console.log(`a.js 64 ${this.state.openModal}`);
   };
 
   deleteAnnouncement = () => {
-    // console.log("a.js 68", this)
     axios
       .post("/announcements/status", {
         user_id: 999992,
         id: this.props.post_id,
         status: "archive"
+      },
+      {
+        headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
       })
-      .then(post => this.props.afterDelete())
+      .then(() => this.props.afterDelete())
       .catch(err => console.log(err));
     // this.props.onDelete();
     this.props.afterDelete();
@@ -111,17 +113,12 @@ class Announcement extends React.Component {
 
   handleTitleChange(event) {
     this.setState({ title: event });
-    // console.log("Updating title to: ", this.state.title);
   }
   handleBodyChange(event) {
     this.setState({ body: event });
-    // console.log("Updating body to: ", this.state.body);
   }
 
   componentDidMount() {
-    const node = this.announcementRef.current;
-    // console.log(node)
-    // console.log(node.getBoundingClientRect());
   }
   render() {
     if (!auth0Client.isAuthenticated()) {

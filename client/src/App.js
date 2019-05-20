@@ -1,17 +1,6 @@
 import React, { Component } from "react";
-import SplitEditor from "./Components/SplitEditor";
-import {
-  Router,
-  Route,
-  withRouter,
-  Link,
-  Switch
-} from "react-router-dom";
-import './index.css'
-import { Header, Button, Grid, Segment } from "semantic-ui-react";
-// import {Link, Router, withRouter} from 'react-router-dom'
-import Navbar from "./Components/Layout/Navbar";
-import Footer from "./Components/Layout/Footer";
+import { Router, Route, withRouter } from "react-router-dom";
+import "./index.css";
 import Display from "./Components/Layout/LiveDisplay";
 import DisplayEditor from "./Components/Layout/DisplayEditor";
 import Profile from "./Components/Profile/Profile";
@@ -21,11 +10,9 @@ import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
 
 class App extends Component {
-  state = {backgroundImage: ""}
+  state = { backgroundImage: "" };
 
   getBackground = updated => {
-
-    
     // this.setState({
     //   backgroundColor: color,
     //   backgroundImage: img
@@ -33,19 +20,14 @@ class App extends Component {
     this.setState({
       backgroundImage: updated.backgroundImage
     });
- 
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    
     if (this.state.backgroundImage !== prevState.backgroundImage) {
-
       // this.setState({backgroundImage: this.})
       // this.getBackground()
-    } 
-
-    console.log("**app.js 39", this.state.backgroundImage)
-  }
+    }
+  };
   // state={checkingSession: true}
 
   // goTo(route) {
@@ -67,32 +49,61 @@ class App extends Component {
   //   }
   // }
 
-  async componentDidMount(){
-    if (this.props.location.pathname === '/callback') {
-    this.setState({checkingSession: false});
-    return
-  };
+  async componentDidMount() {
+    if (this.props.location.pathname === "/callback") {
+      this.setState({ checkingSession: false });
+      return;
+    }
     try {
       await auth0Client.silentAuth();
       // this.forceUpdate();
     } catch (err) {
-      if (err.error !== 'login_required') console.log(err.error);
+      if (err.error !== "login_required") console.log(err.error);
     }
-    this.setState({checkingSession:false});
-
-    
+    this.setState({ checkingSession: false });
   }
   render() {
     return (
-        <Router history={history}>
+      <Router history={history}>
         <div>
-        <Route path="/" exact render={props => <WelcomeMain auth={auth0Client} {...props}/>}/>
-        <Route path="/display" render={props => <Display auth={auth0Client} bk={this.state.backgroundImage} {...props} />}/>
-        <Route path="/displayeditor" render={props => <DisplayEditor auth={auth0Client} didBackgroundUpdate={this.getBackground} {...props} />}/>
-        <Route path="/profile" render={props => <Profile auth={auth0Client} bk={this.state.backgroundImage} {...props} />}/>
-        <Route exact path="/callback" component={Callback} />
+          <Route
+            path="/"
+            exact
+            render={props => <WelcomeMain auth={auth0Client} {...props} />}
+          />
+          <Route
+            path="/display"
+            render={props => (
+              <Display
+                auth={auth0Client}
+                bk={this.state.backgroundImage}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/displayeditor"
+            render={props => (
+              <DisplayEditor
+                auth={auth0Client}
+                didBackgroundUpdate={this.getBackground}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/profile"
+            render={props => (
+              <Profile
+                auth={auth0Client}
+                bk={this.state.backgroundImage}
+                {...props}
+              />
+            )}
+          />
+          <Route exact path="/callback" component={Callback} />
         </div>
-        </Router>
+      </Router>
     );
   }
 }

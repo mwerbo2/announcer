@@ -1,11 +1,9 @@
 import React from "react";
-import { Grid, Button, Icon, Ref } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Announcements from "../Announcement/Announcements";
 import DisplayHeader from "./DisplayHeader";
 import Axios from "axios";
-
-
 
 class AnnouncementBoard extends React.Component {
   constructor(props) {
@@ -13,15 +11,15 @@ class AnnouncementBoard extends React.Component {
     this.myRef = React.createRef();
     this.annRef = React.createRef();
     // this.announcementRef = React.createRef();
-   console.log("ab.js 16",this.props)
-    
-   this.state={
+
+    this.state = {
       announcementBottom: "",
       boardBottom: "",
       backgroundColor: "#000000",
-      backgroundImg: "https://www.solidbackgrounds.com/images/1024x768/1024x768-black-solid-color-background.jpg",
+      backgroundImg:
+        "https://www.solidbackgrounds.com/images/1024x768/1024x768-black-solid-color-background.jpg",
       backgroundUpdated: false
-    }
+    };
     // this.boardStyle = {
     //   height: "768px",
     //   width: "1024px",
@@ -30,34 +28,28 @@ class AnnouncementBoard extends React.Component {
     //   backgroundColor: this.state.backgroundColor
     // };
     // console.log("ab.js 31", boardStyle.backgroundColor)
-    
   }
 
-
   componentDidUpdate(prevProps) {
-    // console.log("ab.js 36", boardStyle.backgroundColor)
-    if (this.props.backgroundColor != prevProps.backgroundColor) {
+    if (this.props.backgroundColor !== prevProps.backgroundColor) {
       // const myColor = this.props.backgroundColor
-      // console.log("ab.js 48", myColor)
       // boardStyle.backgroundColor = myColor;
-      this.setState({backgroundColor: this.props.backgroundColor})
+      this.setState({ backgroundColor: this.props.backgroundColor });
     }
 
-    if (this.props.backgroundImage != prevProps.backgroundImage) {
-      this.setState({backgroundImg: this.props.backgroundImage})
+    if (this.props.backgroundImage !== prevProps.backgroundImage) {
+      this.setState({ backgroundImg: this.props.backgroundImage });
     }
-   }
-
+  }
 
   editBackground = () => {
-      console.log("editing background")
   };
   componentDidMount() {
-    
-console.log("Ab.js 41", this.boardStyle);
-    Axios.get('/boards')
-    .then((response) => this.setState({backgroundImg:response.data[0].background_image}))
-    .catch((error) => console.log(error))
+    Axios.get("/boards")
+      .then(response =>
+        this.setState({ backgroundImg: response.data[0].background_image })
+      )
+      .catch(error => console.log(error));
 
     // this.setState({backgroundColor: response.data[0].background_color})
     //Get height of announcements component
@@ -70,29 +62,23 @@ console.log("Ab.js 41", this.boardStyle);
     // console.log(bott)
     // this.setState({boardBottom: bott})
     // console.log(this.state.boardBottom)
-    console.log(this.myRef.current.getBoundingClientRect().height)
-    console.log(this.annRef.current)
+    // console.log(this.myRef.current.getBoundingClientRect().height);
+    // console.log(this.annRef.current);
     // console.log(this.annRef.current.getBoundingClientRect())
 
     // const annNode = this.announcementRef.current
     // console.log(annNode)
 
-    console.log("line 66, ab.js", this.annref)
   }
 
   getAnnouncementSize() {
-
-    const node = this.announcementsRef.current;
-    console.log(node)
-    console.log(node.getBoundingClientRect())
+    // console.log(node);
+    // console.log(node.getBoundingClientRect());
     // if (!node) { console.log('waiting')} else { console.log(node.getBoundingClientRect().bottom)}
     // this.setState({announcementBottom: "yes"})
-    
-    
   }
 
   render() {
-
     var boardStyle = {
       height: "768px",
       width: "1024px",
@@ -101,15 +87,18 @@ console.log("Ab.js 41", this.boardStyle);
       // backgroundColor: this.state.backgroundColor,
       backgroundImage: `url(${this.state.backgroundImg})`,
       flex: 1
-      
     };
-    
+
     return (
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
         <Grid>
           <DisplayHeader />
           <Grid.Row>
-            <Announcements ref={this.annRef} boardBotto={this.state.boardBottom} getBottom={this.getAnnouncementSize} />
+            <Announcements
+              ref={this.annRef}
+              boardBotto={this.state.boardBottom}
+              getBottom={this.getAnnouncementSize}
+            />
           </Grid.Row>
         </Grid>
       </div>

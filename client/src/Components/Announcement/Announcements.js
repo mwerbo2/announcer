@@ -1,6 +1,5 @@
-import React, { createRef } from "react";
-import ReactDOM from 'react-dom'
-import { Grid, Container, Header, Message, Ref } from "semantic-ui-react";
+import React from "react";
+import { Grid, Container, Ref } from "semantic-ui-react";
 import axios from "axios";
 // import { Editor } from '@tinymce/tinymce-react';
 // import Weather from './Announcement/PreviewWeather';
@@ -37,7 +36,7 @@ class Announcements extends React.Component {
     this.getActivePosts = this.getActivePosts.bind(this);
   }
 
-  handleSubmit = e => {};
+  handleSubmit = () => {};
 
   clickAdd = () => {
     this.setState({
@@ -49,7 +48,6 @@ class Announcements extends React.Component {
 
   handleEditorChange(content) {
     this.setState({ content });
-    // console.log(this.state.content);
   }
 
   renderAnnouncement = () => {
@@ -75,7 +73,6 @@ class Announcements extends React.Component {
     this.getActivePosts()
     this.setState({add:false, showAddButton:true, })
     this.setState({showAddButton:true});
-    // console.log(`A.js 66 ${this.state.savedSchedule}`)
 
   }
 
@@ -99,7 +96,6 @@ class Announcements extends React.Component {
 updateAfterDelete = () => {
   this.setState({deleted: true})
   this.getActivePosts();
-  // console.log("as.js 91", this.state.deleted)
 }
   // deleteAnnouncement() {
   
@@ -142,7 +138,6 @@ updateAfterDelete = () => {
   //   console.log(this.announcementsRef.current.getBoundingClientRect())
   //   console.log(this.announcementsRef.current.clientHeight)
 
-  console.log(this.announcementRef)
   }
 
 

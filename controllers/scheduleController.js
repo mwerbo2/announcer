@@ -1,8 +1,6 @@
 import Schedule from "../models/schedulemodel";
 
 const createSchedule = async (req, res) => {
-
-  console.log("Sc.js 5", req.body)
   try {
     const schedule = await Schedule.create({
       date_time_start: req.body.date_time_start,

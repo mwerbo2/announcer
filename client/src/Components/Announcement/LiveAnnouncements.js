@@ -1,13 +1,7 @@
 import React from "react";
 import {
   Container,
-  Grid,
-  Icon,
-  Modal,
-  Button,
-  Image,
-  Header
-} from "semantic-ui-react";
+  Grid} from "semantic-ui-react";
 
 const liveContainerStyle = { 
   // backgroundColor: "#000000",

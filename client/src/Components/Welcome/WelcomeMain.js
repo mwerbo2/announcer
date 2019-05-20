@@ -1,9 +1,8 @@
 import React from "react";
 import { Header, Button, Grid, Segment } from "semantic-ui-react";
-import { Link, Router, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
-import history from "../../Auth/history";
 import auth0Client from "../../Auth/Auth";
 
 class WelcomeMain extends React.Component {
