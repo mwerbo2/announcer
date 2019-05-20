@@ -1,6 +1,5 @@
-import React, { createRef } from "react";
-import ReactDOM from 'react-dom'
-import { Grid, Container, Header, Message, Ref } from "semantic-ui-react";
+import React from "react";
+import { Grid, Container, Ref } from "semantic-ui-react";
 import axios from "axios";
 // import { Editor } from '@tinymce/tinymce-react';
 // import Weather from './Announcement/PreviewWeather';
@@ -37,7 +36,7 @@ class Announcements extends React.Component {
     this.getActivePosts = this.getActivePosts.bind(this);
   }
 
-  handleSubmit = e => {};
+  handleSubmit = () => {};
 
   clickAdd = () => {
     this.setState({

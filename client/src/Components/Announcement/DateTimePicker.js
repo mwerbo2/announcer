@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, List, Header, Icon, Message, Grid } from "semantic-ui-react";
+import { Button, Header, Icon, Grid } from "semantic-ui-react";
 import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import moment from "moment";
 import auth0Client from "../../Auth/Auth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -28,7 +26,6 @@ const styles = theme => ({
 class DateAndTimePickers extends React.Component {
   constructor(props) {
     super(props);
-    const { classes } = props;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleStartTime = this.handleStartTime.bind(this);
     this.handleEndTime = this.handleEndTime.bind(this);
@@ -63,7 +60,7 @@ class DateAndTimePickers extends React.Component {
     axios
       .delete(`/announcements/${this.props.post_id}`)
       .catch(error => console.log(error))
-      .then(res => this.setState({ scheduleDeleted: true }));
+      .then(() => this.setState({ scheduleDeleted: true }));
   };
 
   checkSchedule = () => {
@@ -73,8 +70,6 @@ class DateAndTimePickers extends React.Component {
     this.checkSchedule();
     e.preventDefault();
     const p_id = this.props.post_id;
-    const start = new Date(this.state.startTime);
-    const end = new Date(this.state.endTime);
     if (this.state.currentSchedule.length > 0) {
       axios
         .put(
@@ -122,7 +117,6 @@ class DateAndTimePickers extends React.Component {
   };
 
   render() {
-    const today = new Date();
     if (this.state.currentSchedule.length === 0) {
       return (
         <div>
@@ -140,6 +134,7 @@ class DateAndTimePickers extends React.Component {
                       selected={this.state.startTime}
                       onChange={this.handleStartDate}
                       dateFormat="yyyy-MM-dd"
+                      key={1}
                     />
                   </Grid.Column>
                   <Grid.Column>
@@ -149,6 +144,7 @@ class DateAndTimePickers extends React.Component {
                       onChange={this.handleEndDate}
                       dateFormat="yyyy-MM-dd"
                       minDate={new Date()}
+                      key={2}
                     />
                   </Grid.Column>
                   <Grid.Column>
@@ -237,7 +233,7 @@ class DateAndTimePickers extends React.Component {
           </Header>
           {this.state.currentSchedule.map(schedule => {
             return (
-              <Grid columns={2}>
+              <Grid columns={2} key={schedule.id}>
                 <Grid.Row>
                   <Grid.Column width={3}>
                     <Header as="h4">Date start</Header>

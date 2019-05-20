@@ -1,4 +1,3 @@
-import { getWeatherLatLong, getWeatherCityName, getWeatherZip, getWeatherId } from "../controllers/weatherController";
 import { getWeather } from '../controllers/darkskyController'
 module.exports = app => {
   app.get("/weather", getWeather);

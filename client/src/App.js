@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import SplitEditor from "./Components/SplitEditor";
-import { Router, Route, withRouter, Link, Switch } from "react-router-dom";
+import { Router, Route, withRouter } from "react-router-dom";
 import "./index.css";
-import { Header, Button, Grid, Segment } from "semantic-ui-react";
-// import {Link, Router, withRouter} from 'react-router-dom'
-import Navbar from "./Components/Layout/Navbar";
-import Footer from "./Components/Layout/Footer";
 import Display from "./Components/Layout/LiveDisplay";
 import DisplayEditor from "./Components/Layout/DisplayEditor";
 import Profile from "./Components/Profile/Profile";

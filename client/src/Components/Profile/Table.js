@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
-import { bgRed } from "ansi-colors";
 
 class Table extends React.Component {
   render() {

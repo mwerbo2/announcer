@@ -1,8 +1,6 @@
 import React from "react";
-import { Grid, Container, Header } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 import {withRouter} from 'react-router-dom'
-import Weather from "./PreviewWeather";
-import DateTime from "./PreviewDateTime";
 // import Announcement from './Announcement/PreviewAnnouncements';
 import LiveAnnouncement from "../Announcement/LiveAnnouncements";
 import DisplayHeader from "./DisplayHeader";

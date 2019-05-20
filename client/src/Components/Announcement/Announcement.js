@@ -4,9 +4,6 @@ import {
   Grid,
   Icon,
   Modal,
-  Button,
-  Image,
-  Header,
   Ref
 } from "semantic-ui-react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -88,7 +85,7 @@ class Announcement extends React.Component {
     }
   };
 
-  openModal = res => {
+  openModal = () => {
     this.setState({ openModal: true, title: "", body: "" });
   };
 
@@ -107,7 +104,7 @@ class Announcement extends React.Component {
       {
         headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
       })
-      .then(post => this.props.afterDelete())
+      .then(() => this.props.afterDelete())
       .catch(err => console.log(err));
     // this.props.onDelete();
     this.props.afterDelete();
@@ -122,7 +119,6 @@ class Announcement extends React.Component {
   }
 
   componentDidMount() {
-    const node = this.announcementRef.current;
   }
   render() {
     if (!auth0Client.isAuthenticated()) {

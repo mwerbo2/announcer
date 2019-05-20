@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Icon, Ref } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Announcements from "../Announcement/Announcements";
 import DisplayHeader from "./DisplayHeader";
@@ -31,13 +31,13 @@ class AnnouncementBoard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.backgroundColor != prevProps.backgroundColor) {
+    if (this.props.backgroundColor !== prevProps.backgroundColor) {
       // const myColor = this.props.backgroundColor
       // boardStyle.backgroundColor = myColor;
       this.setState({ backgroundColor: this.props.backgroundColor });
     }
 
-    if (this.props.backgroundImage != prevProps.backgroundImage) {
+    if (this.props.backgroundImage !== prevProps.backgroundImage) {
       this.setState({ backgroundImg: this.props.backgroundImage });
     }
   }
@@ -72,7 +72,6 @@ class AnnouncementBoard extends React.Component {
   }
 
   getAnnouncementSize() {
-    const node = this.announcementsRef.current;
     // console.log(node);
     // console.log(node.getBoundingClientRect());
     // if (!node) { console.log('waiting')} else { console.log(node.getBoundingClientRect().bottom)}
