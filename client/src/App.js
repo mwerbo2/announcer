@@ -8,6 +8,7 @@ import WelcomeMain from "./Components/Welcome/WelcomeMain";
 import Callback from "./Auth/Callback";
 import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
+import SecuredRoute from './Auth/SecuredRoute'
 
 class App extends Component {
   state = { backgroundImage: "" };
@@ -81,7 +82,7 @@ class App extends Component {
               />
             )}
           />
-          <Route
+          <SecuredRoute
             path="/displayeditor"
             render={props => (
               <DisplayEditor

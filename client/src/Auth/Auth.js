@@ -8,7 +8,8 @@ class Auth {
         clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
         redirectUri: `http://docker01/callback`,
         responseType: `id_token`,
-        scope: `openid profile`
+        scope: `openid profile`,
+        sso: false
     });
 
     this.getProfile = this.getProfile.bind(this);
