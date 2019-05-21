@@ -45,9 +45,23 @@ const getBackground = async (req, res) => {
         return res.status(400).send(error);
     }
 }
+
+const seedDB = async (req, res) => {
+    console.log('******Seeding********')
+    try {
+        const board = await Board.create({
+            background_image: 'https://live.staticflickr.com/25/62666535_0a7513949f_b.jpg'
+        })
+        return res.status(200).send(board);
+    } catch (error) {
+        return res.status(400).send(error)
+    };
+}
+
 export {
     getAllBoards,
     createBoard,
     updateBackground,
-    getBackground
+    getBackground,
+    seedDB
 }

@@ -6,9 +6,8 @@ let app = express();
 require("dotenv").config();
 import cors from 'cors';
 import helmet from 'helmet';
-import jwt from 'express-jwt';
-import jwksRsa from 'jwks-rsa';
-const port = 3001;
+const PORT = 3001;
+const os = require('os');
 
 //Sequelize initialization
 import { sequelize } from "./config/config";
@@ -67,6 +66,6 @@ app.get('*', (req, res) => {
 // getAllAnnouncements();
 // job.start();
 
-app.listen(port, () => {
-  console.log(`server.js Running on port: ${port}`);
+app.listen(PORT, () => {
+  console.log(`server.js 72 Running on port: ${PORT}`);
 });
