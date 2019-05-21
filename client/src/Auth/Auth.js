@@ -89,7 +89,7 @@ class Auth {
         if (err) return reject(err);
         this.setSession(authResult);
         resolve();
-      });
+      }
     });
   }
 }
