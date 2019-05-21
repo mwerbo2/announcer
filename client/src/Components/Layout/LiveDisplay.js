@@ -43,18 +43,18 @@ class Display extends React.Component {
      })
 
 
-    // setInterval(() => {
-    //   axios
-    //   .get("/announcements/liveStatus")
-    //   .then(announcement => {
-    //     this.setState({
-    //       fullAnnouncement: announcement.data,
-    //       title: announcement.title,
-    //       body: announcement.body
-    //     });
-    //   })
-    //   .catch(error => console.log(error));
-    // }, 5000);
+    setInterval(() => {
+      axios
+      .get("/announcements/liveStatus")
+      .then(announcement => {
+        this.setState({
+          fullAnnouncement: announcement.data,
+          title: announcement.title,
+          body: announcement.body
+        });
+      })
+      .catch(error => console.log(error));
+    }, 5000);
   }
 
   render() {
