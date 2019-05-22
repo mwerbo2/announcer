@@ -36,18 +36,11 @@ class WelcomeMain extends React.Component {
           </Grid.Row>
           <Grid.Row columns={2}>
             <Grid.Column width="4" textAlign="center">
-              {!auth0Client.isAuthenticated() && (
-                <Button size="massive" onClick={auth0Client.signIn}>
-                  View Live Post
-                </Button>
-              )}
-              {auth0Client.isAuthenticated() && (
                 <Button size="massive">
                   <Link to={`/display`} target="_blank">
                     View Live Post
                   </Link>
-                </Button>
-              )}
+                </Button>              
             </Grid.Column>
             <Grid.Column width="4" textAlign="center">
               {!auth0Client.isAuthenticated() && (

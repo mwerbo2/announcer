@@ -20,25 +20,16 @@ const Navbar = props => {
           />
           Announce
         </Menu.Item>
-        {!auth0Client.isAuthenticated() && (
-        <Menu.Item onClick={auth0Client.signIn}>
-        View Live
+        <Menu.Item as={Link} to="/display" target="_blank">
+          View Live
         </Menu.Item>
+        {!auth0Client.isAuthenticated() && (
+          <Menu.Item onClick={auth0Client.signIn}>Profile</Menu.Item>
         )}
         {auth0Client.isAuthenticated() && (
-          <Menu.Item as={Link} to="/display" target="_blank">
-            View Live
+          <Menu.Item as={Link} to="/profile">
+            Profile
           </Menu.Item>
-        )}
-        {!auth0Client.isAuthenticated() && (
-          <Menu.Item onClick={auth0Client.signIn}>
-          Profile
-          </Menu.Item>
-        )}
-        {auth0Client.isAuthenticated() && (
-        <Menu.Item as={Link} to="/profile">
-          Profile
-        </Menu.Item>
         )}
         {!auth0Client.isAuthenticated() && (
           <Menu.Item onClick={auth0Client.signIn}>Log in</Menu.Item>

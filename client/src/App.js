@@ -82,7 +82,7 @@ class App extends Component {
               />
             )}
           />
-          <SecuredRoute
+          <Route
             path="/displayeditor"
             render={props => (
               <DisplayEditor

@@ -18,7 +18,7 @@ Announcement.init({
     type: Sequelize.STRING
   },
   announcement_body: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING(1234)
   },
   status: {
     type: Sequelize.STRING

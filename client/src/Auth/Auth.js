@@ -34,6 +34,7 @@ class Auth {
   }
 
   signIn() {
+    console.log('a.js 37 logging in')
     this.auth0.authorize();
   }
   
