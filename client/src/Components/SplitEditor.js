@@ -25,7 +25,6 @@ class Main extends React.Component {
       .then(res => {
         const annoucements = res.data;
         this.setState({ announcement: annoucements });
-        console.log("announcement api ", this.state.announcement);
       })
       .catch(error => console.log(error));
   }
@@ -40,11 +39,9 @@ class Main extends React.Component {
 
   handleEditorChange(content) {
     this.setState({ content });
-    console.log(this.state.content);
   }
 
   handleSubmit(e) {
-    console.log(this.state.content);
     e.preventDefault();
 
     axios.post(`/announcements`, {});
@@ -59,7 +56,6 @@ class Main extends React.Component {
 
   render() {
     // const annoucement = this.state.announcement.map((announce) => {
-    //     console.log('announce', announce)
     //     return <Display title={announce.announcement_title} body={announce.announcement_body} />
     //   }
     //  )

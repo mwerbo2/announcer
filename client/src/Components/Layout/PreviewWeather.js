@@ -1,6 +1,11 @@
 import React from "react";
-import { Container, Header } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import axios from "axios";
+// import WeatherIcon from 'react-icons-weather';
+// import WeatherIcons from 'react-weathericons';
+// import WeatherIcons from 'react-weathericons';
+import "weather-icons/css/weather-icons.css";
+
 
 class Weather extends React.Component {
   state = {
@@ -8,42 +13,104 @@ class Weather extends React.Component {
     conditions: "fair",
     temp: "",
     temp_max: "",
-    temp_min: ""
+    temp_min: "",
+    iconName: "",
+    iconImage: ""
   };
 
-  capitalizeString(str) {
-    str = str.split(" ");
-    for (var i = 0, x = str.length; i < x; i++) {
-      str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+  darkSkyIcons = [
+    "clear-day",
+    "clear-night",
+    "rain",
+    "snow",
+    "sleet",
+    "wind",
+    "fog",
+    "cloudy",
+    "partly-cloudy-day",
+    "partly-cloudy-night"
+  ];
+
+  iconSelector = () => {
+    switch (this.state.icon) {
+      case "clear-day":
+        this.setState({ iconImage: "wi-day-sunny" });
+        break;
+      case "clear-night":
+        this.setState({ iconImage: "wi-night-clear" });
+        break;
+      case "rain":
+        this.setState({ iconImage: "wi-rain" });
+        break;
+      case "snow":
+        this.setState({ iconImage: "wi-snow" });
+        break;
+      case "sleet":
+        this.setState({ iconImage: "wi-sleet" });
+        break;
+      case "wind":
+        this.setState({ iconImage: "wi-strong-wind" });
+        break;
+      case "fog":
+        this.setState({ iconImage: "wi-fog" });
+        break;
+      case "cloudy":
+        this.setState({ iconImage: "wi-cloudy" });
+        break;
+      case "partly-cloudy-day":
+        this.setState({ iconImage: "wi-day-cloudy" });
+        break;
+      case "partly-cloudy-night":
+        this.setState({ iconImage: "wi-night-partly-cloudy" });
+        break;
+      default:
+        this.setState({ iconImage: "wi-day-cloudy" });
     }
-    return str.join(" ");
-  }
+  };
 
   componentDidMount() {
     axios
-      .get("/weather/id")
+      .get("/weather")
       .then(res => {
         this.setState({
-          currentWeather: res.data,
-          conditions: this.capitalizeString(res.data.weather[0].description),
-          temp: res.data.main.temp,
-          temp_max: res.data.main.temp_max,
-          temp_min: res.data.main.temp_min
+          temp: res.data.temperature,
+          icon: res.data.icon
         });
+        this.iconSelector();
       })
       .catch(err => {
         console.log(err);
       });
+
+    this.timeInterval = setInterval(() => {
+      axios
+        .get("/weather")
+        .then(res => {
+          this.setState({
+            temp: res.data.temperature,
+            icon: res.data.icon
+          });
+          this.iconSelector();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }, 1000 * 60 * 60);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeInterval);
   }
 
   render() {
     return (
-      <Container>
-        <Header as="h2">{this.state.conditions}</Header>
-        <Header as="h3">
-          {Math.floor(this.state.temp_min)}&#176;{" "}
-          {Math.floor(this.state.temp_max)}&#176;
-        </Header>
+      <Container textAlign='center'>
+        <span style={{ fontSize: "3em", color: "white" }}>
+          <i className={`wi ${this.state.iconImage}`} />
+        </span>
+        <p style={{ color: "white", fontSize: "18px" }}>
+          {Math.round(this.state.temp)}&deg;F
+        </p>
       </Container>
     );
   }

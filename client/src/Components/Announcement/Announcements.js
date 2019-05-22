@@ -1,6 +1,5 @@
-import React, { createRef } from "react";
-import ReactDOM from 'react-dom'
-import { Grid, Container, Header, Message, Ref } from "semantic-ui-react";
+import React from "react";
+import { Grid, Container, Ref } from "semantic-ui-react";
 import axios from "axios";
 // import { Editor } from '@tinymce/tinymce-react';
 // import Weather from './Announcement/PreviewWeather';
@@ -37,7 +36,7 @@ class Announcements extends React.Component {
     this.getActivePosts = this.getActivePosts.bind(this);
   }
 
-  handleSubmit = e => {};
+  handleSubmit = () => {};
 
   clickAdd = () => {
     this.setState({
@@ -49,7 +48,6 @@ class Announcements extends React.Component {
 
   handleEditorChange(content) {
     this.setState({ content });
-    // console.log(this.state.content);
   }
 
   renderAnnouncement = () => {
@@ -75,8 +73,11 @@ class Announcements extends React.Component {
     this.getActivePosts()
     this.setState({add:false, showAddButton:true, })
     this.setState({showAddButton:true});
-    // console.log(`A.js 66 ${this.state.savedSchedule}`)
 
+  }
+
+  clickDelete = () => {
+    this.setState({add: false, showAddButton: true})
   }
 
   getActivePosts = () => {
@@ -95,7 +96,6 @@ class Announcements extends React.Component {
 updateAfterDelete = () => {
   this.setState({deleted: true})
   this.getActivePosts();
-  // console.log("as.js 91", this.state.deleted)
 }
   // deleteAnnouncement() {
   
@@ -138,7 +138,6 @@ updateAfterDelete = () => {
   //   console.log(this.announcementsRef.current.getBoundingClientRect())
   //   console.log(this.announcementsRef.current.clientHeight)
 
-  console.log(this.announcementRef)
   }
 
 
@@ -158,14 +157,14 @@ updateAfterDelete = () => {
     return (
       // <div ref={this.setAnnouncementRef}>
       <Ref innerRef={this.setAnnouncementRef}>
-      <Container className='announcementsCont' key={this.props.key} style={{ padding: "3em 0em 0em" }}>
+      <Container className='announcementsCont' key={this.props.key} style={{ padding: "3em 0em 0em", height: "100%" }}>
       {/* <div ref={this.announcementsRef}> */}
         <Grid>
           <Grid.Row>
             <Grid.Column width={16}>
                 {this.renderAnnouncement()}
                 {this.state.showAddButton && <AddButton buttonClick={this.clickAdd} />}
-                {this.state.add && <AnnouncementPlaceholder boardB={this.props.boardBotto} onSave={this.updateAfterSave} onDelete={this.deleteAnnouncement} />}
+                {this.state.add && <AnnouncementPlaceholder onDelete={this.clickDelete} boardB={this.props.boardBotto} onSave={this.updateAfterSave} />}
             </Grid.Column>
           </Grid.Row>
         </Grid>

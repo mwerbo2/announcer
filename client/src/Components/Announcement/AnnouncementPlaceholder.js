@@ -48,11 +48,8 @@ class AnnouncementPlaceholder extends React.Component {
         }
       )
       .then(response => {
-        // console.log("saved ann: ", response.data[0].id);
 
-        this.setState({post_id: response.data[0].id, openModal: true, title:"", body:""})
-        // console.log("state", this.state.post_id)
-        // console.log(this.state.openModal);
+        this.setState({post_id: response.data.id, openModal: true, title:"", body:""})
       })
       .catch(function(error) {
         console.log(error);
@@ -62,7 +59,6 @@ class AnnouncementPlaceholder extends React.Component {
   closeModal = () => {
     this.setState({openModal:false})
     this.props.onSave();
-    // console.log(`ap.js 62 ${this.state.openModal}`);
   }
 
 
@@ -73,16 +69,14 @@ class AnnouncementPlaceholder extends React.Component {
 
   handleTitleChange(event) {
     this.setState({ title: event });
-    // console.log("Updating title to: ", this.state.title);
   }
   handleBodyChange(event) {
     this.setState({ body: event });
-    // console.log("Updating body to: ", this.state.body);
   }
   componentDidMount(){
-    console.log(this.placeHolderRef.current.getBoundingClientRect().height);
-    console.log(this.props.boardB)
-    if (this.placeHolderRef.current.getBoundingClientRect().bottom < this.props.boardB) { console.log('I fit')} else { console.log('i do not fit')}
+    // console.log(this.placeHolderRef.current.getBoundingClientRect().height);
+    // console.log(this.props.boardB)
+    // if (this.placeHolderRef.current.getBoundingClientRect().bottom < this.props.boardB) { console.log('I fit')} else { console.log('i do not fit')}
   }
 
   render() {
@@ -96,23 +90,28 @@ class AnnouncementPlaceholder extends React.Component {
                 ref="body"
                 inline
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline;'>Title</span></h1>"
-                plugins="link table wordcount"
-                toolbar="bold link table"
+                initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
+                init={{
+                  "menubar": false,
+                }}
+                plugins="link table wordcount textcolor visualblocks spellchecker"
+                toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
                 onEditorChange={this.handleTitleChange}
-                init={{browser_spellcheck: true}}
               />
               <Editor
                 ref="body"
                 inline
                 apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<ul>
+                initialValue="<ul style='color: #ffffff'>
                 <li>
-                <h3>Body</h3>
+                <h3 style='color: #ffffff'>Body</h3>
                 </li>
                 </ul>"
-                plugins="link table wordcount lists"
-                toolbar="bold link tablenumlist bullist"
+                init={{
+                  "menubar": false,
+                }}
+                plugins="link table wordcount lists textcolor image"
+                toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
                 onEditorChange={this.handleBodyChange}
               />
             </Container>
@@ -122,17 +121,19 @@ class AnnouncementPlaceholder extends React.Component {
             <Icon
               name="trash alternate"
               size="large"
-              onClick={this.deleteAnnouncement}
+              onClick={this.props.onDelete}
+              inverted
             />
             <Icon
-              type="Submit"
+              // type="Submit"
               name="save"
               size="large"
               onClick={this.saveAnnouncement}
+              inverted
             />
             <Modal
             open={this.state.openModal}
-              // trigger={<Icon name="calendar times outline" size="large" />}
+            size="small"            
             >
               <Modal.Header>Schedule your announcement</Modal.Header>
               <Modal.Content>

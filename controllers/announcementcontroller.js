@@ -6,7 +6,7 @@ const Op = Sequelize.Op;
 const createAnnouncement = async (req, res) => {
   try {
     const post = await Announcement.create({
-      user_id: req.user.user_id,
+      user_id: req.body.user_id,
       announcement_title: req.body.announcement_title,
       announcement_body: req.body.announcement_body,
       status: req.body.status
@@ -57,17 +57,25 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
   try {
     const post = await Announcement.findAll({
       where: {
-        status: 'active'
+        status: "active"
       },
       include: [
         {
           model: Schedule,
-          where: {
-            date_time_start: {
-              [Op.lt]: endOfDay,
-              [Op.gt]: beginningOfDay
+          where: [
+            {
+              date_time_start: {
+                [Op.lt]: endOfDay,
+                [Op.gt]: beginningOfDay
+              }
+            },
+            {
+              date_time_end: {
+                [Op.lt]: endOfDay,
+                [Op.gt]: beginningOfDay
+              }
             }
-          }
+          ]
         }
       ]
     });
@@ -77,17 +85,69 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
   }
 };
 
+const getLiveAnnouncementsRonak = async (req, res) => {
+  const currentDate = new Date();
+  try {
+    const post = await Announcement.findAll({
+      where: {
+        status: "active"
+      },
+      include: [
+        {
+          model: Schedule,
+          where: [
+            {
+              date_time_start: {
+                [Op.lte]: currentDate,
+              }
+            },
+            {
+              date_time_end: {
+                [Op.gte]: currentDate
+              }
+            }
+          ]
+        }
+      ]
+    });
+    return res.status(200).send(post);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+};
+
+const updateAnnoucement = async (req, res) => {
+  try {
+    const post = await Announcement.update(
+      {
+        announcement_body: req.body.announcement_body,
+        announcement_title: req.body.announcement_title,
+        status: req.body.status
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    );
+    return res.status(200).send(post);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+};
 
 const updateOrCreateAnnouncement = async (req, res) => {
-  console.log(req.user);
   try {
-    const post = await Announcement.upsert({
-      id: req.body.announcementId,
-      user_id: req.body.user_id,
-      announcement_title: req.body.announcement_title,
-      announcement_body: req.body.announcement_body,
-      status: req.body.status
-    }, {returning:true});
+    const post = await Announcement.upsert(
+      {
+        id: req.body.announcementId,
+        user_id: req.body.user_id,
+        announcement_title: req.body.announcement_title,
+        announcement_body: req.body.announcement_body,
+        status: req.body.status
+      },
+      { returning: true }
+    );
     return res.status(201).send(post);
   } catch (error) {
     return res.status(400).send(error);
@@ -108,13 +168,13 @@ const setAnnouncementStatus = async (req, res) => {
   }
 };
 
-
-
 export {
   createAnnouncement,
   getAllAnnouncements,
   getLiveAnnouncements,
+  updateAnnoucement,
   updateOrCreateAnnouncement,
   setAnnouncementStatus,
-  getLiveAnnouncementWithStatus
+  getLiveAnnouncementWithStatus,
+  getLiveAnnouncementsRonak
 };
