@@ -7,7 +7,6 @@ import Footer from "../Layout/Footer";
 import AnnouncementBoard from "./AnnouncementBoard";
 import EditorBarContainer from "../EditorBar/EditorBarContainer";
 
-
 class Display extends React.Component {
   constructor(props) {
     super(props);
@@ -28,10 +27,6 @@ class Display extends React.Component {
   }
 
   getBackground = updated => {
-    // this.setState({
-    //   backgroundColor: color,
-    //   backgroundImage: img
-    // })
     this.setState({
       backgroundImage: updated.backgroundImage
     });
