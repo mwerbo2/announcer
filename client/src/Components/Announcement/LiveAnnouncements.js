@@ -3,8 +3,7 @@ import {
   Container,
   Grid} from "semantic-ui-react";
 
-const liveContainerStyle = { 
-  // backgroundColor: "#000000",
+const liveContainerStyle = {
   color: '#ffffff',
   opacity: '.9'
 }

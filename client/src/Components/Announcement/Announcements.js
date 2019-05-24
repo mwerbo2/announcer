@@ -1,9 +1,6 @@
 import React from "react";
 import { Grid, Container, Ref } from "semantic-ui-react";
 import axios from "axios";
-// import { Editor } from '@tinymce/tinymce-react';
-// import Weather from './Announcement/PreviewWeather';
-// import DateTime from './Announcement/PreviewDateTime';
 import Announcement from "./Announcement";
 import AddButton from "./AddButton";
 import AnnouncementPlaceholder from "./AnnouncementPlaceholder";
@@ -24,19 +21,14 @@ class Announcements extends React.Component {
       showAddButton: true
     };
 
-    // this.announcementsRef = React.createRef();
     this.setAnnouncementRef = element => {
       this.announcementRef = element;
     };
 
     this.handleEditorChange = this.handleEditorChange.bind(this);
-    // this.deleteAnnouncement = this.deleteAnnouncement.bind(this);
     this.clickAdd = this.clickAdd.bind(this);
-    // this.handleEditChange = this.handleEditChange.bind(this);
     this.getActivePosts = this.getActivePosts.bind(this);
   }
-
-  handleSubmit = () => {};
 
   clickAdd = () => {
     this.setState({
@@ -69,16 +61,15 @@ class Announcements extends React.Component {
   };
 
   updateAfterSave = () => {
-    this.setState({savedSchedule: true})
-    this.getActivePosts()
-    this.setState({add:false, showAddButton:true, })
-    this.setState({showAddButton:true});
-
-  }
+    this.setState({ savedSchedule: true });
+    this.getActivePosts();
+    this.setState({ add: false, showAddButton: true });
+    this.setState({ showAddButton: true });
+  };
 
   clickDelete = () => {
-    this.setState({add: false, showAddButton: true})
-  }
+    this.setState({ add: false, showAddButton: true });
+  };
 
   getActivePosts = () => {
     axios
@@ -93,14 +84,11 @@ class Announcements extends React.Component {
       .catch(error => console.log(error));
   };
 
-updateAfterDelete = () => {
-  this.setState({deleted: true})
-  this.getActivePosts();
-}
-  // deleteAnnouncement() {
-  
-  // }
-
+  updateAfterDelete = () => {
+    this.setState({ deleted: true });
+    this.getActivePosts();
+  };
+  //Feature for validating if post will fit on live display
   getBottomDimension = () => {
     // console.log(this.props.boardBotto)
     // this.props.getBottom()
@@ -108,69 +96,72 @@ updateAfterDelete = () => {
     // const node = this.announcementsRef.current
     // console.log(node)
     // const annBottom = node.getBoundingClientRect().bottom
-    
     // const annBottom = !node ? " " : node.getBoundingClientRect().bottom
     // console.log(annBottom)
-   //   if (!node) { console.log('waiting')} else if (this.props.boardBotto < annBottom ){
-  //     console.log('too big')
-  //   } else {
-  //     console.log('fits ')
-  //   }
-  }
-  
+    //   if (!node) { console.log('waiting')} else if (this.props.boardBotto < annBottom ){
+    //     console.log('too big')
+    //   } else {
+    //     console.log('fits ')
+    //   }
+  };
 
   componentDidMount() {
-    // console.log(this.props.getBottom())
-    
-    this.getActivePosts()
+    this.getActivePosts();
 
-    setTimeout(() => {
-      // console.log(this)
-      // console.log(this.announcementsRef.current.getBoundingClientRect().bottom)    
-      // console.log("offset height", this.announcementsRef.offsetHeight)
-  }, 100);
+    setTimeout(() => {}, 100);
 
-    //
     // console.log(ReactDOM.findDOMNode(this).offsetHeight)
-    
-  // console.log(this.announcementsRef.current.getBoundingClientRect())
-  //   console.log(this.announcementsRef.current)
-  //   console.log(this.announcementsRef.current.getBoundingClientRect())
-  //   console.log(this.announcementsRef.current.clientHeight)
-
+    // console.log(this.announcementsRef.current.getBoundingClientRect())
+    //   console.log(this.announcementsRef.current)
+    //   console.log(this.announcementsRef.current.getBoundingClientRect())
+    //   console.log(this.announcementsRef.current.clientHeight)
   }
-
 
   render() {
     if (!auth0Client.isAuthenticated())
       return (
         <Ref innerRef={this.announcementsRef}>
-        <Container className='announcementsCont' key={this.props.key} style={{ padding: "3em 0em 0em" }}>
-          <Grid>
-            <Grid.Row>
-              <Grid.Column width={16}>{this.renderAnnouncement()}</Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
+          <Container
+            className="announcementsCont"
+            key={this.props.key}
+            style={{ padding: "3em 0em 0em" }}
+          >
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={16}>
+                  {this.renderAnnouncement()}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
         </Ref>
       );
     return (
-      // <div ref={this.setAnnouncementRef}>
       <Ref innerRef={this.setAnnouncementRef}>
-      <Container className='announcementsCont' key={this.props.key} style={{ padding: "3em 0em 0em", height: "100%" }}>
-      {/* <div ref={this.announcementsRef}> */}
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={16}>
+        <Container
+          className="announcementsCont"
+          key={this.props.key}
+          style={{ padding: "3em 0em 0em", height: "100%" }}
+        >
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={16}>
                 {this.renderAnnouncement()}
-                {this.state.showAddButton && <AddButton buttonClick={this.clickAdd} />}
-                {this.state.add && <AnnouncementPlaceholder onDelete={this.clickDelete} boardB={this.props.boardBotto} onSave={this.updateAfterSave} />}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+                {this.state.showAddButton && (
+                  <AddButton buttonClick={this.clickAdd} />
+                )}
+                {this.state.add && (
+                  <AnnouncementPlaceholder
+                    onDelete={this.clickDelete}
+                    boardB={this.props.boardBotto}
+                    onSave={this.updateAfterSave}
+                  />
+                )}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
       </Ref>
-      // </div>
     );
   }
 }

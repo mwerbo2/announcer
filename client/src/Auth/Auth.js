@@ -1,15 +1,15 @@
-import auth0 from 'auth0-js';
+import auth0 from "auth0-js";
 
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-        domain: `${process.env.REACT_APP_Auth0_Domain}`,
-        audience: `https://${process.env.REACT_APP_Auth0_Domain}/userinfo`,
-        clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
-        redirectUri: `http://docker01/callback`,
-        responseType: `id_token`,
-        scope: `openid profile`,
-        sso: false
+      domain: `${process.env.REACT_APP_Auth0_Domain}`,
+      audience: `https://${process.env.REACT_APP_Auth0_Domain}/userinfo`,
+      clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
+      redirectUri: `http://docker01/callback`,
+      responseType: `id_token`,
+      scope: `openid profile`,
+      sso: false
     });
 
     this.getProfile = this.getProfile.bind(this);
@@ -36,7 +36,7 @@ class Auth {
   signIn() {
     this.auth0.authorize();
   }
-  
+
   handleAuthentication() {
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
@@ -47,12 +47,12 @@ class Auth {
         this.setSession(authResult);
         resolve();
       });
-    })
+    });
   }
 
   setSession(authResult) {
-    localStorage.setItem('isLoggedIn', 'true');
-    this.acccessToke = authResult.accessToken
+    localStorage.setItem("isLoggedIn", "true");
+    this.acccessToke = authResult.accessToken;
     this.idToken = authResult.idToken;
     this.profile = authResult.idTokenPayload;
     // set the time that the id token will expire at
@@ -64,23 +64,25 @@ class Auth {
     this.idToken = null;
     this.expiresAt = 0;
 
-    localStorage.removeItem('isLoggedIn')
+    localStorage.removeItem("isLoggedIn");
 
     this.auth0.logout({
       returnTo: `http://docker01/`,
-      clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
+      clientID: `${process.env.REACT_APP_Auth0_ClientId}`
     });
   }
 
   renewSession() {
     this.auth0.checkSession({}, (err, authResult) => {
-       if (authResult && authResult.accessToken && authResult.idToken) {
-         this.setSession(authResult);
-       } else if (err) {
-         this.logout();
-         console.log(err);
-         alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
-       }
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        this.setSession(authResult);
+      } else if (err) {
+        this.logout();
+        console.log(err);
+        alert(
+          `Could not get a new token (${err.error}: ${err.error_description}).`
+        );
+      }
     });
   }
 

@@ -19,7 +19,6 @@ class AnnouncementPlaceholder extends React.Component {
     this.handleBodyChange = this.handleBodyChange.bind(this);
     this.saveAnnouncement = this.saveAnnouncement.bind(this);
     this.deleteAnnouncement = this.deleteAnnouncement.bind(this);
-    // this.scheduleAnnouncement = this.scheduleAnnouncement.bind(this);
 
     this.placeHolderRef = React.createRef();
 
@@ -35,7 +34,9 @@ class AnnouncementPlaceholder extends React.Component {
 
   saveAnnouncement = e => {
     const postId = this.props.post_id;
-    axios.post("/announcements",
+    axios
+      .post(
+        "/announcements",
         {
           user_id: 999999993,
           announcement_title: this.state.title,
@@ -48,8 +49,12 @@ class AnnouncementPlaceholder extends React.Component {
         }
       )
       .then(response => {
-
-        this.setState({post_id: response.data.id, openModal: true, title:"", body:""})
+        this.setState({
+          post_id: response.data.id,
+          openModal: true,
+          title: "",
+          body: ""
+        });
       })
       .catch(function(error) {
         console.log(error);
@@ -57,15 +62,13 @@ class AnnouncementPlaceholder extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({openModal:false})
+    this.setState({ openModal: false });
     this.props.onSave();
-  }
+  };
 
-
-  deleteAnnouncement = (e) => {
-  this.props.onDelete();
-
-  }
+  deleteAnnouncement = e => {
+    this.props.onDelete();
+  };
 
   handleTitleChange(event) {
     this.setState({ title: event });
@@ -73,7 +76,7 @@ class AnnouncementPlaceholder extends React.Component {
   handleBodyChange(event) {
     this.setState({ body: event });
   }
-  componentDidMount(){
+  componentDidMount() {
     // console.log(this.placeHolderRef.current.getBoundingClientRect().height);
     // console.log(this.props.boardB)
     // if (this.placeHolderRef.current.getBoundingClientRect().bottom < this.props.boardB) { console.log('I fit')} else { console.log('i do not fit')}
@@ -84,37 +87,37 @@ class AnnouncementPlaceholder extends React.Component {
       <Grid>
         <Grid.Row>
           <Grid.Column width={14}>
-          <Ref innerRef={this.placeHolderRef}>
-            <Container style={styles.containerStyle}>
-              <Editor
-                ref="body"
-                inline
-                apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
-                init={{
-                  "menubar": false,
-                }}
-                plugins="link table wordcount textcolor visualblocks spellchecker"
-                toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
-                onEditorChange={this.handleTitleChange}
-              />
-              <Editor
-                ref="body"
-                inline
-                apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
-                initialValue="<ul style='color: #ffffff'>
+            <Ref innerRef={this.placeHolderRef}>
+              <Container style={styles.containerStyle}>
+                <Editor
+                  ref="body"
+                  inline
+                  apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
+                  initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
+                  init={{
+                    menubar: false
+                  }}
+                  plugins="link table wordcount textcolor visualblocks spellchecker"
+                  toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
+                  onEditorChange={this.handleTitleChange}
+                />
+                <Editor
+                  ref="body"
+                  inline
+                  apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
+                  initialValue="<ul style='color: #ffffff'>
                 <li>
                 <h3 style='color: #ffffff'>Body</h3>
                 </li>
                 </ul>"
-                init={{
-                  "menubar": false,
-                }}
-                plugins="link table wordcount lists textcolor image"
-                toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
-                onEditorChange={this.handleBodyChange}
-              />
-            </Container>
+                  init={{
+                    menubar: false
+                  }}
+                  plugins="link table wordcount lists textcolor image"
+                  toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
+                  onEditorChange={this.handleBodyChange}
+                />
+              </Container>
             </Ref>
           </Grid.Column>
           <Grid.Column floated="right" verticalAlign="middle" width={2}>
@@ -131,13 +134,13 @@ class AnnouncementPlaceholder extends React.Component {
               onClick={this.saveAnnouncement}
               inverted
             />
-            <Modal
-            open={this.state.openModal}
-            size="small"            
-            >
+            <Modal open={this.state.openModal} size="small">
               <Modal.Header>Schedule your announcement</Modal.Header>
               <Modal.Content>
-                <MaterialUIPickers closeMod={this.closeModal} post_id={this.state.post_id} />
+                <MaterialUIPickers
+                  closeMod={this.closeModal}
+                  post_id={this.state.post_id}
+                />
               </Modal.Content>
             </Modal>
           </Grid.Column>
