@@ -61,15 +61,22 @@ class Display extends React.Component {
     const displayStyle = {
       // backgroundColor: "#000000",
       // backgroundImage: `url(${this.props.bk})`,
-      backgroundImage: `url(${this.state.backgroundImage})`,
+      // backgroundImage: `url(${this.state.backgroundImage})`,
       // opacity:'.7',
       // backgroundImage: `url(https://media.wired.com/photos/5bfedea686ef9a0ff73f01e4/master/pass/Porsche-911.jpg)`,
-      height: "768px",
-      width: "1024px",
+      // height: "100%",
+      // width: "100%",
       // marginTop: 
       // padding: "3em 0em 0em"
     }
+
+    const background = {
+      backgroundImage: `url(${this.state.backgroundImage})`,
+      height: "100%",
+      width: "100%",
+    }
     return (
+      <div className="backgroundI" style={background}>
       <Container style={displayStyle} key={this.props.key}>
         <Grid>
           <DisplayHeader />
@@ -88,6 +95,7 @@ class Display extends React.Component {
           </Grid.Row>
         </Grid>
       </Container>
+      </div>
     );
   }
 }
