@@ -18,13 +18,16 @@ class BackgroundEditorButton extends React.Component {
     this.state = {
       modalOpen: false,
       imageURL: "",
-      backgroundColor: ""
+      backgroundColor: "",
+      backgroundPosition: "center",
     };
   }
 
   openModal = () => {
     this.setState({ modalOpen: true });
   };
+
+  handleBackgroundPosition = (e, { value }) => this.setState({ value })
 
   close = () => {
     this.setState({ modalOpen: false });
