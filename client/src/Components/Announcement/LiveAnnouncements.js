@@ -5,7 +5,8 @@ import {
 
 const liveContainerStyle = {
   color: '#ffffff',
-  opacity: '.9'
+  opacity: '.9',
+  background: 'rgba(0, 0, 0, 0.2)'
 }
 const LiveAnnouncement = props => {
   return (

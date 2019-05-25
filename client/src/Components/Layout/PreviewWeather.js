@@ -104,8 +104,8 @@ class Weather extends React.Component {
 
   render() {
     return (
-      <Container textAlign='center'>
-        <span style={{ fontSize: "3em", color: "white" }}>
+      <Container textAlign='center' style={{marginTop: '1em'}}>
+        <span style={{ fontSize: "3em", color: "white"}}>
           <i className={`wi ${this.state.iconImage}`} />
         </span>
         <p style={{ color: "white", fontSize: "18px" }}>

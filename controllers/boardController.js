@@ -27,7 +27,8 @@ const updateBackground = async (req, res) => {
     try {
         const board = await Board.update({
             background_color: req.body.background_color,
-            background_image: req.body.background_image
+            background_image: req.body.background_image,
+            background_opacity: req.body.background_opacity
         }, { where: {
             id: req.body.id
         }})
