@@ -9,7 +9,7 @@ import {
   Image
 } from "semantic-ui-react";
 import axios from "axios";
-
+import OpacityPicker from "./OpacityPicker";
 class BackgroundEditorButton extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,7 @@ class BackgroundEditorButton extends React.Component {
       modalOpen: false,
       imageURL: "",
       backgroundColor: "",
-      backgroundPosition: "center",
+      backgroundPosition: "center"
     };
   }
 
@@ -27,7 +27,7 @@ class BackgroundEditorButton extends React.Component {
     this.setState({ modalOpen: true });
   };
 
-  handleBackgroundPosition = (e, { value }) => this.setState({ value })
+  handleBackgroundPosition = (e, { value }) => this.setState({ value });
 
   close = () => {
     this.setState({ modalOpen: false });
@@ -77,6 +77,12 @@ class BackgroundEditorButton extends React.Component {
                     centered
                     style={{ marginTop: "1em" }}
                   />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column>
+                  <Header as="h3">Opacity setting for display</Header>
+                  <OpacityPicker />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
