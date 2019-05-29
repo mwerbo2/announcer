@@ -13,7 +13,7 @@ const Handle = Slider.Handle;
 const handle = props => {
   // console.log(value);
   const { value, dragging, index, ...restProps } = props;
-  console.log(props.value);
+  console.log(props.value * 0.1);
   return (
     <Tooltip
       prefixCls="rc-slider-tooltip"
@@ -29,30 +29,19 @@ const handle = props => {
 
 const OpacityPicker = props => {
   return (
-    <div style={{ width: "25em", margin: 20 }}>
-      <Grid>
-        <Grid.Row>
-          <Grid.Column>
-            <Header as="h5" floated="left">
-              Less transparent
-            </Header>
-            <Header as="h5" floated="right">
-              More transparent
-            </Header>
-            <Slider
-              min={0}
-              max={10}
-              defaultValue={5}
-              // marks={{
-              //   "less opacity": "less opacity",
-              //   "more opacity": "more opacity"
-              // }}
-              handle={handle}
-            />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </div>
+    // <div style={{ width: "30%", margin: 20 }}>
+    <Grid>
+      <Grid.Row>
+        <Grid.Column width={10}>
+          <Slider min={0} max={10} defaultValue={5} handle={handle} />
+          <p style={{ textAlign: "left" }}>
+            Less
+            <span style={{ float: "right" }}>More</span>
+          </p>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+    // </div>
   );
 };
 

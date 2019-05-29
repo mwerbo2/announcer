@@ -62,7 +62,7 @@ class BackgroundEditorButton extends React.Component {
         <Modal open={modalOpen}>
           <Modal.Header>Edit Background</Modal.Header>
           <Modal.Content>
-            <Grid>
+            <Grid columns={2}>
               <Grid.Row>
                 <Grid.Column>
                   <Header>Add image as background</Header>
@@ -71,18 +71,11 @@ class BackgroundEditorButton extends React.Component {
                     onChange={e => this.setState({ imageURL: e.target.value })}
                     placeholder="url"
                   />{" "}
-                  <Image
-                    src={this.state.imageURL}
-                    size="small"
-                    centered
-                    style={{ marginTop: "1em" }}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column>
                   <Header as="h3">Opacity setting for display</Header>
                   <OpacityPicker />
+                </Grid.Column>
+                <Grid.Column>
+                  <Image src={this.state.imageURL} size="medium" centered />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
