@@ -8,10 +8,18 @@ import WelcomeMain from "./Components/Welcome/WelcomeMain";
 import Callback from "./Auth/Callback";
 import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
-import SecuredRoute from './Auth/SecuredRoute'
+import SecuredRoute from "./Auth/SecuredRoute";
 
 class App extends Component {
-  state = { backgroundImage: "" };
+  state = {
+    backgroundImage: "",
+    opacity: 0
+  };
+
+  getOpacity = opa => {
+    this.setState({ opacity: opa });
+    console.log("app.js 21", this.state.opacity);
+  };
 
   getBackground = updated => {
     // this.setState({
@@ -78,6 +86,7 @@ class App extends Component {
               <Display
                 auth={auth0Client}
                 bk={this.state.backgroundImage}
+                opacity={this.state.opacity}
                 {...props}
               />
             )}
@@ -88,6 +97,7 @@ class App extends Component {
               <DisplayEditor
                 auth={auth0Client}
                 didBackgroundUpdate={this.getBackground}
+                didOpacityUpdate={this.getOpacity}
                 {...props}
               />
             )}

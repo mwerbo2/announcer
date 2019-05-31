@@ -21,6 +21,7 @@ class Display extends React.Component {
       backgroundColor: "",
       backgroundImage: ""
     };
+    console.log(this.props.didOpacityUpdate);
   }
   componentDidMount() {
     // console.log(ReactDOM.findDOMNode().getBoundingClientRect())
@@ -31,6 +32,10 @@ class Display extends React.Component {
       backgroundImage: updated.backgroundImage
     });
     this.props.didBackgroundUpdate(updated);
+  };
+
+  getOpacity = opa => {
+    this.props.didOpacityUpdate();
   };
 
   render() {
@@ -72,7 +77,11 @@ class Display extends React.Component {
             }}
           >
             <Navbar />
-            <EditorBarContainer didBackgroundUpdate={this.getBackground} />
+            <EditorBarContainer
+              {...this.props}
+              // didOpacityUpdate={this.getOpacity}
+              didBackgroundUpdate={this.getBackground}
+            />
             <AnnouncementBoard
               backgroundColor={this.state.backgroundColor}
               backgroundImage={this.state.backgroundImage}

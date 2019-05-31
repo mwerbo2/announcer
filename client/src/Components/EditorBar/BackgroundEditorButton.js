@@ -9,10 +9,13 @@ import {
   Image
 } from "semantic-ui-react";
 import axios from "axios";
+import OpacityPicker from "./OpacityPicker";
+import ResolutionPicker from "./ResolutionPicker";
 
 class BackgroundEditorButton extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
 
     this.inputRef = createRef();
     this.state = {
@@ -20,6 +23,7 @@ class BackgroundEditorButton extends React.Component {
       imageURL: "",
       backgroundColor: "",
       backgroundPosition: "center",
+      opacity: 0
     };
   }
 
@@ -27,7 +31,12 @@ class BackgroundEditorButton extends React.Component {
     this.setState({ modalOpen: true });
   };
 
-  handleBackgroundPosition = (e, { value }) => this.setState({ value })
+  // getOpacity = val => {
+  //   this.setState({ opacity: val });
+  //   console.log("beb.js 33", this.state);
+  // };
+
+  handleBackgroundPosition = (e, { value }) => this.setState({ value });
 
   close = () => {
     this.setState({ modalOpen: false });
@@ -62,7 +71,7 @@ class BackgroundEditorButton extends React.Component {
         <Modal open={modalOpen}>
           <Modal.Header>Edit Background</Modal.Header>
           <Modal.Content>
-            <Grid>
+            <Grid columns={2}>
               <Grid.Row>
                 <Grid.Column>
                   <Header>Add image as background</Header>
@@ -70,13 +79,13 @@ class BackgroundEditorButton extends React.Component {
                     ref={this.inputRef}
                     onChange={e => this.setState({ imageURL: e.target.value })}
                     placeholder="url"
-                  />{" "}
-                  <Image
-                    src={this.state.imageURL}
-                    size="small"
-                    centered
-                    style={{ marginTop: "1em" }}
                   />
+                  <Header as="h3">Opacity setting for display</Header>
+                  <OpacityPicker {...this.props} />
+                  <ResolutionPicker />
+                </Grid.Column>
+                <Grid.Column>
+                  <Image src={this.state.imageURL} size="medium" centered />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
