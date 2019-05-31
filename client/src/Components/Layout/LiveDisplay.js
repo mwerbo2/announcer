@@ -59,8 +59,13 @@ class Display extends React.Component {
     };
     return (
       <div className="backgroundImageContainer" style={background}>
-        <Container key={this.props.key}>
-          <Grid>
+        <Container
+          className="liveDisplay"
+          fluid
+          key={this.props.key}
+          style={{ backgroundColor: "black", opacity: ".5" }}
+        >
+          <Grid className="widescreen">
             <DisplayHeader />
             <Grid.Row>
               <Grid.Column width={16}>

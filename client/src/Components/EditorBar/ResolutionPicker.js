@@ -23,7 +23,7 @@ class ResolutionPicker extends Component {
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <Header>Select the resolution</Header>
+            <Header>Resolution</Header>
             <Dropdown
               onChange={this.handleChange}
               options={resolutions}
