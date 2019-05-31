@@ -1,48 +1,54 @@
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import React from "react";
-import { Grid, Header } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
+import Slider, { createSliderWithTooltip } from "rc-slider";
 
-import Tooltip from "rc-tooltip";
-import Slider from "rc-slider";
+// const SliderWithTooltip = createSliderWithTooltip(Slider);
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Range = createSliderWithTooltip(Slider.Range);
-const Handle = Slider.Handle;
+class OpacityPicker extends React.Component {
+  constructor(props) {
+    super(props);
 
-const handle = props => {
-  // console.log(value);
-  const { value, dragging, index, ...restProps } = props;
-  console.log(props.value * 0.1);
-  return (
-    <Tooltip
-      prefixCls="rc-slider-tooltip"
-      overlay={value}
-      visible={dragging}
-      placement="top"
-      key={index}
-    >
-      <Handle value={value} {...restProps} />
-    </Tooltip>
-  );
-};
+    console.log(props);
+  }
 
-const OpacityPicker = props => {
-  return (
-    // <div style={{ width: "30%", margin: 20 }}>
-    <Grid>
-      <Grid.Row>
-        <Grid.Column width={10}>
-          <Slider min={0} max={10} defaultValue={5} handle={handle} />
-          <p style={{ textAlign: "left" }}>
-            Less
-            <span style={{ float: "right" }}>More</span>
-          </p>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-    // </div>
-  );
-};
+  log = value => {
+    const formattedValue = this.percentFormatter(value);
+    console.log(this.props);
+    // props.didOpacityUpdate(formattedValue);
+    // props.opacityUpdate(formattedValue);
+    console.log(formattedValue);
+    this.props.didOpacityUpdate(formattedValue);
+  };
+
+  percentFormatter = v => {
+    return (v * 0.1).toFixed(1);
+  };
+
+  render() {
+    return (
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={10}>
+            <div>
+              <Slider
+                tipFormatter={this.percentFormatter}
+                tipProps={{ overlayClassName: "foo" }}
+                onChange={this.log}
+                min={0}
+                max={10}
+                defaultValue={10}
+              />
+            </div>
+            <p style={{ textAlign: "left" }}>
+              0<span style={{ float: "right" }}>100%</span>
+            </p>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
+  }
+}
 
 export default OpacityPicker;

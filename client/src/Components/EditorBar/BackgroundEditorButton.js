@@ -10,22 +10,31 @@ import {
 } from "semantic-ui-react";
 import axios from "axios";
 import OpacityPicker from "./OpacityPicker";
+import ResolutionPicker from "./ResolutionPicker";
+
 class BackgroundEditorButton extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
 
     this.inputRef = createRef();
     this.state = {
       modalOpen: false,
       imageURL: "",
       backgroundColor: "",
-      backgroundPosition: "center"
+      backgroundPosition: "center",
+      opacity: 0
     };
   }
 
   openModal = () => {
     this.setState({ modalOpen: true });
   };
+
+  // getOpacity = val => {
+  //   this.setState({ opacity: val });
+  //   console.log("beb.js 33", this.state);
+  // };
 
   handleBackgroundPosition = (e, { value }) => this.setState({ value });
 
@@ -70,9 +79,10 @@ class BackgroundEditorButton extends React.Component {
                     ref={this.inputRef}
                     onChange={e => this.setState({ imageURL: e.target.value })}
                     placeholder="url"
-                  />{" "}
+                  />
                   <Header as="h3">Opacity setting for display</Header>
-                  <OpacityPicker />
+                  <OpacityPicker {...this.props} />
+                  <ResolutionPicker />
                 </Grid.Column>
                 <Grid.Column>
                   <Image src={this.state.imageURL} size="medium" centered />
