@@ -11,16 +11,23 @@ class Display extends React.Component {
     fullAnnouncement: [],
     title: "",
     body: "",
-    backgroundImage: ""
+    backgroundImage: "",
+    opacity: ".5"
   };
 
   componentDidUpdate = prevProps => {
     if (this.props.backgroundImg !== prevProps.backgroundImg) {
       this.setState({ backgroundImage: this.props.backgroundImg });
     }
+    if (this.props.opacity !== prevProps.opacity) {
+      console.log("props lvie", this.props);
+      this.setState({ opacity: this.props.opacity });
+      console.log("state live", this.state.opacity);
+    }
   };
 
   componentDidMount() {
+    console.log("mounted", this.props);
     axios.get("/announcements/liveStatus").then(announcement => {
       this.setState({
         fullAnnouncement: announcement.data,
@@ -63,7 +70,7 @@ class Display extends React.Component {
           className="liveDisplay"
           fluid
           key={this.props.key}
-          style={{ backgroundColor: "black", opacity: ".5" }}
+          style={{ background: `rgb(0,0,0,${this.state.opacity})` }}
         >
           <Grid className="widescreen">
             <DisplayHeader />

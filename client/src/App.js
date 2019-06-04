@@ -32,6 +32,10 @@ class App extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
+    if (this.state.opacity !== prevState.opacity) {
+      this.getOpacity();
+      console.log("update opa", this.state.opacity);
+    }
     if (this.state.backgroundImage !== prevState.backgroundImage) {
       // this.setState({backgroundImage: this.})
       // this.getBackground()

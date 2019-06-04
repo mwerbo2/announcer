@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Grid } from "semantic-ui-react";
 
 const liveContainerStyle = {
-  color: "#ffffff",
-  opacity: ".9",
-  background: "rgba(0, 0, 0, 0.2)"
+  color: "#ffffff"
+  // opacity: ".9",
+  // background: "rgba(0, 0, 0, 0.2)"
 };
 const LiveAnnouncement = props => {
   return (
