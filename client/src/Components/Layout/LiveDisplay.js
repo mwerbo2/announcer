@@ -19,9 +19,15 @@ class Display extends React.Component {
     if (this.props.backgroundImg !== prevProps.backgroundImg) {
       this.setState({ backgroundImage: this.props.backgroundImg });
     }
+    if (this.props.opacity !== prevProps.opacity) {
+      console.log("props lvie", this.props);
+      this.setState({ opacity: this.props.opacity });
+      console.log("state live", this.state.opacity);
+    }
   };
 
   componentDidMount() {
+    console.log("mounted", this.props);
     axios.get("/announcements/liveStatus").then(announcement => {
       this.setState({
         fullAnnouncement: announcement.data,
