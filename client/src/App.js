@@ -8,6 +8,7 @@ import WelcomeMain from "./Components/Welcome/WelcomeMain";
 import Callback from "./Auth/Callback";
 import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
+import NavBar from "./Components/Layout/Navbar";
 import SecuredRoute from "./Auth/SecuredRoute";
 
 class App extends Component {
@@ -17,29 +18,29 @@ class App extends Component {
   };
 
   getOpacity = opa => {
+    console.log("this gotOPacity");
     this.setState({ opacity: opa });
-    console.log("app.js 21", this.state.opacity);
+    // console.log("app.js 21", this.state.opacity);
   };
 
   getBackground = updated => {
-    // this.setState({
-    //   backgroundColor: color,
-    //   backgroundImage: img
-    // })
     this.setState({
       backgroundImage: updated.backgroundImage
     });
   };
 
   componentDidUpdate = (prevProps, prevState) => {
+    console.log(this.state.opacity);
+    console.log("comp did update", prevState);
+    console.log(this.state.opacity !== prevState.opacity);
     if (this.state.opacity !== prevState.opacity) {
-      this.getOpacity();
-      console.log("update opa", this.state.opacity);
+      // this.getOpacity();
+      console.log("update opa in", this.state.opacity);
     }
-    if (this.state.backgroundImage !== prevState.backgroundImage) {
-      // this.setState({backgroundImage: this.})
-      // this.getBackground()
-    }
+    // if (this.state.backgroundImage !== prevState.backgroundImage) {
+    // this.setState({backgroundImage: this.})
+    // this.getBackground()
+    // }
   };
   // state={checkingSession: true}
 
@@ -77,48 +78,52 @@ class App extends Component {
   }
   render() {
     return (
-      <Router history={history}>
-        <div>
-          <Route
-            path="/"
-            exact
-            render={props => <WelcomeMain auth={auth0Client} {...props} />}
-          />
-          <Route
-            path="/display"
-            render={props => (
-              <Display
-                auth={auth0Client}
-                bk={this.state.backgroundImage}
-                opacity={this.state.opacity}
-                {...props}
-              />
-            )}
-          />
-          <Route
-            path="/displayeditor"
-            render={props => (
-              <DisplayEditor
-                auth={auth0Client}
-                didBackgroundUpdate={this.getBackground}
-                didOpacityUpdate={this.getOpacity}
-                {...props}
-              />
-            )}
-          />
-          <Route
-            path="/profile"
-            render={props => (
-              <Profile
-                auth={auth0Client}
-                bk={this.state.backgroundImage}
-                {...props}
-              />
-            )}
-          />
-          <Route exact path="/callback" component={Callback} />
-        </div>
-      </Router>
+      <div>
+        {/* <NavBar /> */}
+        <Router history={history}>
+          <div>
+            <Route
+              path="/"
+              exact
+              render={props => <WelcomeMain auth={auth0Client} {...props} />}
+            />
+            <Route
+              path="/display"
+              render={props => (
+                <Display
+                  auth={auth0Client}
+                  bk={this.state.backgroundImage}
+                  opacity={this.state.opacity}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              path="/displayeditor"
+              render={props => (
+                <DisplayEditor
+                  auth={auth0Client}
+                  didBackgroundUpdate={this.getBackground}
+                  didOpacityUpdate={this.getOpacity}
+                  opacity={this.state.opacity}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              path="/profile"
+              render={props => (
+                <Profile
+                  auth={auth0Client}
+                  bk={this.state.backgroundImage}
+                  {...props}
+                />
+              )}
+            />
+            <Route exact path="/callback" component={Callback} />
+          </div>
+        </Router>
+      </div>
     );
   }
 }

@@ -3,22 +3,22 @@ import "rc-tooltip/assets/bootstrap.css";
 import React from "react";
 import { Grid } from "semantic-ui-react";
 import Slider, { createSliderWithTooltip } from "rc-slider";
+import axios from "axios";
 
 // const SliderWithTooltip = createSliderWithTooltip(Slider);
 
 class OpacityPicker extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log(props);
   }
 
+  async componentDidMount() {
+    const res = await axios.get("/");
+  }
   log = value => {
     const formattedValue = this.percentFormatter(value);
-    console.log(this.props);
     // props.didOpacityUpdate(formattedValue);
     // props.opacityUpdate(formattedValue);
-    console.log(formattedValue);
     this.props.didOpacityUpdate(formattedValue);
   };
 
@@ -38,7 +38,7 @@ class OpacityPicker extends React.Component {
                 onChange={this.log}
                 min={0}
                 max={10}
-                defaultValue={10}
+                defaultValue={10 | this.value}
               />
             </div>
             <p style={{ textAlign: "left" }}>
