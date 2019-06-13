@@ -16,11 +16,12 @@ class Display extends React.Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (this.props.backgroundImg !== prevProps.backgroundImg) {
-      this.setState({ backgroundImage: this.props.backgroundImg });
-    }
+    // console.log("Livedisplay 19", prevProps);
+    // if (this.props.backgroundImg !== prevProps.backgroundImg) {
+    //   this.setState({ backgroundImage: this.props.backgroundImg });
+    // }
     if (this.props.opacity !== prevProps.opacity) {
-      console.log("props lvie", this.props);
+      console.log("props lvie", this.props, "****", this.prevProps);
       this.setState({ opacity: this.props.opacity });
       console.log("state live", this.state.opacity);
     }
