@@ -132,6 +132,7 @@ class DateAndTimePickers extends React.Component {
                     <DatePicker
                       selected={this.state.startTime}
                       onChange={this.handleStartDate}
+                      minDate={new Date()}
                       dateFormat="yyyy-MM-dd"
                       key={1}
                     />
@@ -183,6 +184,7 @@ class DateAndTimePickers extends React.Component {
                     <DatePicker
                       selected={this.state.startTime}
                       onChange={this.handleStartDate}
+                      minDate={new Date()}
                       dateFormat="yyyy-MM-dd"
                     />
                   </Grid.Column>
