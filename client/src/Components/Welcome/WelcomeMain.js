@@ -25,13 +25,19 @@ class WelcomeMain extends React.Component {
                 </Header>
                 <Header as="h1">Get started here</Header>
                 {!auth0Client.isAuthenticated() && (
-                  <Button size="massive" onClick={auth0Client.signIn}>
+                  <Button
+                    color="blue"
+                    size="massive"
+                    onClick={auth0Client.signIn}
+                  >
                     Add Announcement
                   </Button>
                 )}
                 {auth0Client.isAuthenticated() && (
-                  <Button size="massive">
-                    <Link to={"/displayeditor"}>Add Announcement</Link>
+                  <Button color="blue" size="massive">
+                    <Link to={"/displayeditor"} style={{ color: "white" }}>
+                      Add Announcement
+                    </Link>
                   </Button>
                 )}
                 <Header as="h1">Already have a post?</Header>
@@ -39,8 +45,12 @@ class WelcomeMain extends React.Component {
             </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column width="4" textAlign="center">
-                <Button size="massive">
-                  <Link to={`/display`} target="_blank">
+                <Button color="blue" size="massive">
+                  <Link
+                    to={`/display`}
+                    target="_blank"
+                    style={{ color: "white" }}
+                  >
                     View Live Post
                   </Link>
                 </Button>
