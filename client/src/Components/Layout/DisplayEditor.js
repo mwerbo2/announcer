@@ -7,7 +7,6 @@ import Footer from "../Layout/Footer";
 import AnnouncementBoard from "./AnnouncementBoard";
 import EditorBarContainer from "../EditorBar/EditorBarContainer";
 
-
 class Display extends React.Component {
   constructor(props) {
     super(props);
@@ -22,20 +21,29 @@ class Display extends React.Component {
       backgroundColor: "",
       backgroundImage: ""
     };
+    // console.log(this.props.didOpacityUpdate);
   }
   componentDidMount() {
     // console.log(ReactDOM.findDOMNode().getBoundingClientRect())
   }
 
+  componentDidUpdate(prevProps) {
+    console.log("de.js 32", prevProps.opacity);
+    if (prevProps.opacity !== this.props.opacity) {
+      // this.setState({ opacity: this.props.opacity });
+    }
+  }
+
   getBackground = updated => {
-    // this.setState({
-    //   backgroundColor: color,
-    //   backgroundImage: img
-    // })
     this.setState({
       backgroundImage: updated.backgroundImage
     });
     this.props.didBackgroundUpdate(updated);
+  };
+
+  getOpacity = opa => {
+    console.log("de.js 43", opa);
+    this.props.didOpacityUpdate();
   };
 
   render() {
@@ -77,8 +85,13 @@ class Display extends React.Component {
             }}
           >
             <Navbar />
-            <EditorBarContainer didBackgroundUpdate={this.getBackground} />
+            <EditorBarContainer
+              {...this.props}
+              // didOpacityUpdate={this.getOpacity}
+              didBackgroundUpdate={this.getBackground}
+            />
             <AnnouncementBoard
+              {...this.props}
               backgroundColor={this.state.backgroundColor}
               backgroundImage={this.state.backgroundImage}
             />

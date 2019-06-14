@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import auth0Client from "../../Auth/Auth";
 import DatePicker from "react-datepicker";
+import RepeatDropdown from "./RepeatDropdown";
 import "react-datepicker/dist/react-datepicker.css";
 
 const styles = theme => ({
@@ -31,7 +32,6 @@ class DateAndTimePickers extends React.Component {
     this.handleEndTime = this.handleEndTime.bind(this);
 
     this.state = {
-      // defaultDate: new Date('2019-03-27T10:30'),
       startTime: new Date(),
       endTime: new Date(),
       currentSchedule: [],
@@ -63,8 +63,7 @@ class DateAndTimePickers extends React.Component {
       .then(() => this.setState({ scheduleDeleted: true }));
   };
 
-  checkSchedule = () => {
-  };
+  checkSchedule = () => {};
 
   handleSubmit = e => {
     this.checkSchedule();
@@ -147,38 +146,18 @@ class DateAndTimePickers extends React.Component {
                       key={2}
                     />
                   </Grid.Column>
+
                   <Grid.Column>
-                    <Button type="submit" positive>
+                    <Button
+                      type="submit"
+                      positive
+                      style={{ position: "absolute", right: 0, bottom: 0 }}
+                    >
                       Save
                     </Button>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
-
-              {/* <TextField
-                id="date"
-                label="Day to start"
-                type="date"
-                min='2019-05-17'
-                defaultValue={this.state.startTime}
-                className={this.props.classes.textField}
-                onChange={this.handleStartTime}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              /> */}
-              {/* <TextField
-                id="date"
-                label="Day to end"
-                type="date"
-                min={today}
-                defaultValue={this.state.endTime}
-                className={this.props.classes.textField}
-                onChange={this.handleEndTime}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              /> */}
             </form>
             <Header as="h3">{this.state.postMessage}</Header>
           </div>
@@ -245,8 +224,6 @@ class DateAndTimePickers extends React.Component {
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
-              // {schedule}
-              // schedule.date_time_start ? <h1>Date Start</h1> : <h1>Date End</h1>
             );
           })}
         </div>

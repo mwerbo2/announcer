@@ -16,11 +16,14 @@ Board.init({
     type: Sequelize.STRING
   },
   background_image: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING(1234)
   },
+  background_opacity: {
+    type: Sequelize.STRING(1234)
+ },
   status: {
     type: Sequelize.STRING
-  }
+  },
 }, {
   sequelize,
   // options

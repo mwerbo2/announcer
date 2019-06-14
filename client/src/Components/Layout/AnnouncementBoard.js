@@ -91,7 +91,7 @@ class AnnouncementBoard extends React.Component {
 
     return (
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
-        <Grid>
+        <Grid style={{backgroundColor: `rgb(0,0,0,${this.props.opacity})`}}>
           <DisplayHeader />
           <Grid.Row>
             <Announcements

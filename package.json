@@ -9,7 +9,8 @@
     "server": "nodemon -r esm server.js",
     "client": "npm start --prefix client",
     "serve": "concurrently \"npm run server\" \" npm run client\"",
-    "dev": "node -r esm server.js"
+    "dev": "node -r esm server.js",
+    "dock": "cd client/ && npm run build && cd ../ && docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker-compose up"
   },
   "repository": {
     "type": "git",

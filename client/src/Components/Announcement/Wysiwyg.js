@@ -20,14 +20,12 @@ class Wysiwyg extends React.Component {
           cloudChannel="stable"
           value={this.props.content}
           onEditorChange={this.handleEditorChange}
-          // initialValue="<p>Testing editor, initial value</p>"
           init={{
             height: "500",
             plugins: "link image code lists",
             toolbar:
               "undo redo | bold italic | alignleft aligncenter alignright | code image | numlist bullist forecolor backcolor"
           }}
-          //    onChange={this.handleEditChange}
         />
         <Form.Button content="submit" />
       </Form>
