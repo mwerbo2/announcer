@@ -16,8 +16,8 @@ class Announcement extends React.Component {
     // console.log("A.js 25", auth0Client.getIdToken())
     this.announcementRef = React.createRef();
     this.state = {
-      title: "",
-      body: "",
+      title: "Title",
+      body: "Body",
       live: true,
       target_post_id: "",
       deleted: false,
