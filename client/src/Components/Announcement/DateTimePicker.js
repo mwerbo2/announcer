@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import auth0Client from "../../Auth/Auth";
 import DatePicker from "react-datepicker";
+import RepeatDropdown from "./RepeatDropdown";
 import "react-datepicker/dist/react-datepicker.css";
 
 const styles = theme => ({
@@ -145,6 +146,7 @@ class DateAndTimePickers extends React.Component {
                       key={2}
                     />
                   </Grid.Column>
+
                   <Grid.Column>
                     <Button
                       type="submit"
