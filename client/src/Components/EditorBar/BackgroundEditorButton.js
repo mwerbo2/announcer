@@ -103,7 +103,9 @@ class BackgroundEditorButton extends React.Component {
             />
           </Modal.Actions>
         </Modal>
-        <Button onClick={this.openModal}>Edit Background</Button>
+        <Button onClick={this.openModal} color="blue">
+          Edit Background
+        </Button>
       </Container>
     );
   }

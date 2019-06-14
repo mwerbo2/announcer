@@ -3,7 +3,7 @@ import { Button, Icon } from "semantic-ui-react";
 
 const AddButton = props => {
   return (
-    <Button icon labelPosition="left" onClick={props.buttonClick}>
+    <Button color="blue" icon labelPosition="left" onClick={props.buttonClick}>
       <Icon name="add" />
       Add Announcement
     </Button>
