@@ -1,11 +1,20 @@
 import React from "react";
 import { Container, Grid } from "semantic-ui-react";
+import "./LiveAnnouncement.css";
+import Media from "react";
 
 const liveContainerStyle = {
   color: "#ffffff"
   // opacity: ".9",
   // background: "rgba(0, 0, 0, 0.2)"
 };
+
+// const titleDiv = {
+//   fontSize: "100px",
+//   backGround: grey,
+//   color: "#ffffff"
+// };
+
 const LiveAnnouncement = props => {
   return (
     <Grid>
@@ -14,7 +23,6 @@ const LiveAnnouncement = props => {
           <Container style={liveContainerStyle} fluid>
             <div
               name="title"
-              style={{ color: "#ffffff" }}
               className="title"
               dangerouslySetInnerHTML={{ __html: props.title }}
             />

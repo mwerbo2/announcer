@@ -71,7 +71,9 @@ class Display extends React.Component {
           className="liveDisplay"
           fluid
           key={this.props.key}
-          style={{ background: `rgb(0,0,0,${this.state.opacity})` }}
+          style={{
+            background: `rgb(0,0,0,${this.state.opacity})`
+          }}
         >
           <Grid className="widescreen">
             <DisplayHeader />

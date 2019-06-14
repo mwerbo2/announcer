@@ -146,7 +146,11 @@ class DateAndTimePickers extends React.Component {
                     />
                   </Grid.Column>
                   <Grid.Column>
-                    <Button type="submit" positive>
+                    <Button
+                      type="submit"
+                      positive
+                      style={{ position: "absolute", right: 0, bottom: 0 }}
+                    >
                       Save
                     </Button>
                   </Grid.Column>
