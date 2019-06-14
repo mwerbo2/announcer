@@ -82,7 +82,7 @@ class BackgroundEditorButton extends React.Component {
                   />
                   <Header as="h3">Opacity setting for display</Header>
                   <OpacityPicker {...this.props} />
-                  <ResolutionPicker />
+                  {/* <ResolutionPicker /> */}
                 </Grid.Column>
                 <Grid.Column>
                   <Image src={this.state.imageURL} size="medium" centered />
