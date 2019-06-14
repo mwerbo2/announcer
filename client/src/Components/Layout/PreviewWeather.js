@@ -6,7 +6,6 @@ import axios from "axios";
 // import WeatherIcons from 'react-weathericons';
 import "weather-icons/css/weather-icons.css";
 
-
 class Weather extends React.Component {
   state = {
     currentWeather: "",
@@ -104,11 +103,11 @@ class Weather extends React.Component {
 
   render() {
     return (
-      <Container textAlign='center' style={{marginTop: '1em'}}>
-        <span style={{ fontSize: "3em", color: "white"}}>
+      <Container textAlign="center" style={{ marginTop: ".5em" }}>
+        <span style={{ fontSize: "2vw", color: "white" }}>
           <i className={`wi ${this.state.iconImage}`} />
         </span>
-        <p style={{ color: "white", fontSize: "18px" }}>
+        <p style={{ color: "white", fontSize: "2vw" }}>
           {Math.round(this.state.temp)}&deg;F
         </p>
       </Container>
