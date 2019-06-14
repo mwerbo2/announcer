@@ -59,7 +59,8 @@ class Display extends React.Component {
 
   render() {
     const background = {
-      backgroundImage: `url(${this.state.backgroundImage})` ,
+      backgroundImage: `url(${this.state.backgroundImage ||
+        "https://live.staticflickr.com/25/62666535_0a7513949f_b.jpg"})`,
       backgroundPosition: "center",
       height: "100%",
       width: "100%",
