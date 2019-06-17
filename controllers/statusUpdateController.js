@@ -7,23 +7,36 @@ const Op = Sequelize.Op;
 // Return the announcement status based on the date_time start and end
 const setStatus = (dateStart, dateEnd) => {
   // console.log("linke", moment(dateStart).format("YYYY MM DD"));
-
+  var tiempo = moment();
+  console.log(tiempo);
   // console.log(moment());
-  const currentDate = new Date();
+  // const currentDate = new Date();
+  // const currentDate = moment().format("YYYY MM DD");
   // const start = new Date(dateStart);
   // const end = new Date(dateEnd);
-  const start = moment(dateStart).format("YYYY MM DD");
-  const end = moment(dateEnd).format("YYYY MM DD");
-  if (start.isAfter(currentDate) && end.isSameOrAfter(currentDate)) {
-    return "Scheduled";
-  } else if (
-    start.isSameOrBefore(currentDate) &&
-    end.isSameOrAfter(currentDate)
-  ) {
-    return "Active";
-  } else {
-    return "Inactive";
-  }
+  // const start = moment(dateStart).format("YYYY MM DD");
+  // const end = moment(dateEnd).format("YYYY MM DD");
+  // if (
+  //   moment(dateStart)
+  //     .format("YYYY MM DD")
+  //     .isAfter(currentDate) &&
+  //   moment(dateEnd)
+  //     .format("YYYY MM DD")
+  //     .isSameOrAfter(currentDate)
+  // ) {
+  //   return "Scheduled";
+  // } else if (
+  //   moment(dateStart)
+  //     .format("YYYY MM DD")
+  //     .isSameOrBefore(currentDate) &&
+  //   moment(dateEnd)
+  //     .format("YYYY MM DD")
+  //     .isSameOrAfter(currentDate)
+  // ) {
+  //   return "Active";
+  // } else {
+  //   return "Inactive";
+  // }
 
   // if (start > currentDate && end > currentDate) {
   //   return "Scheduled";
