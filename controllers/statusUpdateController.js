@@ -9,16 +9,28 @@ const setStatus = (dateStart, dateEnd) => {
   // console.log("linke", moment(dateStart).format("YYYY MM DD"));
 
   // console.log(moment());
-  const currentDate = new Date();
+  // const currentDate = new Date();
+  const currentDate = moment().format("YYYY MM DD");
   // const start = new Date(dateStart);
   // const end = new Date(dateEnd);
   const start = moment(dateStart).format("YYYY MM DD");
   const end = moment(dateEnd).format("YYYY MM DD");
-  if (start.isAfter(currentDate) && end.isSameOrAfter(currentDate)) {
+  if (
+    moment(dateStart)
+      .format("YYYY MM DD")
+      .isAfter(currentDate) &&
+    moment(dateEnd)
+      .format("YYYY MM DD")
+      .isSameOrAfter(currentDate)
+  ) {
     return "Scheduled";
   } else if (
-    start.isSameOrBefore(currentDate) &&
-    end.isSameOrAfter(currentDate)
+    moment(dateStart)
+      .format("YYYY MM DD")
+      .isSameOrBefore(currentDate) &&
+    moment(dateEnd)
+      .format("YYYY MM DD")
+      .isSameOrAfter(currentDate)
   ) {
     return "Active";
   } else {
