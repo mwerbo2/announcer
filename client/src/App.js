@@ -78,7 +78,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ height: "100vh" }}>
         {/* <NavBar /> */}
         <Router history={history}>
           <div>

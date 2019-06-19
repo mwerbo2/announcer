@@ -62,7 +62,7 @@ class Display extends React.Component {
       backgroundImage: `url(${this.state.backgroundImage ||
         "https://live.staticflickr.com/25/62666535_0a7513949f_b.jpg"})`,
       backgroundPosition: "center",
-      height: "100%",
+      height: "100vh",
       width: "100%",
       position: "fixed"
     };
@@ -73,7 +73,8 @@ class Display extends React.Component {
           fluid
           key={this.props.key}
           style={{
-            background: `rgb(0,0,0,${this.state.opacity})`
+            background: `rgb(0,0,0,${this.state.opacity})`,
+            height: "105vh"
           }}
         >
           <Grid className="widescreen">
