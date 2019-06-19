@@ -63,25 +63,18 @@ class Display extends React.Component {
         "https://live.staticflickr.com/25/62666535_0a7513949f_b.jpg"})`,
       backgroundPosition: "center",
       height: "100vh",
-      width: "100%"
-      // position: "fixed"
+      width: "100%",
+      position: "fixed"
     };
     return (
       <div className="backgroundImageContainer" style={background}>
-        {/* <Container
+        <Container
           className="liveDisplay"
           fluid
           key={this.props.key}
           style={{
             background: `rgb(0,0,0,${this.state.opacity})`,
-            height: "100vh"
-          }}
-        > */}
-        <div
-          style={{
-            height: "100vh",
-            width: "100vw",
-            background: `rgb(0,0,0,${this.state.opacity})`
+            height: "105vh"
           }}
         >
           <Grid className="widescreen">
@@ -100,8 +93,7 @@ class Display extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </div>
-        {/* </Container> */}
+        </Container>
       </div>
     );
   }
