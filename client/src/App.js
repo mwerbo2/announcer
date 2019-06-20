@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Route, withRouter } from "react-router-dom";
+import { Router, Route, withRouter, Redirect } from "react-router-dom";
 import "./index.css";
 import Display from "./Components/Layout/LiveDisplay";
 import DisplayEditor from "./Components/Layout/DisplayEditor";
@@ -10,7 +10,7 @@ import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
 import NavBar from "./Components/Layout/Navbar";
 import SecuredRoute from "./Auth/SecuredRoute";
-
+import { toast } from "react-semantic-toasts";
 
 class App extends Component {
   state = {
@@ -100,15 +100,19 @@ class App extends Component {
             />
             <Route
               path="/displayeditor"
-              render={props => (
-                <DisplayEditor
-                  auth={auth0Client}
-                  didBackgroundUpdate={this.getBackground}
-                  didOpacityUpdate={this.getOpacity}
-                  opacity={this.state.opacity}
-                  {...props}
-                />
-              )}
+              render={props =>
+                !auth0Client.isAuthenticated() ? (
+                  auth0Client.signIn()
+                ) : (
+                  <DisplayEditor
+                    auth={auth0Client}
+                    didBackgroundUpdate={this.getBackground}
+                    didOpacityUpdate={this.getOpacity}
+                    opacity={this.state.opacity}
+                    {...props}
+                  />
+                )
+              }
             />
             <Route
               path="/profile"

@@ -38,6 +38,7 @@ class Display extends React.Component {
     });
 
     axios.get("/boards").then(board => {
+      console.log("Board data, live d", board.data);
       this.setState({
         backgroundImage: board.data[0].background_image
       });
