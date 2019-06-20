@@ -4,6 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import MaterialUIPickers from "../Announcement/DateTimePicker";
 import auth0Client from "../../Auth/Auth";
+import { toast } from "react-semantic-toasts";
 
 class Announcement extends React.Component {
   constructor(props) {
@@ -106,9 +107,9 @@ class Announcement extends React.Component {
           headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
         }
       )
-      .then(() => this.props.afterDelete())
+      .then(res => this.props.afterDelete())
       .catch(err => console.log(err));
-    this.props.afterDelete();
+    // this.props.afterDelete();
   };
 
   handleTitleChange(event) {

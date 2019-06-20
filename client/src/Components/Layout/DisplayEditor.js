@@ -6,6 +6,8 @@ import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import AnnouncementBoard from "./AnnouncementBoard";
 import EditorBarContainer from "../EditorBar/EditorBarContainer";
+import { SemanticToastContainer, toast } from "react-semantic-toasts";
+import "react-semantic-toasts/styles/react-semantic-alert.css";
 
 class Display extends React.Component {
   constructor(props) {
@@ -85,6 +87,7 @@ class Display extends React.Component {
             }}
           >
             <Navbar />
+            <SemanticToastContainer />
             <EditorBarContainer
               {...this.props}
               // didOpacityUpdate={this.getOpacity}

@@ -11,6 +11,7 @@ import history from "./Auth/history";
 import NavBar from "./Components/Layout/Navbar";
 import SecuredRoute from "./Auth/SecuredRoute";
 
+
 class App extends Component {
   state = {
     backgroundImage: "",
@@ -79,7 +80,6 @@ class App extends Component {
   render() {
     return (
       <div style={{ height: "100vh" }}>
-        {/* <NavBar /> */}
         <Router history={history}>
           <div>
             <Route
