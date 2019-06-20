@@ -69,6 +69,11 @@ class Announcements extends React.Component {
   };
 
   clickDelete = () => {
+    setTimeout(() => {
+      toast({
+        title: "Deleted announcement"
+      });
+    }, 500);
     this.setState({ add: false, showAddButton: true });
   };
 
@@ -87,15 +92,10 @@ class Announcements extends React.Component {
 
   updateAfterDelete = () => {
     setTimeout(() => {
-      toast(
-        {
-          title: "Deleted Post",
-          description: <p>Deleted Post</p>
-        },
-        () => console.log("toast closed"),
-        () => console.log("toast clicked")
-      );
-    }, 1000);
+      toast({
+        title: "Deleted announcement"
+      });
+    }, 500);
     this.setState({ deleted: true });
     this.getActivePosts();
   };

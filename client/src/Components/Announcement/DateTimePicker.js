@@ -6,6 +6,7 @@ import axios from "axios";
 import auth0Client from "../../Auth/Auth";
 import DatePicker from "react-datepicker";
 import RepeatDropdown from "./RepeatDropdown";
+import { toast } from "react-semantic-toasts";
 import "react-datepicker/dist/react-datepicker.css";
 
 const styles = theme => ({
@@ -40,6 +41,11 @@ class DateAndTimePickers extends React.Component {
     };
   }
   closeModal(res) {
+    setTimeout(() => {
+      toast({
+        title: "Successfully added announcement"
+      });
+    }, 500);
     this.setState({ postMessage: res.statusText });
     this.props.closeMod();
   }
