@@ -5,6 +5,7 @@ import Announcement from "./Announcement";
 import AddButton from "./AddButton";
 import AnnouncementPlaceholder from "./AnnouncementPlaceholder";
 import auth0Client from "../../Auth/Auth";
+import { toast } from "react-semantic-toasts";
 
 class Announcements extends React.Component {
   constructor(props) {
@@ -68,6 +69,11 @@ class Announcements extends React.Component {
   };
 
   clickDelete = () => {
+    setTimeout(() => {
+      toast({
+        title: "Deleted announcement"
+      });
+    }, 500);
     this.setState({ add: false, showAddButton: true });
   };
 
@@ -85,6 +91,11 @@ class Announcements extends React.Component {
   };
 
   updateAfterDelete = () => {
+    setTimeout(() => {
+      toast({
+        title: "Deleted announcement"
+      });
+    }, 500);
     this.setState({ deleted: true });
     this.getActivePosts();
   };
