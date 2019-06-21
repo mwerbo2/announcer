@@ -28,6 +28,16 @@ class BackgroundEditorButton extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.log("BED.js 32, props", this.props);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.opacity !== this.props.opacity) {
+      console.log("BED.js 36, props", this.props);
+      this.setState({ opacity: this.props.opacity });
+    }
+  }
+
   openModal = () => {
     this.setState({ modalOpen: true });
   };
@@ -91,6 +101,7 @@ class BackgroundEditorButton extends React.Component {
       .put("/boards", {
         background_color: this.state.backgroundColor,
         background_image: this.state.imageURL,
+        background_opacity: this.state.opacity,
         id: 1
       })
       .then(response => this.close(response))
