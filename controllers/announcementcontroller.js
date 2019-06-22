@@ -98,7 +98,7 @@ const getLiveAnnouncementsRonak = async (req, res) => {
           where: [
             {
               date_time_start: {
-                [Op.lte]: currentDate,
+                [Op.lte]: currentDate
               }
             },
             {
@@ -116,6 +116,30 @@ const getLiveAnnouncementsRonak = async (req, res) => {
   }
 };
 
+const getAnnouncementByStatus = async (req, res) => {
+  try {
+    const activePosts = await Announcement.findAll({
+      where: {
+        status: "active"
+      }
+    });
+
+    const inactivePosts = await Announcement.findAll({
+      where: {
+        status: "inactive"
+      }
+    });
+    const scheduledPosts = await Announcement.findAll({
+      where: {
+        status: "scheduled"
+      }
+    });
+
+    return res.status(200).send({"active": activePosts, "inactive" : inactivePosts, "scheduled" : scheduledPosts});
+  } catch (err) {
+    console.error(err.message);
+  }
+};
 const updateAnnoucement = async (req, res) => {
   try {
     const post = await Announcement.update(
@@ -176,5 +200,6 @@ export {
   updateOrCreateAnnouncement,
   setAnnouncementStatus,
   getLiveAnnouncementWithStatus,
-  getLiveAnnouncementsRonak
+  getLiveAnnouncementsRonak,
+  getAnnouncementByStatus
 };
