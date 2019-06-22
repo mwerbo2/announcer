@@ -116,7 +116,7 @@ const getLiveAnnouncementsRonak = async (req, res) => {
   }
 };
 
-getAnnouncementByStatus = async (req, res) => {
+const getAnnouncementByStatus = async (req, res) => {
   try {
     const activePosts = await Announcement.findAll({
       where: {
@@ -135,7 +135,7 @@ getAnnouncementByStatus = async (req, res) => {
       }
     });
 
-    return res.status(200).send(activePosts, inactivePosts, scheduledPosts);
+    return res.status(200).send({"active": activePosts, "inactive" : inactivePosts, "scheduled" : scheduledPosts});
   } catch (err) {
     console.error(err.message);
   }
