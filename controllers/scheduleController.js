@@ -1,4 +1,5 @@
 import Schedule from "../models/schedulemodel";
+import Announcement from "../models/announcementmodel";
 import { setStatus } from "./statusUpdateController";
 
 const createSchedule = async (req, res) => {
@@ -12,6 +13,18 @@ const createSchedule = async (req, res) => {
       date_time_end: req.body.date_time_end,
       AnnouncementId: req.body.AnnouncementId
     });
+
+    const statusUpdate = await Announcement.update(
+      {
+        status: stat
+      },
+      {
+        where: {
+          id: req.body.AnnouncementId
+        }
+      }
+    );
+
     return res.status(201).send(schedule);
   } catch (error) {
     return res.status(400).send(error);

@@ -11,11 +11,11 @@ const setStatus = (dateStart, dateEnd) => {
   const formattedEnd = moment(dateEnd).format("YYYY-MM-DD");
 
   if (formattedStart > currentDate && formattedEnd > currentDate) {
-    return "Scheduled";
+    return "scheduled";
   } else if (formattedStart <= currentDate && formattedEnd >= currentDate) {
-    return "Active";
+    return "active";
   } else {
-    return "Inactive";
+    return "inactive";
   }
 };
 
