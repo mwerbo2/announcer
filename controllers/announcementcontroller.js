@@ -121,21 +121,30 @@ const getAnnouncementByStatus = async (req, res) => {
     const activePosts = await Announcement.findAll({
       where: {
         status: "active"
-      }
+      },
+      include: [{ model: Schedule }]
     });
 
     const inactivePosts = await Announcement.findAll({
       where: {
         status: "inactive"
-      }
+      },
+      include: [{ model: Schedule }]
     });
     const scheduledPosts = await Announcement.findAll({
       where: {
         status: "scheduled"
-      }
+      },
+      include: [{ model: Schedule }]
     });
 
-    return res.status(200).send({"active": activePosts, "inactive" : inactivePosts, "scheduled" : scheduledPosts});
+    return res
+      .status(200)
+      .send({
+        active: activePosts,
+        inactive: inactivePosts,
+        scheduled: scheduledPosts
+      });
   } catch (err) {
     console.error(err.message);
   }
