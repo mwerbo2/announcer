@@ -1,43 +1,62 @@
 import React from "react";
-import {
-  Header,
-  Search,
-  Table,
-  Container,
-  Icon,
-  Button
-} from "semantic-ui-react";
+import { Header, Table, Container, Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import auth0Client from "../../Auth/Auth";
 import axios from "axios";
 import { SemanticToastContainer, toast } from "react-semantic-toasts";
-// import tinymce from "";
+import _ from "lodash";
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: "",
-      activePosts: [],
-      inactivePosts: [],
-      scheduledPosts: []
+      activePosts: "",
+      inactivePosts: "",
+      scheduledPosts: "",
+      table: null,
+      column: null,
+      direction: null
     };
-    // this.deleteAnnouncement = this.deleteAnnouncement.bind(this);
   }
 
   strip = html => {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
-
-    // Or Regex myString.replace(/<[^>]*>?/gm, '');
   };
 
   fetchAnnouncements = async () => {
     const res = await axios.get("/announcements/status");
-    this.setState({ posts: res.data });
+    const { active, inactive, scheduled } = res.data;
+    this.setState({
+      posts: res.data,
+      activePosts: active,
+      inactivePosts: inactive,
+      scheduledPosts: scheduled
+    });
+  };
+
+  handleSort = (clickedColumn, clickedTable) => () => {
+    const { column, posts, direction } = this.state;
+    console.log("34", posts);
+    if (column !== clickedColumn) {
+      console.log("36", posts);
+      this.setState({
+        column: clickedColumn,
+        clickedTable: _.sortBy(clickedTable, [clickedColumn]),
+        direction: "ascending"
+      });
+      console.log("after", this.state.posts);
+      return;
+    }
+
+    this.setState({
+      clickedTable: _.reverse(),
+      direction: direction === "ascending" ? "descending" : "ascending"
+    });
   };
 
   afterDelete = () => {
@@ -50,10 +69,6 @@ class Profile extends React.Component {
   };
 
   deleteAnnouncement = (e, data) => {
-    console.log("e", e.target);
-    console.log("val", e.target.value);
-    console.log("this", this);
-    console.log("data", data.value);
     axios
       .post(
         "/announcements/status",
@@ -68,15 +83,20 @@ class Profile extends React.Component {
       )
       .then(res => this.afterDelete())
       .catch(err => console.log(err));
-    // this.props.afterDelete();
   };
 
   componentDidMount() {
     this.fetchAnnouncements();
   }
+
   render() {
     const {
-      posts: { active, inactive, scheduled }
+      column,
+      data,
+      direction,
+      activePosts,
+      inactivePosts,
+      scheduledPosts
     } = this.state;
     return (
       <div>
@@ -85,19 +105,39 @@ class Profile extends React.Component {
           <SemanticToastContainer />
           <Header>Welcome</Header>
           <Header>Active</Header>
-          <Table celled selectable className="active">
+          <Table celled sortable selectable className="active">
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Title</Table.HeaderCell>
-                <Table.HeaderCell>Body</Table.HeaderCell>
-                <Table.HeaderCell>Date start</Table.HeaderCell>
-                <Table.HeaderCell>Date End</Table.HeaderCell>
+                <Table.HeaderCell
+                  sorted={column === "title" ? direction : null}
+                  onClick={this.handleSort("title", "activePosts")}
+                >
+                  Title
+                </Table.HeaderCell>
+                <Table.HeaderCell
+                  sorted={column === "body" ? direction : null}
+                  onClick={this.handleSort("body", "activePosts")}
+                >
+                  Body
+                </Table.HeaderCell>
+                <Table.HeaderCell
+                  sorted={column === "dateStart" ? direction : null}
+                  onClick={this.handleSort("dateStart", "activePosts")}
+                >
+                  Date start
+                </Table.HeaderCell>
+                <Table.HeaderCell
+                  sorted={column === "dateEnd" ? direction : null}
+                  onClick={this.handleSort("dateEnd", "activePosts")}
+                >
+                  Date End
+                </Table.HeaderCell>
                 <Table.HeaderCell>Options</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.state.posts &&
-                this.state.posts.active.map(post => {
+              {activePosts &&
+                activePosts.map(post => {
                   return (
                     <Table.Row key={post.id}>
                       <Table.Cell>
@@ -121,7 +161,7 @@ class Profile extends React.Component {
             </Table.Body>
           </Table>
           <Header>Scheduled</Header>
-          <Table celled selectable className="scheduled">
+          <Table celled sortable selectable className="scheduled">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Title</Table.HeaderCell>
@@ -132,8 +172,8 @@ class Profile extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.state.posts &&
-                this.state.posts.scheduled.map(post => {
+              {scheduledPosts &&
+                scheduledPosts.map(post => {
                   return (
                     <Table.Row key={post.id}>
                       <Table.Cell>
@@ -157,7 +197,7 @@ class Profile extends React.Component {
             </Table.Body>
           </Table>
           <Header>Inactive</Header>
-          <Table celled selectable className="inactive">
+          <Table celled sortable selectable className="inactive">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Title</Table.HeaderCell>
@@ -168,8 +208,8 @@ class Profile extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.state.posts &&
-                this.state.posts.inactive.map(post => {
+              {inactivePosts &&
+                inactivePosts.map(post => {
                   return (
                     <Table.Row key={post.id}>
                       <Table.Cell>
