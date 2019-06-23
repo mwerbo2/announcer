@@ -1,10 +1,18 @@
 import React from "react";
-import { Header, Search, Table, Container, Icon } from "semantic-ui-react";
+import {
+  Header,
+  Search,
+  Table,
+  Container,
+  Icon,
+  Button
+} from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import auth0Client from "../../Auth/Auth";
 import axios from "axios";
+import { SemanticToastContainer, toast } from "react-semantic-toasts";
 // import tinymce from "";
 
 class Profile extends React.Component {
@@ -16,6 +24,7 @@ class Profile extends React.Component {
       inactivePosts: [],
       scheduledPosts: []
     };
+    // this.deleteAnnouncement = this.deleteAnnouncement.bind(this);
   }
 
   strip = html => {
@@ -26,33 +35,44 @@ class Profile extends React.Component {
     // Or Regex myString.replace(/<[^>]*>?/gm, '');
   };
 
-  deleteAnnouncement = e => {
+  fetchAnnouncements = async () => {
+    const res = await axios.get("/announcements/status");
+    this.setState({ posts: res.data });
+  };
+
+  afterDelete = () => {
+    setTimeout(() => {
+      toast({
+        title: "Deleted announcement"
+      });
+    }, 500);
+    this.fetchAnnouncements();
+  };
+
+  deleteAnnouncement = (e, data) => {
+    console.log("e", e.target);
+    console.log("val", e.target.value);
+    console.log("this", this);
+    console.log("data", data.value);
     axios
       .post(
         "/announcements/status",
         {
           user_id: 999992,
-          id: this.props.post_id,
+          id: data.value,
           status: "archive"
         },
         {
           headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
         }
       )
-      .then(res => this.props.afterDelete())
+      .then(res => this.afterDelete())
       .catch(err => console.log(err));
     // this.props.afterDelete();
   };
 
-  async componentDidMount() {
-    const res = await axios.get("/announcements/status");
-    console.log(res);
-    console.log(res.data.active);
-
-    const { data } = res.data;
-    console.log("Announcements", data);
-    this.setState({ posts: res.data });
-    console.log(this.state.posts);
+  componentDidMount() {
+    this.fetchAnnouncements();
   }
   render() {
     const {
@@ -62,8 +82,9 @@ class Profile extends React.Component {
       <div>
         <Container style={{ marginTop: "7em", minHeight: "100vh", flex: 1 }}>
           <Navbar />
-          <Header>Welcome {this.props.name}</Header>
-          <Search />
+          <SemanticToastContainer />
+          <Header>Welcome</Header>
+          <Header>Active</Header>
           <Table celled selectable className="active">
             <Table.Header>
               <Table.Row>
@@ -88,14 +109,18 @@ class Profile extends React.Component {
                       <Table.Cell>{post.Schedule.date_time_start}</Table.Cell>
                       <Table.Cell>{post.Schedule.date_time_end}</Table.Cell>
                       <Table.Cell>
-                        <Icon name="trash" onClick={this.deleteAnnouncement} />
+                        <Button
+                          icon="trash"
+                          value={post.id}
+                          onClick={this.deleteAnnouncement}
+                        />
                       </Table.Cell>
                     </Table.Row>
                   );
                 })}
             </Table.Body>
           </Table>
-
+          <Header>Scheduled</Header>
           <Table celled selectable className="scheduled">
             <Table.Header>
               <Table.Row>
@@ -120,14 +145,18 @@ class Profile extends React.Component {
                       <Table.Cell>{post.Schedule.date_time_start}</Table.Cell>
                       <Table.Cell>{post.Schedule.date_time_end}</Table.Cell>
                       <Table.Cell>
-                        <Icon name="trash" onClick={this.deleteAnnouncement} />
+                        <Button
+                          icon="trash"
+                          value={post.id}
+                          onClick={this.deleteAnnouncement}
+                        />
                       </Table.Cell>
                     </Table.Row>
                   );
                 })}
             </Table.Body>
           </Table>
-
+          <Header>Inactive</Header>
           <Table celled selectable className="inactive">
             <Table.Header>
               <Table.Row>
@@ -152,7 +181,11 @@ class Profile extends React.Component {
                       <Table.Cell>{post.Schedule.date_time_start}</Table.Cell>
                       <Table.Cell>{post.Schedule.date_time_end}</Table.Cell>
                       <Table.Cell>
-                        <Icon name="trash" onClick={this.deleteAnnouncement} />
+                        <Button
+                          icon="trash"
+                          value={post.id}
+                          onClick={this.deleteAnnouncement}
+                        />
                       </Table.Cell>
                     </Table.Row>
                   );
