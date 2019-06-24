@@ -30,13 +30,13 @@ class WelcomeMain extends React.Component {
                     size="massive"
                     onClick={auth0Client.signIn}
                   >
-                    Add Announcement
+                    Add announcement
                   </Button>
                 )}
                 {auth0Client.isAuthenticated() && (
                   <Button color="blue" size="massive">
                     <Link to={"/displayeditor"} style={{ color: "white" }}>
-                      Add Announcement
+                      Add announcement
                     </Link>
                   </Button>
                 )}
@@ -51,22 +51,28 @@ class WelcomeMain extends React.Component {
                     target="_blank"
                     style={{ color: "white" }}
                   >
-                    View Live Post
+                    View live post
                   </Link>
                 </Button>
               </Grid.Column>
-              {/* <Grid.Column width="4" textAlign="center">
-              {!auth0Client.isAuthenticated() && (
-                <Button size="massive" onClick={auth0Client.signIn}>
-                  View Previous Posts
-                </Button>
-              )}
-              {auth0Client.isAuthenticated() && (
-                <Button size="massive">
-                  <Link to={"/profile"}>View Previous Posts</Link>
-                </Button>
-              )}
-            </Grid.Column> */}
+              <Grid.Column width="4" textAlign="center">
+                {!auth0Client.isAuthenticated() && (
+                  <Button
+                    color="blue"
+                    size="massive"
+                    onClick={auth0Client.signIn}
+                  >
+                    View previous posts
+                  </Button>
+                )}
+                {auth0Client.isAuthenticated() && (
+                  <Button color="blue" size="massive">
+                    <Link to={"/profile"} style={{ color: "white" }}>
+                      View previous posts
+                    </Link>
+                  </Button>
+                )}
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>
