@@ -16,19 +16,12 @@ class Display extends React.Component {
   };
 
   componentDidUpdate = prevProps => {
-    // console.log("Livedisplay 19", prevProps);
-    // if (this.props.backgroundImg !== prevProps.backgroundImg) {
-    //   this.setState({ backgroundImage: this.props.backgroundImg });
-    // }
     if (this.props.opacity !== prevProps.opacity) {
-      console.log("props lvie", this.props, "****", this.prevProps);
       this.setState({ opacity: this.props.opacity });
-      console.log("state live", this.state.opacity);
     }
   };
 
   componentDidMount() {
-    console.log("mounted", this.props);
     axios.get("/announcements/liveStatus").then(announcement => {
       this.setState({
         fullAnnouncement: announcement.data,
@@ -38,7 +31,6 @@ class Display extends React.Component {
     });
 
     axios.get("/boards").then(board => {
-      console.log("Board data, live d", board.data);
       this.setState({
         backgroundImage: board.data[0].background_image,
         opacity: board.data[0].background_opacity
@@ -76,7 +68,7 @@ class Display extends React.Component {
           key={this.props.key}
           style={{
             background: `rgb(0,0,0,${this.state.opacity})`,
-            height: "105vh"
+            height: "105vh" 
           }}
         >
           <Grid className="widescreen">
