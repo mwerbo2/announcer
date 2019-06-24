@@ -12,13 +12,12 @@ import Announcement from "./models/announcementmodel";
 import Schedule from "./models/schedulemodel";
 import Board from "./models/boardModel";
 Announcement.hasOne(Schedule, { unique: true });
-// Schedule.belongsTo(Announcement, {unique:true});
 Board.hasMany(Announcement);
 sequelize.sync();
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Connection has been established successfully.");
+    console.log("Database connection has been established successfully.");
   })
   .catch(err => {
     console.error("Unable to connect to the database:", err);
