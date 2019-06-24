@@ -14,7 +14,9 @@ RUN cd client
 
 RUN npm install
 
-run npm run build
+run ls
+
+run npm build
 
 RUN cd ..
 
