@@ -16,7 +16,6 @@ import { toast } from "react-semantic-toasts";
 class BackgroundEditorButton extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.inputRef = createRef();
     this.state = {
@@ -28,12 +27,8 @@ class BackgroundEditorButton extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log("BED.js 32, props", this.props);
-  }
   componentDidUpdate(prevProps) {
     if (prevProps.opacity !== this.props.opacity) {
-      console.log("BED.js 36, props", this.props);
       this.setState({ opacity: this.props.opacity });
     }
   }
@@ -41,11 +36,6 @@ class BackgroundEditorButton extends React.Component {
   openModal = () => {
     this.setState({ modalOpen: true });
   };
-
-  // getOpacity = val => {
-  //   this.setState({ opacity: val });
-  //   console.log("beb.js 33", this.state);
-  // };
 
   handleBackgroundPosition = (e, { value }) => this.setState({ value });
 
@@ -57,16 +47,11 @@ class BackgroundEditorButton extends React.Component {
           description: "Check the image url"
         });
       }, 500);
-      // this.setState({ modalOpen: false });
-      // this.getBackground()
-      // this.props.didEdit;
       const backgroundInfo = {
         backgroundColor: this.state.backgroundColor,
         backgroundImage: this.state.imageURL
       };
       this.props.didBackgroundUpdate(backgroundInfo);
-    } else {
-      console.log("figure it out");
     }
   };
   close = res => {
@@ -77,8 +62,6 @@ class BackgroundEditorButton extends React.Component {
         });
       }, 500);
       this.setState({ modalOpen: false });
-      // this.getBackground()
-      // this.props.didEdit;
       const backgroundInfo = {
         backgroundColor: this.state.backgroundColor,
         backgroundImage: this.state.imageURL
@@ -86,8 +69,6 @@ class BackgroundEditorButton extends React.Component {
       this.props.didBackgroundUpdate(backgroundInfo);
     } else {
       this.setState({ modalOpen: false });
-      // this.getBackground()
-      // this.props.didEdit;
       const backgroundInfo = {
         backgroundColor: this.state.backgroundColor,
         backgroundImage: this.state.imageURL
@@ -130,7 +111,6 @@ class BackgroundEditorButton extends React.Component {
                   />
                   <Header as="h3">Opacity setting for display</Header>
                   <OpacityPicker {...this.props} />
-                  {/* <ResolutionPicker /> */}
                 </Grid.Column>
                 <Grid.Column>
                   <Image src={this.state.imageURL} size="medium" centered />

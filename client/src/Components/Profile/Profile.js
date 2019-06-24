@@ -41,15 +41,12 @@ class Profile extends React.Component {
 
   handleSort = (clickedColumn, clickedTable) => () => {
     const { column, posts, direction } = this.state;
-    console.log("34", posts);
     if (column !== clickedColumn) {
-      console.log("36", posts);
       this.setState({
         column: clickedColumn,
         clickedTable: _.sortBy(clickedTable, [clickedColumn]),
         direction: "ascending"
       });
-      console.log("after", this.state.posts);
       return;
     }
 
@@ -92,7 +89,6 @@ class Profile extends React.Component {
   render() {
     const {
       column,
-      data,
       direction,
       activePosts,
       inactivePosts,

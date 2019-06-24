@@ -30,7 +30,6 @@ class Display extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("de.js 32", prevProps.opacity);
     if (prevProps.opacity !== this.props.opacity) {
       // this.setState({ opacity: this.props.opacity });
     }
@@ -44,7 +43,6 @@ class Display extends React.Component {
   };
 
   getOpacity = opa => {
-    console.log("de.js 43", opa);
     this.props.didOpacityUpdate();
   };
 

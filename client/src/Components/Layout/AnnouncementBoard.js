@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import Announcements from "../Announcement/Announcements";
 import DisplayHeader from "./DisplayHeader";
@@ -42,8 +42,7 @@ class AnnouncementBoard extends React.Component {
     }
   }
 
-  editBackground = () => {
-  };
+  editBackground = () => {};
   componentDidMount() {
     Axios.get("/boards")
       .then(response =>
@@ -68,7 +67,6 @@ class AnnouncementBoard extends React.Component {
 
     // const annNode = this.announcementRef.current
     // console.log(annNode)
-
   }
 
   getAnnouncementSize() {
@@ -83,24 +81,31 @@ class AnnouncementBoard extends React.Component {
       height: "768px",
       width: "1024px",
       margin: "0 auto",
-      padding: "1em",
-      // backgroundColor: this.state.backgroundColor,
       backgroundImage: `url(${this.state.backgroundImg})`,
       flex: 1
     };
 
     return (
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
-        <Grid style={{backgroundColor: `rgb(0,0,0,${this.props.opacity})`}}>
-          <DisplayHeader />
-          <Grid.Row>
-            <Announcements
-              ref={this.annRef}
-              boardBotto={this.state.boardBottom}
-              getBottom={this.getAnnouncementSize}
-            />
-          </Grid.Row>
-        </Grid>
+        <div
+          style={{
+            background: `rgb(0,0,0,${this.props.opacity})`,
+            height: "100%",
+            width: "100%",
+            padding: "1em"
+          }}
+        >
+          <Grid style={{}}>
+            <DisplayHeader />
+            <Grid.Row>
+              <Announcements
+                ref={this.annRef}
+                boardBotto={this.state.boardBottom}
+                getBottom={this.getAnnouncementSize}
+              />
+            </Grid.Row>
+          </Grid>
+        </div>
       </div>
     );
   }
