@@ -3,12 +3,7 @@ import { Container, Image, Segment } from "semantic-ui-react";
 
 const Footer = () => {
   return (
-    <Segment
-      inverted
-      vertical
-      // style={{ margin: "5em 0em 0em", padding: "5em 0em" }}
-      // style={footerStyle}
-    >
+    <Segment inverted vertical>
       <Container textAlign="center">
         <Image
           centered

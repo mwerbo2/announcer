@@ -4,7 +4,6 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import MaterialUIPickers from "../Announcement/DateTimePicker";
 import auth0Client from "../../Auth/Auth";
-import { toast } from "react-semantic-toasts";
 
 class Announcement extends React.Component {
   constructor(props) {
@@ -13,8 +12,6 @@ class Announcement extends React.Component {
     this.handleBodyChange = this.handleBodyChange.bind(this);
     this.saveAnnouncement = this.saveAnnouncement.bind(this);
     this.deleteAnnouncement = this.deleteAnnouncement.bind(this);
-    // console.log("A.js 24", auth0Client.getProfile())
-    // console.log("A.js 25", auth0Client.getIdToken())
     this.announcementRef = React.createRef();
     this.state = {
       title: "",
@@ -109,7 +106,6 @@ class Announcement extends React.Component {
       )
       .then(res => this.props.afterDelete())
       .catch(err => console.log(err));
-    // this.props.afterDelete();
   };
 
   handleTitleChange(event) {

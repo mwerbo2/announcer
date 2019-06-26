@@ -76,11 +76,6 @@ class AnnouncementPlaceholder extends React.Component {
   handleBodyChange(event) {
     this.setState({ body: event });
   }
-  componentDidMount() {
-    // console.log(this.placeHolderRef.current.getBoundingClientRect().height);
-    // console.log(this.props.boardB)
-    // if (this.placeHolderRef.current.getBoundingClientRect().bottom < this.props.boardB) { console.log('I fit')} else { console.log('i do not fit')}
-  }
 
   render() {
     return (

@@ -99,33 +99,10 @@ class Announcements extends React.Component {
     this.setState({ deleted: true });
     this.getActivePosts();
   };
-  //Feature for validating if post will fit on live display
-  getBottomDimension = () => {
-    // console.log(this.props.boardBotto)
-    // this.props.getBottom()
-    // console.log('do you even work?')
-    // const node = this.announcementsRef.current
-    // console.log(node)
-    // const annBottom = node.getBoundingClientRect().bottom
-    // const annBottom = !node ? " " : node.getBoundingClientRect().bottom
-    // console.log(annBottom)
-    //   if (!node) { console.log('waiting')} else if (this.props.boardBotto < annBottom ){
-    //     console.log('too big')
-    //   } else {
-    //     console.log('fits ')
-    //   }
-  };
 
   componentDidMount() {
     this.getActivePosts();
-
     setTimeout(() => {}, 100);
-
-    // console.log(ReactDOM.findDOMNode(this).offsetHeight)
-    // console.log(this.announcementsRef.current.getBoundingClientRect())
-    //   console.log(this.announcementsRef.current)
-    //   console.log(this.announcementsRef.current.getBoundingClientRect())
-    //   console.log(this.announcementsRef.current.clientHeight)
   }
 
   render() {

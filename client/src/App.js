@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Route, withRouter, Redirect } from "react-router-dom";
+import { Router, Route, withRouter } from "react-router-dom";
 import "./index.css";
 import Display from "./Components/Layout/LiveDisplay";
 import DisplayEditor from "./Components/Layout/DisplayEditor";

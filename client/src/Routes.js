@@ -14,14 +14,7 @@ export const makeMainRoutes = () => {
   return (
     <Router history={history}>
       <div>
-        {/* <Route path="/" render={(props) => <WelcomeMain auth={auth0Client} {...props} />}/> */}
         <Route path="/" render={(props) => <App auth={auth0Client} {...props} />}/>
-        {/* <Route
-          path="/welcome"
-          render={props => <WelcomeMain auth={auth0Client} {...props} />}
-        /> */}
-
-        {/* <Route exact path="/edit" component={SplitEditor} /> */}
         <Route
           path="/display"
           render={props => <Display auth={auth0Client} {...props} />}

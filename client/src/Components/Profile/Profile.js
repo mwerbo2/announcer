@@ -40,7 +40,7 @@ class Profile extends React.Component {
   };
 
   handleSort = (clickedColumn, clickedTable) => () => {
-    const { column, posts, direction } = this.state;
+    const { column, direction } = this.state;
     if (column !== clickedColumn) {
       this.setState({
         column: clickedColumn,

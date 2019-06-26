@@ -10,7 +10,6 @@ import {
 } from "semantic-ui-react";
 import axios from "axios";
 import OpacityPicker from "./OpacityPicker";
-import ResolutionPicker from "./ResolutionPicker";
 import { toast } from "react-semantic-toasts";
 
 class BackgroundEditorButton extends React.Component {
