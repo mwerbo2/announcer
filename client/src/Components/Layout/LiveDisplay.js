@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, Container } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
-// import Announcement from './Announcement/PreviewAnnouncements';
 import LiveAnnouncement from "../Announcement/LiveAnnouncements";
 import DisplayHeader from "./DisplayHeader";
 import axios from "axios";
@@ -68,7 +67,7 @@ class Display extends React.Component {
           key={this.props.key}
           style={{
             background: `rgb(0,0,0,${this.state.opacity})`,
-            height: "105vh" 
+            height: "105vh"
           }}
         >
           <Grid className="widescreen">

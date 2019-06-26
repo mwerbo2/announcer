@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import auth0Client from "../../Auth/Auth";
 import DatePicker from "react-datepicker";
-import RepeatDropdown from "./RepeatDropdown";
 import { toast } from "react-semantic-toasts";
 import "react-datepicker/dist/react-datepicker.css";
 

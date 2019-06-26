@@ -3,8 +3,6 @@ import Announcement from "../models/announcementmodel";
 import { setStatus } from "./statusUpdateController";
 
 const createSchedule = async (req, res) => {
-  // console.log("sc.js start", req.body.date_time_start);
-  // console.log("sc.js end", req.body.date_time_end);
   const stat = setStatus(req.body.date_time_start, req.body.date_time_end);
   console.log("sc.js line 7 ", stat);
   try {
@@ -71,9 +69,5 @@ const updateSchedule = async (req, res) => {
     return res.status(400).send(error);
   }
 };
-
-// Method for getting announcements with status="active" and within todays date
-// SELECT * FROM "Announcements" as "A" JOIN "Schedules" ON "A"."id"="Schedules"."AnnouncementId";
-// SELECT * FROM "Announcements" as "A" JOIN "Schedules" ON "A"."id"="Schedules"."AnnouncementId" WHERE "Schedules"."date_time_start"='2017-03-05 15:33:00-06';
 
 export { createSchedule, getAllScheduled, getScheduleById, updateSchedule };

@@ -6,7 +6,7 @@ import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import AnnouncementBoard from "./AnnouncementBoard";
 import EditorBarContainer from "../EditorBar/EditorBarContainer";
-import { SemanticToastContainer, toast } from "react-semantic-toasts";
+import { SemanticToastContainer } from "react-semantic-toasts";
 import "react-semantic-toasts/styles/react-semantic-alert.css";
 
 class Display extends React.Component {
@@ -23,16 +23,6 @@ class Display extends React.Component {
       backgroundColor: "",
       backgroundImage: ""
     };
-    // console.log(this.props.didOpacityUpdate);
-  }
-  componentDidMount() {
-    // console.log(ReactDOM.findDOMNode().getBoundingClientRect())
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.opacity !== this.props.opacity) {
-      // this.setState({ opacity: this.props.opacity });
-    }
   }
 
   getBackground = updated => {
@@ -88,7 +78,6 @@ class Display extends React.Component {
             <SemanticToastContainer />
             <EditorBarContainer
               {...this.props}
-              // didOpacityUpdate={this.getOpacity}
               didBackgroundUpdate={this.getBackground}
             />
             <AnnouncementBoard
