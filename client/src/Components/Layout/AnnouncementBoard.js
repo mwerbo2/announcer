@@ -17,7 +17,8 @@ class AnnouncementBoard extends React.Component {
       backgroundColor: "#000000",
       backgroundImg:
         "https://www.solidbackgrounds.com/images/1024x768/1024x768-black-solid-color-background.jpg",
-      backgroundUpdated: false
+      backgroundUpdated: false,
+      opacity: 0
     };
   }
 
@@ -26,6 +27,9 @@ class AnnouncementBoard extends React.Component {
       this.setState({ backgroundColor: this.props.backgroundColor });
     }
 
+    if (this.props.opacity !== prevProps.opacity) {
+      this.setState({ opacity: this.props.opacity });
+    }
     if (this.props.backgroundImage !== prevProps.backgroundImage) {
       this.setState({ backgroundImg: this.props.backgroundImage });
     }
@@ -34,7 +38,10 @@ class AnnouncementBoard extends React.Component {
   componentDidMount() {
     Axios.get("/boards")
       .then(response =>
-        this.setState({ backgroundImg: response.data[0].background_image })
+        this.setState({
+          backgroundImg: response.data[0].background_image,
+          opacity: response.data[0].background_opacity
+        })
       )
       .catch(error => console.log(error));
   }
@@ -52,7 +59,7 @@ class AnnouncementBoard extends React.Component {
       <div ref={this.myRef} style={boardStyle} onClick={this.editBackground}>
         <div
           style={{
-            background: `rgb(0,0,0,${this.props.opacity})`,
+            background: `rgb(0,0,0,${this.state.opacity})`,
             height: "100%",
             width: "100%",
             padding: "1em"
