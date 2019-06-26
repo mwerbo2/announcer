@@ -26,6 +26,14 @@ class BackgroundEditorButton extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    const res = await axios.get("/boards");
+    this.setState({
+      opacity: res.data[0].background_opacity,
+      imageURL: res.data[0].background_image
+    });
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.opacity !== this.props.opacity) {
       this.setState({ opacity: this.props.opacity });
@@ -63,14 +71,16 @@ class BackgroundEditorButton extends React.Component {
       this.setState({ modalOpen: false });
       const backgroundInfo = {
         backgroundColor: this.state.backgroundColor,
-        backgroundImage: this.state.imageURL
+        backgroundImage: this.state.imageURL,
+        backgroundOpacity: this.state.opacity
       };
       this.props.didBackgroundUpdate(backgroundInfo);
     } else {
       this.setState({ modalOpen: false });
       const backgroundInfo = {
         backgroundColor: this.state.backgroundColor,
-        backgroundImage: this.state.imageURL
+        backgroundImage: this.state.imageURL,
+        backgroundOpacity: this.state.opacity
       };
       this.props.didBackgroundUpdate(backgroundInfo);
     }
@@ -93,7 +103,7 @@ class BackgroundEditorButton extends React.Component {
   };
 
   render() {
-    const { modalOpen } = this.state;
+    const { modalOpen, imageURL } = this.state;
     return (
       <Container>
         <Modal open={modalOpen}>
@@ -112,7 +122,7 @@ class BackgroundEditorButton extends React.Component {
                   <OpacityPicker {...this.props} />
                 </Grid.Column>
                 <Grid.Column>
-                  <Image src={this.state.imageURL} size="medium" centered />
+                  <Image src={imageURL} size="medium" centered />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
