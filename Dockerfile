@@ -18,8 +18,6 @@ RUN ls
 
 RUN cd client
 
-RUN npm run build
-
 RUN cd ..
 
 EXPOSE 3001
