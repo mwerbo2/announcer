@@ -16,8 +16,6 @@ RUN npm install
 
 RUN ls
 
-RUN cd client
-
 RUN cd ..
 
 EXPOSE 3001
