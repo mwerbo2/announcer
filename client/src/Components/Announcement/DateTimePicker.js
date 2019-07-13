@@ -30,8 +30,8 @@ class DateAndTimePickers extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      startTime: "",
-      endTime: "",
+      startTime: new Date(),
+      endTime: new Date(),
       currentSchedule: [],
       postMessage: "",
       scheduleDeleted: false
@@ -104,11 +104,17 @@ class DateAndTimePickers extends React.Component {
   };
 
   handleStartDate = date => {
-    console.log("handle start", date);
     this.setState({ startTime: date });
   };
   handleEndDate = date => {
-    console.log("handle end", date);
+    this.setState({ endTime: date });
+  };
+
+  handleSelectStart = date => {
+    this.setState({ startTime: date });
+  };
+
+  handleSelectEnd = date => {
     this.setState({ endTime: date });
   };
 
@@ -129,6 +135,7 @@ class DateAndTimePickers extends React.Component {
                     <DatePicker
                       selected={this.state.startTime}
                       onChange={this.handleStartDate}
+                      onSelect={this.handleSelectStart}
                       minDate={new Date()}
                       dateFormat="yyyy-MM-dd"
                       key={1}
@@ -138,6 +145,7 @@ class DateAndTimePickers extends React.Component {
                     <Header as="h5">Date End</Header>
                     <DatePicker
                       selected={this.state.endTime}
+                      onSelect={this.handleSelectEnd}
                       onChange={this.handleEndDate}
                       dateFormat="yyyy-MM-dd"
                       minDate={new Date()}
