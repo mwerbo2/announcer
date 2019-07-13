@@ -9,16 +9,21 @@ class DateTime extends React.Component {
   };
 
   componentDidMount() {
-    this.timeInterval = setInterval(() => {
-      this.setState({
-        dateTime: moment().format("LLLL")
-      });
+    setInterval(() => {
+      this.timeInterval();
     }, 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timeInterval);
   }
+
+  timeInterval = () => {
+    this.setState({
+      date: moment().format("MMMM D, YYYY"),
+      time: moment().format("h:mm A")
+    });
+  };
 
   render() {
     return (

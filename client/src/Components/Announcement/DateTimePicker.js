@@ -28,18 +28,17 @@ class DateAndTimePickers extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleStartTime = this.handleStartTime.bind(this);
-    this.handleEndTime = this.handleEndTime.bind(this);
 
     this.state = {
-      startTime: new Date(),
-      endTime: new Date(),
+      startTime: "",
+      endTime: "",
       currentSchedule: [],
       postMessage: "",
       scheduleDeleted: false
     };
   }
   closeModal(res) {
+    console.log("close mod", res);
     setTimeout(() => {
       toast({
         title: "Successfully added announcement"
@@ -55,12 +54,6 @@ class DateAndTimePickers extends React.Component {
       .then(res => this.setState({ currentSchedule: res.data }));
   }
 
-  handleChange = date => {
-    this.setState({
-      startTime: date
-    });
-  };
-
   deleteSchedule = () => {
     axios
       .delete(`/announcements/${this.props.post_id}`)
@@ -75,6 +68,8 @@ class DateAndTimePickers extends React.Component {
     e.preventDefault();
     const p_id = this.props.post_id;
     if (this.state.currentSchedule.length > 0) {
+      console.log("Start datepicker put", this.state.startTime);
+      console.log("End datepicker put", this.state.endTime);
       axios
         .put(
           `/schedules/${p_id}`,
@@ -89,6 +84,8 @@ class DateAndTimePickers extends React.Component {
         .then(res => this.closeModal(res))
         .catch(err => console.log(err));
     } else {
+      console.log("Start datepicker post", this.state.startTime);
+      console.log("End datepicker post", this.state.endTime);
       axios
         .post(
           "/schedules",
@@ -106,18 +103,13 @@ class DateAndTimePickers extends React.Component {
     }
   };
 
-  handleStartTime = e => {
-    this.setState({ startTime: e.target.value });
-  };
   handleStartDate = date => {
+    console.log("handle start", date);
     this.setState({ startTime: date });
   };
   handleEndDate = date => {
+    console.log("handle end", date);
     this.setState({ endTime: date });
-  };
-
-  handleEndTime = e => {
-    this.setState({ endTime: e.target.value });
   };
 
   render() {
