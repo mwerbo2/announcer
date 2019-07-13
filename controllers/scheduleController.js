@@ -5,6 +5,8 @@ import { setStatus } from "./statusUpdateController";
 const createSchedule = async (req, res) => {
   const stat = setStatus(req.body.date_time_start, req.body.date_time_end);
   console.log("sc.js line 7 ", stat);
+  console.log("***********controller start", req.body.date_time_start);
+  console.log("***********controller end", req.body.date_time_end);
   try {
     const schedule = await Schedule.create({
       date_time_start: req.body.date_time_start,
