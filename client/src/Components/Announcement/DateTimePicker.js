@@ -104,17 +104,21 @@ class DateAndTimePickers extends React.Component {
   };
 
   handleStartDate = date => {
+    console.log("hsd", date);
     this.setState({ startTime: date });
   };
   handleEndDate = date => {
+    console.log("hed", date);
     this.setState({ endTime: date });
   };
 
   handleSelectStart = date => {
+    console.log("hss", date);
     this.setState({ startTime: date });
   };
 
   handleSelectEnd = date => {
+    console.log("hse", date);
     this.setState({ endTime: date });
   };
 

@@ -1,6 +1,7 @@
 import Schedule from "../models/schedulemodel";
 import Announcement from "../models/announcementmodel";
 import { setStatus } from "./statusUpdateController";
+import { read } from "fs";
 
 const createSchedule = async (req, res) => {
   const stat = setStatus(req.body.date_time_start, req.body.date_time_end);
@@ -54,6 +55,9 @@ const getScheduleById = async (req, res) => {
 };
 
 const updateSchedule = async (req, res) => {
+  console.log("uuuuuuuuuuuu ", req.params.id);
+  console.log("bbbbb", req.body);
+
   try {
     const schedule = await Schedule.update(
       {
@@ -66,6 +70,22 @@ const updateSchedule = async (req, res) => {
         }
       }
     );
+
+    const stat = await setStatus(
+      req.body.date_time_start,
+      req.body.date_time_end
+    );
+    const statusUpdate = await Announcement.update(
+      {
+        status: stat
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    );
+    console.log(schedule);
     return res.status(200).send(schedule);
   } catch (error) {
     return res.status(400).send(error);
