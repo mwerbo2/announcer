@@ -68,8 +68,6 @@ class DateAndTimePickers extends React.Component {
     e.preventDefault();
     const p_id = this.props.post_id;
     if (this.state.currentSchedule.length > 0) {
-      console.log("Start datepicker put", this.state.startTime);
-      console.log("End datepicker put", this.state.endTime);
       axios
         .put(
           `/schedules/${p_id}`,
@@ -84,8 +82,6 @@ class DateAndTimePickers extends React.Component {
         .then(res => this.closeModal(res))
         .catch(err => console.log(err));
     } else {
-      console.log("Start datepicker post", this.state.startTime);
-      console.log("End datepicker post", this.state.endTime);
       axios
         .post(
           "/schedules",
@@ -104,21 +100,17 @@ class DateAndTimePickers extends React.Component {
   };
 
   handleStartDate = date => {
-    console.log("hsd", date);
     this.setState({ startTime: date });
   };
   handleEndDate = date => {
-    console.log("hed", date);
     this.setState({ endTime: date });
   };
 
   handleSelectStart = date => {
-    console.log("hss", date);
     this.setState({ startTime: date });
   };
 
   handleSelectEnd = date => {
-    console.log("hse", date);
     this.setState({ endTime: date });
   };
 
