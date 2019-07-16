@@ -55,9 +55,6 @@ const getScheduleById = async (req, res) => {
 };
 
 const updateSchedule = async (req, res) => {
-  console.log("uuuuuuuuuuuu ", req.params.id);
-  console.log("bbbbb", req.body);
-
   try {
     const schedule = await Schedule.update(
       {
