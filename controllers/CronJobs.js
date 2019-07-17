@@ -1,6 +1,7 @@
 const CronJob = require("cron").CronJob;
 import Announcement from "../models/announcementmodel";
 import Schedule from "../models/schedulemodel";
+import StatusUpdate from "";
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 import {
@@ -9,11 +10,11 @@ import {
 } from "./announcementcontroller";
 import { SetInactiveStatus } from "./statusUpdateController";
 
-console.log("Before job instantiation");
-const job = new CronJob("* * * * * *", function() {
-  // getLiveAnnouncementWithStatus();
 
-  SetInactiveStatus();
+const job = new CronJob("* * * * * *", function() {
+  // Update the statuses at midnight
+  console.log("this should fire");
+  // SetInactiveStatus();
 });
 console.log("After job instantiation");
 // job.start();
