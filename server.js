@@ -11,6 +11,7 @@ import { sequelize } from "./config/config";
 import Announcement from "./models/announcementmodel";
 import Schedule from "./models/schedulemodel";
 import Board from "./models/boardModel";
+import { job } from "./controllers/CronJobs";
 Announcement.hasOne(Schedule, { unique: true });
 Board.hasMany(Announcement);
 sequelize.sync();
