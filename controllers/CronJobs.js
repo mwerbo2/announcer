@@ -8,12 +8,13 @@ import {
   getLiveAnnouncementWithStatus,
   getAllAnnouncements
 } from "./announcementcontroller";
-import { SetInactiveStatus } from "./statusUpdateController";
+import { SetInactiveStatus, updateStatus } from "./statusUpdateController";
 
-const job = new CronJob("* * * * * *", function() {
+const job = new CronJob("*/1 * * * *", function() {
   // Update the statuses at midnight
-  console.log("this should fire");
-  SetInactiveStatus();
+  console.log("Firing Cronjob to update status");
+  // SetInactiveStatus();
+  updateStatus();
 });
 console.log("After job instantiation");
 // job.start();
