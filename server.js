@@ -24,6 +24,7 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
+job.start();
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
