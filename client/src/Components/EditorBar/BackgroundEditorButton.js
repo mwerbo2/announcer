@@ -65,7 +65,7 @@ class BackgroundEditorButton extends React.Component {
     if (res.status === 200) {
       setTimeout(() => {
         toast({
-          title: "Background udpated"
+          title: "Background updated"
         });
       }, 500);
       this.setState({ modalOpen: false });
