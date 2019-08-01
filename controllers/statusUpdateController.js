@@ -8,9 +8,12 @@ const Op = Sequelize.Op;
 // Return the announcement status based on the date_time start and end
 const setStatus = (dateStart, dateEnd) => {
   const currentDate = moment().format("YYYY-MM-DD");
+  // const currentDate = new Date().toLocaleDateString();
   const formattedStart = moment(dateStart).format("YYYY-MM-DD");
   const formattedEnd = moment(dateEnd).format("YYYY-MM-DD");
-
+  console.log("suc.js datestart", dateStart);
+  console.log("suc.js dateend", dateEnd);
+  console.log("suc.js 16", currentDate);
   if (formattedStart > currentDate && formattedEnd > currentDate) {
     return "scheduled";
   } else if (formattedStart <= currentDate && formattedEnd >= currentDate) {
