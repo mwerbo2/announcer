@@ -72,8 +72,8 @@ class DateAndTimePickers extends React.Component {
         .put(
           `/schedules/${p_id}`,
           {
-            date_time_start: this.state.startTime,
-            date_time_end: this.state.endTime
+            date_time_start: this.state.startTime.toLocaleDateString(),
+            date_time_end: this.state.endTime.toLocaleDateString()
           },
           {
             headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
@@ -86,8 +86,8 @@ class DateAndTimePickers extends React.Component {
         .post(
           "/schedules",
           {
-            date_time_start: this.state.startTime,
-            date_time_end: this.state.endTime,
+            date_time_start: this.state.startTime.toLocaleDateString(),
+            date_time_end: this.state.endTime.toLocaleDateString(),
             AnnouncementId: p_id
           },
           {
