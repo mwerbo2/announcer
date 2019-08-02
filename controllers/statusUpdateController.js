@@ -7,7 +7,10 @@ const Op = Sequelize.Op;
 
 // Return the announcement status based on the date_time start and end
 const setStatus = (dateStart, dateEnd) => {
-  const currentDate = moment().format("YYYY-MM-DD");
+  // const currentDate = moment().format("YYYY-MM-DD");
+  const currentDate = moment()
+    .tz("America/Chicago")
+    .format("YYYY-MM-DD");
   // const currentDate = new Date().toLocaleDateString();
   const formattedStart = moment(dateStart).format("YYYY-MM-DD");
   const formattedEnd = moment(dateEnd).format("YYYY-MM-DD");
