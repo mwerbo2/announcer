@@ -38,7 +38,6 @@ class DateAndTimePickers extends React.Component {
     };
   }
   closeModal(res) {
-    console.log("close mod", res);
     setTimeout(() => {
       toast({
         title: "Successfully added announcement"

@@ -30,7 +30,6 @@ class Profile extends React.Component {
 
   fetchAnnouncements = async () => {
     const res = await axios.get("/announcements/status");
-    console.log("Announcements", res);
     const { active, inactive, scheduled } = res.data;
     this.setState({
       posts: res.data,
