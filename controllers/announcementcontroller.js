@@ -84,31 +84,44 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
     return res.status(400).send(error);
   }
 };
+// Old method that to return active announcement by comparing status and dates
+// const getLiveAnnouncementsRonak = async (req, res) => {
+//   const currentDate = new Date();
+//   try {
+//     const post = await Announcement.findAll({
+//       where: {
+//         status: "active"
+//       },
+//       include: [
+//         {
+//           model: Schedule,
+//           where: [
+//             {
+//               date_time_start: {
+//                 [Op.lte]: currentDate
+//               }
+//             },
+//             {
+//               date_time_end: {
+//                 [Op.gte]: currentDate
+//               }
+//             }
+//           ]
+//         }
+//       ]
+//     });
+//     return res.status(200).send(post);
+//   } catch (error) {
+//     return res.status(400).send(error);
+//   }
+// };
 
 const getLiveAnnouncementsRonak = async (req, res) => {
-  const currentDate = new Date();
   try {
     const post = await Announcement.findAll({
       where: {
         status: "active"
-      },
-      include: [
-        {
-          model: Schedule,
-          where: [
-            {
-              date_time_start: {
-                [Op.lte]: currentDate
-              }
-            },
-            {
-              date_time_end: {
-                [Op.gte]: currentDate
-              }
-            }
-          ]
-        }
-      ]
+      }
     });
     return res.status(200).send(post);
   } catch (error) {
@@ -138,13 +151,11 @@ const getAnnouncementByStatus = async (req, res) => {
       include: [{ model: Schedule }]
     });
 
-    return res
-      .status(200)
-      .send({
-        active: activePosts,
-        inactive: inactivePosts,
-        scheduled: scheduledPosts
-      });
+    return res.status(200).send({
+      active: activePosts,
+      inactive: inactivePosts,
+      scheduled: scheduledPosts
+    });
   } catch (err) {
     console.error(err.message);
   }

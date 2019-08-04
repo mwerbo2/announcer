@@ -27,7 +27,10 @@ const setStatus = (dateStart, dateEnd) => {
 };
 // Runs on crontab to update announcement statuses based on start and end dates in schedule
 const updateStatus = async () => {
-  const currentDate = moment().format("YYYY-MM-DD");
+  // const currentDate = moment().format("YYYY-MM-DD");
+  const currentDate = moment()
+    .tz("America/Chicago")
+    .format("YYYY-MM-DD");
   console.log("suc.js 25 update status");
 
   // Check all announcements schedules for date start / end range
@@ -40,6 +43,7 @@ const updateStatus = async () => {
   // SELECT * FROM "Schedules" WHERE "date_time_start" <= '2019-07-29' AND "date_time_end" >= '2019-07-29';
 
   const scheduled = await Schedule.findAll({
+    raw: true,
     attributes: ["AnnouncementId"],
     where: {
       date_time_start: {
@@ -50,8 +54,25 @@ const updateStatus = async () => {
       }
     }
   });
-
   console.log("suc.js 48", scheduled);
+
+  
+    scheduled.map(sched => {
+      console.log("Id should be", sched.AnnouncementId);
+      const updatedSched = await Announcement.update(
+        {
+          status: scheduled
+        },
+        {
+          where: {
+            id: sched.AnnouncementId
+          }
+        }
+      );
+      console.log("done:", updatedSched);
+    });
+
+
   // find records and then update the corresponding files.
 
   // Correctly updates status with schedule table joined
