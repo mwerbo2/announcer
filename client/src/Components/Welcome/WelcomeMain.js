@@ -25,13 +25,19 @@ class WelcomeMain extends React.Component {
                 </Header>
                 <Header as="h1">Get started here</Header>
                 {!auth0Client.isAuthenticated() && (
-                  <Button size="massive" onClick={auth0Client.signIn}>
-                    Add Announcement
+                  <Button
+                    color="blue"
+                    size="massive"
+                    onClick={auth0Client.signIn}
+                  >
+                    Add announcement
                   </Button>
                 )}
                 {auth0Client.isAuthenticated() && (
-                  <Button size="massive">
-                    <Link to={"/displayeditor"}>Add Announcement</Link>
+                  <Button color="blue" size="massive">
+                    <Link to={"/displayeditor"} style={{ color: "white" }}>
+                      Add announcement
+                    </Link>
                   </Button>
                 )}
                 <Header as="h1">Already have a post?</Header>
@@ -39,24 +45,34 @@ class WelcomeMain extends React.Component {
             </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column width="4" textAlign="center">
-                <Button size="massive">
-                  <Link to={`/display`} target="_blank">
-                    View Live Post
+                <Button color="blue" size="massive">
+                  <Link
+                    to={`/display`}
+                    target="_blank"
+                    style={{ color: "white" }}
+                  >
+                    View live post
                   </Link>
                 </Button>
               </Grid.Column>
-              {/* <Grid.Column width="4" textAlign="center">
-              {!auth0Client.isAuthenticated() && (
-                <Button size="massive" onClick={auth0Client.signIn}>
-                  View Previous Posts
-                </Button>
-              )}
-              {auth0Client.isAuthenticated() && (
-                <Button size="massive">
-                  <Link to={"/profile"}>View Previous Posts</Link>
-                </Button>
-              )}
-            </Grid.Column> */}
+              <Grid.Column width="4" textAlign="center">
+                {!auth0Client.isAuthenticated() && (
+                  <Button
+                    color="blue"
+                    size="massive"
+                    onClick={auth0Client.signIn}
+                  >
+                    View previous posts
+                  </Button>
+                )}
+                {auth0Client.isAuthenticated() && (
+                  <Button color="blue" size="massive">
+                    <Link to={"/profile"} style={{ color: "white" }}>
+                      View previous posts
+                    </Link>
+                  </Button>
+                )}
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>

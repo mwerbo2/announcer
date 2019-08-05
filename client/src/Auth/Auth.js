@@ -6,7 +6,7 @@ class Auth {
       domain: `${process.env.REACT_APP_Auth0_Domain}`,
       audience: `https://${process.env.REACT_APP_Auth0_Domain}/userinfo`,
       clientID: `${process.env.REACT_APP_Auth0_ClientId}`,
-      redirectUri: `http://docker01/callback`,
+      redirectUri: `http://${process.env.REACT_APP_hostname}/callback`,
       responseType: `id_token`,
       scope: `openid profile`,
       sso: false
@@ -67,7 +67,7 @@ class Auth {
     localStorage.removeItem("isLoggedIn");
 
     this.auth0.logout({
-      returnTo: `http://docker01/`,
+      returnTo: `http://${process.env.REACT_APP_hostname}/`,
       clientID: `${process.env.REACT_APP_Auth0_ClientId}`
     });
   }

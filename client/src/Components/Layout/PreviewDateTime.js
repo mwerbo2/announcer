@@ -5,14 +5,12 @@ import moment from "moment";
 class DateTime extends React.Component {
   state = {
     date: moment().format("MMMM D, YYYY"),
-    time: moment().format("h:mm A"),
+    time: moment().format("h:mm A")
   };
 
   componentDidMount() {
-    this.timeInterval = setInterval(() => {
-      this.setState({
-        dateTime: moment().format("LLLL")
-      });
+    setInterval(() => {
+      this.timeInterval();
     }, 1000);
   }
 
@@ -20,11 +18,29 @@ class DateTime extends React.Component {
     clearInterval(this.timeInterval);
   }
 
+  timeInterval = () => {
+    this.setState({
+      date: moment().format("MMMM D, YYYY"),
+      time: moment().format("h:mm A")
+    });
+  };
+
   render() {
     return (
       <Container>
-        <p style={{color: 'white', fontSize: "17px", margin: "0", textAlign: 'center'}}>{this.state.date}</p>
-        <p style={{color: 'white', fontSize: "17px", textAlign: 'center'}}>{this.state.time}</p>
+        <p
+          style={{
+            color: "white",
+            fontSize: "2vw",
+            margin: "0",
+            textAlign: "center"
+          }}
+        >
+          {this.state.date}
+        </p>
+        <p style={{ color: "white", fontSize: "2vw", textAlign: "center" }}>
+          {this.state.time}
+        </p>
       </Container>
     );
   }

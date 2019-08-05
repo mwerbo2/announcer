@@ -8,8 +8,6 @@ import WelcomeMain from "./Components/Welcome/WelcomeMain";
 import Callback from "./Auth/Callback";
 import auth0Client from "./Auth/Auth";
 import history from "./Auth/history";
-import NavBar from "./Components/Layout/Navbar";
-import SecuredRoute from "./Auth/SecuredRoute";
 
 class App extends Component {
   state = {
@@ -18,9 +16,7 @@ class App extends Component {
   };
 
   getOpacity = opa => {
-    console.log("this gotOPacity");
     this.setState({ opacity: opa });
-    // console.log("app.js 21", this.state.opacity);
   };
 
   getBackground = updated => {
@@ -29,39 +25,7 @@ class App extends Component {
     });
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log(this.state.opacity);
-    console.log("comp did update", prevState);
-    console.log(this.state.opacity !== prevState.opacity);
-    if (this.state.opacity !== prevState.opacity) {
-      // this.getOpacity();
-      console.log("update opa in", this.state.opacity);
-    }
-    // if (this.state.backgroundImage !== prevState.backgroundImage) {
-    // this.setState({backgroundImage: this.})
-    // this.getBackground()
-    // }
-  };
-  // state={checkingSession: true}
-
-  // goTo(route) {
-  //   this.props.history.replace(`/${route}`);
-  // }
-
-  // login() {
-  //   this.props.auth.login();
-  // }
-
-  // logout() {
-  //   this.props.auth.logOut();
-  // }
-  // componentDidMount() {
-  //   const { renewSession } = this.props.auth;
-
-  //   if (localStorage.getItem("isLoggedIn") === "true") {
-  //     renewSession();
-  //   }
-  // }
+  componentDidUpdate = (prevProps, prevState) => {};
 
   async componentDidMount() {
     if (this.props.location.pathname === "/callback") {
@@ -70,7 +34,6 @@ class App extends Component {
     }
     try {
       await auth0Client.silentAuth();
-      // this.forceUpdate();
     } catch (err) {
       if (err.error !== "login_required") console.log(err.error);
     }
@@ -78,8 +41,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        {/* <NavBar /> */}
+      <div style={{ height: "100vh" }}>
         <Router history={history}>
           <div>
             <Route
@@ -100,15 +62,19 @@ class App extends Component {
             />
             <Route
               path="/displayeditor"
-              render={props => (
-                <DisplayEditor
-                  auth={auth0Client}
-                  didBackgroundUpdate={this.getBackground}
-                  didOpacityUpdate={this.getOpacity}
-                  opacity={this.state.opacity}
-                  {...props}
-                />
-              )}
+              render={props =>
+                !auth0Client.isAuthenticated() ? (
+                  auth0Client.signIn()
+                ) : (
+                  <DisplayEditor
+                    auth={auth0Client}
+                    didBackgroundUpdate={this.getBackground}
+                    didOpacityUpdate={this.getOpacity}
+                    opacity={this.state.opacity}
+                    {...props}
+                  />
+                )
+              }
             />
             <Route
               path="/profile"

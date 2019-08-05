@@ -11,9 +11,7 @@ class RepeatDropdown extends React.Component {
   state = {};
 
   handleChange = (e, { value }) => this.setState({ value });
-
   render() {
-    const { value } = this.state;
     return (
       <Dropdown
         onChange={this.handleChange}

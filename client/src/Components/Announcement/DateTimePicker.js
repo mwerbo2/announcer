@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import auth0Client from "../../Auth/Auth";
 import DatePicker from "react-datepicker";
-import RepeatDropdown from "./RepeatDropdown";
+import { toast } from "react-semantic-toasts";
 import "react-datepicker/dist/react-datepicker.css";
 
 const styles = theme => ({
@@ -28,8 +28,6 @@ class DateAndTimePickers extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleStartTime = this.handleStartTime.bind(this);
-    this.handleEndTime = this.handleEndTime.bind(this);
 
     this.state = {
       startTime: new Date(),
@@ -40,6 +38,11 @@ class DateAndTimePickers extends React.Component {
     };
   }
   closeModal(res) {
+    setTimeout(() => {
+      toast({
+        title: "Successfully added announcement"
+      });
+    }, 500);
     this.setState({ postMessage: res.statusText });
     this.props.closeMod();
   }
@@ -49,12 +52,6 @@ class DateAndTimePickers extends React.Component {
       .catch(error => console.log(error))
       .then(res => this.setState({ currentSchedule: res.data }));
   }
-
-  handleChange = date => {
-    this.setState({
-      startTime: date
-    });
-  };
 
   deleteSchedule = () => {
     axios
@@ -74,8 +71,8 @@ class DateAndTimePickers extends React.Component {
         .put(
           `/schedules/${p_id}`,
           {
-            date_time_start: this.state.startTime,
-            date_time_end: this.state.endTime
+            date_time_start: this.state.startTime.toLocaleDateString(),
+            date_time_end: this.state.endTime.toLocaleDateString()
           },
           {
             headers: { Authorization: `Bearer ${auth0Client.getIdToken()}` }
@@ -88,8 +85,8 @@ class DateAndTimePickers extends React.Component {
         .post(
           "/schedules",
           {
-            date_time_start: this.state.startTime,
-            date_time_end: this.state.endTime,
+            date_time_start: this.state.startTime.toLocaleDateString(),
+            date_time_end: this.state.endTime.toLocaleDateString(),
             AnnouncementId: p_id
           },
           {
@@ -101,9 +98,6 @@ class DateAndTimePickers extends React.Component {
     }
   };
 
-  handleStartTime = e => {
-    this.setState({ startTime: e.target.value });
-  };
   handleStartDate = date => {
     this.setState({ startTime: date });
   };
@@ -111,8 +105,12 @@ class DateAndTimePickers extends React.Component {
     this.setState({ endTime: date });
   };
 
-  handleEndTime = e => {
-    this.setState({ endTime: e.target.value });
+  handleSelectStart = date => {
+    this.setState({ startTime: date });
+  };
+
+  handleSelectEnd = date => {
+    this.setState({ endTime: date });
   };
 
   render() {
@@ -132,6 +130,8 @@ class DateAndTimePickers extends React.Component {
                     <DatePicker
                       selected={this.state.startTime}
                       onChange={this.handleStartDate}
+                      onSelect={this.handleSelectStart}
+                      minDate={new Date()}
                       dateFormat="yyyy-MM-dd"
                       key={1}
                     />
@@ -140,6 +140,7 @@ class DateAndTimePickers extends React.Component {
                     <Header as="h5">Date End</Header>
                     <DatePicker
                       selected={this.state.endTime}
+                      onSelect={this.handleSelectEnd}
                       onChange={this.handleEndDate}
                       dateFormat="yyyy-MM-dd"
                       minDate={new Date()}
@@ -183,6 +184,7 @@ class DateAndTimePickers extends React.Component {
                     <DatePicker
                       selected={this.state.startTime}
                       onChange={this.handleStartDate}
+                      minDate={new Date()}
                       dateFormat="yyyy-MM-dd"
                     />
                   </Grid.Column>

@@ -14,7 +14,6 @@ class ResolutionPicker extends Component {
   }
   handleChange = (e, { value }) => {
     this.setState({ resolution: value });
-    console.log(value);
   };
 
   render() {

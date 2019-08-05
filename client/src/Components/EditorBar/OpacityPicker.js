@@ -2,23 +2,12 @@ import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import React from "react";
 import { Grid } from "semantic-ui-react";
-import Slider, { createSliderWithTooltip } from "rc-slider";
-import axios from "axios";
-
-// const SliderWithTooltip = createSliderWithTooltip(Slider);
+import Slider from "rc-slider";
 
 class OpacityPicker extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  async componentDidMount() {
-    const res = await axios.get("/");
-  }
+  async componentDidMount() {}
   log = value => {
     const formattedValue = this.percentFormatter(value);
-    // props.didOpacityUpdate(formattedValue);
-    // props.opacityUpdate(formattedValue);
     this.props.didOpacityUpdate(formattedValue);
   };
 

@@ -10,12 +10,11 @@ import {
 } from "semantic-ui-react";
 import axios from "axios";
 import OpacityPicker from "./OpacityPicker";
-import ResolutionPicker from "./ResolutionPicker";
+import { toast } from "react-semantic-toasts";
 
 class BackgroundEditorButton extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.inputRef = createRef();
     this.state = {
@@ -27,26 +26,64 @@ class BackgroundEditorButton extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    const res = await axios.get("/boards");
+    this.setState({
+      opacity: res.data[0].background_opacity,
+      imageURL: res.data[0].background_image
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.opacity !== this.props.opacity) {
+      this.setState({ opacity: this.props.opacity });
+    }
+  }
+
   openModal = () => {
     this.setState({ modalOpen: true });
   };
 
-  // getOpacity = val => {
-  //   this.setState({ opacity: val });
-  //   console.log("beb.js 33", this.state);
-  // };
-
   handleBackgroundPosition = (e, { value }) => this.setState({ value });
 
-  close = () => {
-    this.setState({ modalOpen: false });
-    // this.getBackground()
-    // this.props.didEdit;
-    const backgroundInfo = {
-      backgroundColor: this.state.backgroundColor,
-      backgroundImage: this.state.imageURL
-    };
-    this.props.didBackgroundUpdate(backgroundInfo);
+  handleError = err => {
+    if (err.response.status === 400) {
+      setTimeout(() => {
+        toast({
+          title: "Error uploading image",
+          description: "Check the image url"
+        });
+      }, 500);
+      const backgroundInfo = {
+        backgroundColor: this.state.backgroundColor,
+        backgroundImage: this.state.imageURL
+      };
+      this.props.didBackgroundUpdate(backgroundInfo);
+    }
+  };
+  close = res => {
+    if (res.status === 200) {
+      setTimeout(() => {
+        toast({
+          title: "Background updated"
+        });
+      }, 500);
+      this.setState({ modalOpen: false });
+      const backgroundInfo = {
+        backgroundColor: this.state.backgroundColor,
+        backgroundImage: this.state.imageURL,
+        backgroundOpacity: this.state.opacity
+      };
+      this.props.didBackgroundUpdate(backgroundInfo);
+    } else {
+      this.setState({ modalOpen: false });
+      const backgroundInfo = {
+        backgroundColor: this.state.backgroundColor,
+        backgroundImage: this.state.imageURL,
+        backgroundOpacity: this.state.opacity
+      };
+      this.props.didBackgroundUpdate(backgroundInfo);
+    }
   };
 
   submitBackground = () => {
@@ -54,10 +91,11 @@ class BackgroundEditorButton extends React.Component {
       .put("/boards", {
         background_color: this.state.backgroundColor,
         background_image: this.state.imageURL,
+        background_opacity: this.state.opacity,
         id: 1
       })
       .then(response => this.close(response))
-      .catch(err => console.log(err));
+      .catch(err => this.handleError(err));
   };
 
   handleChangeComplete = color => {
@@ -65,7 +103,7 @@ class BackgroundEditorButton extends React.Component {
   };
 
   render() {
-    const { modalOpen } = this.state;
+    const { modalOpen, imageURL } = this.state;
     return (
       <Container>
         <Modal open={modalOpen}>
@@ -82,10 +120,9 @@ class BackgroundEditorButton extends React.Component {
                   />
                   <Header as="h3">Opacity setting for display</Header>
                   <OpacityPicker {...this.props} />
-                  {/* <ResolutionPicker /> */}
                 </Grid.Column>
                 <Grid.Column>
-                  <Image src={this.state.imageURL} size="medium" centered />
+                  <Image src={imageURL} size="medium" centered />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -103,7 +140,9 @@ class BackgroundEditorButton extends React.Component {
             />
           </Modal.Actions>
         </Modal>
-        <Button onClick={this.openModal}>Edit Background</Button>
+        <Button onClick={this.openModal} color="blue">
+          Edit Background
+        </Button>
       </Container>
     );
   }

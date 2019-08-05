@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/mwerbo2/sqlize#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
@@ -34,12 +34,13 @@
     "express-jwt": "^5.3.1",
     "helmet": "^3.16.0",
     "jwks-rsa": "^1.4.0",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3",
     "pg": "^7.9.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^5.2.9",
-    "sequelize-cli": "^5.4.0"
+    "sequelize": "^6.0.0",
+    "sequelize-cli": "^5.5.0"
   },
   "devDependencies": {
     "prettier": "1.16.4"

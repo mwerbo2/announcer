@@ -76,11 +76,6 @@ class AnnouncementPlaceholder extends React.Component {
   handleBodyChange(event) {
     this.setState({ body: event });
   }
-  componentDidMount() {
-    // console.log(this.placeHolderRef.current.getBoundingClientRect().height);
-    // console.log(this.props.boardB)
-    // if (this.placeHolderRef.current.getBoundingClientRect().bottom < this.props.boardB) { console.log('I fit')} else { console.log('i do not fit')}
-  }
 
   render() {
     return (
@@ -95,7 +90,9 @@ class AnnouncementPlaceholder extends React.Component {
                   apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                   initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
                   init={{
-                    menubar: false
+                    menubar: false,
+                    fontsize_formats:
+                      "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px"
                   }}
                   plugins="link table wordcount textcolor visualblocks spellchecker"
                   toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
@@ -111,7 +108,9 @@ class AnnouncementPlaceholder extends React.Component {
                 </li>
                 </ul>"
                   init={{
-                    menubar: false
+                    menubar: false,
+                    fontsize_formats:
+                      "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px"
                   }}
                   plugins="link table wordcount lists textcolor image"
                   toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
