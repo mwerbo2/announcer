@@ -1,7 +1,5 @@
 import Announcement from "../models/announcementmodel";
 import Schedule from "../models/schedulemodel";
-import { json } from "body-parser";
-import { type } from "os";
 const Sequelize = require("sequelize");
 const moment = require("moment");
 const Op = Sequelize.Op;
@@ -50,7 +48,10 @@ const updateStatus = async () => {
         },
         {
           where: {
-            id: updateId
+            id: updateId,
+            status: {
+              [Op.not]: "archive"
+            }
           }
         }
       );
@@ -78,7 +79,10 @@ const updateStatus = async () => {
         },
         {
           where: {
-            id: updateId
+            id: updateId,
+            status: {
+              [Op.not]: "archive"
+            }
           }
         }
       );
@@ -106,7 +110,10 @@ const updateStatus = async () => {
         },
         {
           where: {
-            id: updateId
+            id: updateId,
+            status: {
+              [Op.not]: "archive"
+            }
           }
         }
       );
@@ -116,30 +123,4 @@ const updateStatus = async () => {
   }
 };
 
-const SetInactiveStatus = async () => {
-  const currentDate = new Date();
-  const beginningOfDay = currentDate.setHours(0, 0, 0, 0);
-  const endOfDay = currentDate.setHours(23, 59, 59, 59);
-  try {
-    const post = await Announcement.update(
-      {
-        status: "archive"
-      },
-      {
-        include: [
-          {
-            model: Schedule,
-            where: {
-              date_time_start: {
-                [Op.lt]: endOfDay,
-                [Op.gt]: beginningOfDay
-              }
-            }
-          }
-        ]
-      }
-    );
-  } catch (error) {}
-};
-
-export { SetInactiveStatus, setStatus, updateStatus };
+export { setStatus, updateStatus };

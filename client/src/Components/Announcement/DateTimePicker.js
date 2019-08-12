@@ -60,10 +60,7 @@ class DateAndTimePickers extends React.Component {
       .then(() => this.setState({ scheduleDeleted: true }));
   };
 
-  checkSchedule = () => {};
-
   handleSubmit = e => {
-    this.checkSchedule();
     e.preventDefault();
     const p_id = this.props.post_id;
     if (this.state.currentSchedule.length > 0) {
