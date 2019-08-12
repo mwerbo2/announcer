@@ -88,5 +88,5 @@ const updateSchedule = async (req, res) => {
     return res.status(400).send(error);
   }
 };
-
+ 
 export { createSchedule, getAllScheduled, getScheduleById, updateSchedule };
