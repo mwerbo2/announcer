@@ -156,7 +156,8 @@ class Announcement extends React.Component {
                     init={{
                       menubar: false,
                       fontsize_formats:
-                        "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px"
+                        "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px",
+			content_css: "./Application.css"
                     }}
                     plugins="link table wordcount textcolor visualblocks spellchecker"
                     toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
@@ -177,7 +178,8 @@ class Announcement extends React.Component {
                     init={{
                       menubar: false,
                       fontsize_formats:
-                        "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px"
+                        "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px",
+			content_css: "./Application.css"
                     }}
                     plugins="link table wordcount lists textcolor image"
                     toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
