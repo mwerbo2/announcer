@@ -5,6 +5,7 @@ import {
   updateSchedule
 } from "../controllers/scheduleController";
 import checkJwt from "../authConfig";
+import { updateStatus } from "../controllers/statusUpdateController"
 
 module.exports = app => {
   app.get("/schedules/:id", getScheduleById);

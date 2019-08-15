@@ -104,7 +104,7 @@ class AnnouncementPlaceholder extends React.Component {
                   apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                   initialValue="<ul class='unorderedList' style='color: #ffffff'>
                 <li class='listItem'>
-                <h3 class='body' style='color: #ffffff'>Body</h3>
+                <p class='messageBody' style='color: #ffffff'>Body</p>
                 </li>
                 </ul>"
                   init={{

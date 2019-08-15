@@ -22,7 +22,7 @@ const setStatus = (dateStart, dateEnd) => {
   }
 };
 // Runs on crontab to update announcement statuses based on start and end dates in schedule
-const updateStatus = async () => {
+const updateStatus = async (req, res) => {
   try {
     const currentDate = moment()
       .tz("America/Chicago")
