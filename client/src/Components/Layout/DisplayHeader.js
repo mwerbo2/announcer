@@ -6,7 +6,7 @@ import Weather from "./PreviewWeather";
 const DisplayHeader = () => (
   <Grid.Row>
     <Grid.Column width={4}>
-      <Weather />
+      <Weather weatherVW="2vw"/>
     </Grid.Column>
     <Grid.Column width={8}>
       <Header
@@ -19,7 +19,7 @@ const DisplayHeader = () => (
       </Header>
     </Grid.Column>
     <Grid.Column width={4}>
-      <DateTime />
+      <DateTime dateVW="2vw"/>
     </Grid.Column>
   </Grid.Row>
 );

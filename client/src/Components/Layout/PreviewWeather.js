@@ -104,10 +104,10 @@ class Weather extends React.Component {
   render() {
     return (
       <Container textAlign="center" style={{ marginTop: ".5em" }}>
-        <span style={{ fontSize: "2vw", color: "white" }}>
+        <span style={{ fontSize: `calc(17px + ${this.props.weatherVW})`, color: "white" }}>
           <i className={`wi ${this.state.iconImage}`} />
         </span>
-        <p style={{ color: "white", fontSize: "2vw" }}>
+        <p style={{ color: "white", fontSize: `calc(15px + ${this.props.weatherVW})` }}>
           {Math.round(this.state.temp)}&deg;F
         </p>
       </Container>
