@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import Announcements from "../Announcement/Announcements";
 import DisplayHeader from "./DisplayHeader";
 import Axios from "axios";
+import DisplayHeaderEditor from "./DisplayHeaderEditor";
 
 class AnnouncementBoard extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class AnnouncementBoard extends React.Component {
           }}
         >
           <Grid style={{}}>
-            <DisplayHeader />
+            <DisplayHeaderEditor />
             <Grid.Row>
               <Announcements
                 ref={this.annRef}
