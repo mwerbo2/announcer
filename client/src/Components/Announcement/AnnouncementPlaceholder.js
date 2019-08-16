@@ -34,6 +34,7 @@ class AnnouncementPlaceholder extends React.Component {
 
   saveAnnouncement = e => {
     const postId = this.props.post_id;
+    console.log(this.state.body, this.state.title);
     axios
       .post(
         "/announcements",

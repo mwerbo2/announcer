@@ -26,7 +26,8 @@ class Announcement extends React.Component {
   saveAnnouncement = () => {
     //conditional to check if null don't send
     const postId = this.props.post_id;
-
+console.log("ann.js body ", this.state.body);
+	  console.log("ann.js title", this.state.title)
     if (!this.state.body) {
       axios
         .put(

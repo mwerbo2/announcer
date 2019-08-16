@@ -3,6 +3,8 @@ import { Grid, Container } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import LiveAnnouncement from "../Announcement/LiveAnnouncements";
 import DisplayHeader from "./DisplayHeader";
+//import defaultBackgroundImage from "./assets/backgroundImage";
+import BlackSquirrel from "./blackSquirrel";
 import axios from "axios";
 
 class Display extends React.Component {
@@ -21,6 +23,7 @@ class Display extends React.Component {
   };
 
   componentDidMount() {
+	  console.log("Ronak stinks ann.js 28");
     axios.get("/announcements/liveStatus").then(announcement => {
       this.setState({
         fullAnnouncement: announcement.data,
@@ -29,11 +32,11 @@ class Display extends React.Component {
       });
     });
 
-    axios.get("/boards").then(board => {
-      this.setState({
-        backgroundImage: board.data[0].background_image,
-        opacity: board.data[0].background_opacity
-      });
+    //axios.get("/boards").then(board => {
+     // this.setState({
+       // backgroundImage: board.data[0].background_image,
+        //opacity: board.data[0].background_opacity
+     // });
     });
 
     setInterval(() => {
@@ -53,7 +56,7 @@ class Display extends React.Component {
   render() {
     const background = {
       backgroundImage: `url(${this.state.backgroundImage ||
-        "https://live.staticflickr.com/25/62666535_0a7513949f_b.jpg"})`,
+       BlackSquirrel})`,
       backgroundPosition: "center",
       height: "100vh",
       width: "100%",
