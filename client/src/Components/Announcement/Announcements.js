@@ -40,6 +40,7 @@ class Announcements extends React.Component {
   };
 
   handleEditorChange(content) {
+    console.log('Ann.js handle editor change', content);
     this.setState({ content });
   }
 
@@ -62,6 +63,7 @@ class Announcements extends React.Component {
   };
 
   updateAfterSave = () => {
+	  console.log('Ann.js UpdateAfterSave', this.state)
     this.setState({ savedSchedule: true });
     this.getActivePosts();
     this.setState({ add: false, showAddButton: true });

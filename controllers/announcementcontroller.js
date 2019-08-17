@@ -161,6 +161,13 @@ const getAnnouncementByStatus = async (req, res) => {
   }
 };
 const updateAnnoucement = async (req, res) => {
+  console.log('AnnController updateAnnouncement body', req.body);
+  const {announcement_body, announcement_title, status} = req.body;
+  const updateObject = {};
+  if (announcement_body) updateObject.announcement_body = announcement_body;
+  if (announcement_title) updateObject.announcement_title = announcement_title;
+  if (status) updateObject.status = status;
+  console.log('Update Body', updateObject);
   try {
     const post = await Announcement.update(
       {
