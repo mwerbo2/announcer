@@ -25,6 +25,9 @@ class Announcement extends React.Component {
 
   saveAnnouncement = () => {
     //conditional to check if null don't send
+	console.log("ann.js saveannouncement props id", this.props.post_id);
+	console.log("ann.js saveannouncement body", this.state.body);
+	console.log("ann.js saveannouncement title", this.state.title);
     const postId = this.props.post_id;
 
     if (!this.state.body) {
@@ -62,6 +65,7 @@ class Announcement extends React.Component {
           console.log(error);
         });
     } else {
+	    console.log("Ann.js put title: ", this.state.title, "body: ", this.state.body)
       axios
         .put(
           `/announcements/${postId}`,

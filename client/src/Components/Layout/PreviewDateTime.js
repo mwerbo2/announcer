@@ -31,14 +31,14 @@ class DateTime extends React.Component {
         <p
           style={{
             color: "white",
-            fontSize: "2vw",
+            fontSize: `calc(15px + ${this.props.dateVW})`,
             margin: "0",
             textAlign: "center"
           }}
         >
           {this.state.date}
         </p>
-        <p style={{ color: "white", fontSize: "2vw", textAlign: "center" }}>
+        <p style={{ color: "white", fontSize: `calc(15px + ${this.props.dateVW})`, textAlign: "center" }}>
           {this.state.time}
         </p>
       </Container>
