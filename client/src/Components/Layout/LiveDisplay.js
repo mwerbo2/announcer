@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import LiveAnnouncement from "../Announcement/LiveAnnouncements";
 import DisplayHeader from "./DisplayHeader";
 import axios from "axios";
+import '../Announcement/Announcement.css'
 
 class Display extends React.Component {
   state = {
@@ -66,7 +67,7 @@ class Display extends React.Component {
           fluid
           key={this.props.key}
           style={{
-            background: `rgb(0,0,0,${this.state.opacity})`,
+            backgroundColor: `rgba(0,0,0,${this.state.opacity})`,
             height: "105vh"
           }}
         >
@@ -77,6 +78,7 @@ class Display extends React.Component {
                 {this.state.fullAnnouncement.map(announce => {
                   return (
                     <LiveAnnouncement
+                    id='bod'
                       key={announce.id}
                       title={announce.announcement_title}
                       body={announce.announcement_body}

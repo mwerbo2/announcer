@@ -1,4 +1,16 @@
-.messageBody {
-font-size: 30px;
-font-color: orange;
+
+#bod {
+    font-size: 2vw !important;
 }
+
+/* .messageBody {
+font-size: 28px;
+color:orange;
+}
+
+.messageTitle {
+    font-size: calc(25px + .5vw);
+    color: #ffffff;
+    text-decoration: underline;
+    text-align: center;
+} */

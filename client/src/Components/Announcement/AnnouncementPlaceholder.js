@@ -4,6 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import MaterialUIPickers from "../Announcement/DateTimePicker";
 import auth0Client from "../../Auth/Auth";
+import './Announcement.css'
 
 const styles = {
   containerStyle: {
@@ -91,8 +92,9 @@ class AnnouncementPlaceholder extends React.Component {
                   initialValue="<h1 style='text-align: center;'><span style='text-decoration: underline; color: #ffffff'>Title</span></h1>"
                   init={{
                     menubar: false,
-                    fontsize_formats:
-                      "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px"
+                    // fontsize_formats:
+                    //   "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px"
+                    fontsize_formats: ".5vw 1vw 1.5vw 2vw 2.5vw 3vw 3.5vw 4vw 4.5vw"
                   }}
                   plugins="link table wordcount textcolor visualblocks spellchecker"
                   toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align image"
@@ -104,14 +106,15 @@ class AnnouncementPlaceholder extends React.Component {
                   apiKey="2v70mtgk4kz045dkbblsshf5xoky86546vqb4bvj4h3oaqds"
                   initialValue="<ul class='unorderedList' style='color: #ffffff'>
                 <li class='listItem'>
-                <p class='messageBody' style='color: #ffffff'>Body</p>
+                <h3 class='messageBody' style='color: #ffffff'>Body</h3>
                 </li>
                 </ul>"
                   init={{
                     menubar: false,
-                    fontsize_formats:
-                      "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px",
-			content_css: 'Application.css'
+      //               fontsize_formats:
+      //                 "8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 20px 22px 24px 26px 28px 30px 34px 38px 42px 46px 50px",
+      // content_css: 'Application.css'
+      fontsize_formats: ".5vw 1vw 1.5vw 2vw 2.5vw 3vw 3.5vw 4vw 4.5vw"
                   }}
                   plugins="link table wordcount lists textcolor image"
                   toolbar="cut copy paste undo redo bold italic underline fontsizeselect forecolor backcolor align numlist bullist image"
