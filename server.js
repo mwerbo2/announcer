@@ -38,10 +38,10 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-require("./Routes/weatherRoutes")(app);
-require("./Routes/announcementRoutes")(app);
-require("./Routes/scheduleRoutes")(app);
-require("./Routes/boardRoutes")(app);
+require("./routes/weatherRoutes")(app);
+require("./routes/announcementRoutes")(app);
+require("./routes/scheduleRoutes")(app);
+require("./routes/boardRoutes")(app);
 
 app.use(express.static(`client/build`));
 app.get("*", (req, res) => {
