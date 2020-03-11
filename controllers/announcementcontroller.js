@@ -1,5 +1,7 @@
 import Announcement from "../models/announcementmodel";
 import Schedule from "../models/schedulemodel";
+import {setStatus} from './statusUpdateController';
+
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -84,6 +86,38 @@ const getLiveAnnouncementWithStatus = async (req, res) => {
     return res.status(400).send(error);
   }
 };
+// Posting for new modal combined content and scheduling
+const postAndSchedule = async (req, res) => {
+const startDateFormatted = new Date(req.body.date_time_start)
+const endDateFormatted = new Date(req.body.date_time_end)
+  try {
+    const post = await Announcement.create({
+      user_id: req.body.user_id,
+      announcement_title: req.body.announcement_title,
+      announcement_body: req.body.announcement_body
+    });
+    
+    const schedule = await Schedule.create({
+      date_time_start: startDateFormatted,
+      date_time_end: endDateFormatted,
+      AnnouncementId: post.id
+    });
+    const stat = setStatus(startDateFormatted, endDateFormatted);
+    const statusUpdate = await Announcement.update(
+      {
+        status: stat
+      },
+      {
+        where: {
+          id: post.id
+        }
+      }
+    );
+    return res.status(200).send(post)
+  } catch (err) {
+    return res.status(500).send(err)
+  }
+}
 // Old method that to return active announcement by comparing status and dates
 // const getLiveAnnouncementsRonak = async (req, res) => {
 //   const currentDate = new Date();
@@ -228,5 +262,6 @@ export {
   setAnnouncementStatus,
   getLiveAnnouncementWithStatus,
   getLiveAnnouncementsRonak,
-  getAnnouncementByStatus
+  getAnnouncementByStatus,
+  postAndSchedule
 };

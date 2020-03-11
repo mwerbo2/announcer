@@ -1,13 +1,15 @@
 import React from "react";
-import { Container } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import BackgroundEditorButton from "./BackgroundEditorButton";
+import AnnouncementModal from '../Announcement/AnnouncementModal';
 
 class EditorBarContainer extends React.Component {
   render() {
     return (
-      <Container>
-        <BackgroundEditorButton {...this.props} />
-      </Container>
+      <Grid columns="equal">
+        <Grid.Column><AnnouncementModal {...this.props}/></Grid.Column>
+        <Grid.Column><BackgroundEditorButton {...this.props} /></Grid.Column>        
+      </Grid>
     );
   }
 }

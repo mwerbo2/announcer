@@ -1,17 +1,16 @@
 import Schedule from "../models/schedulemodel";
 import Announcement from "../models/announcementmodel";
 import { setStatus } from "./statusUpdateController";
-import { read } from "fs";
 
 const createSchedule = async (req, res) => {
-  const stat = setStatus(req.body.date_time_start, req.body.date_time_end);
-  console.log("sc.js line 7 ", stat);
-  console.log("***********controller start", req.body.date_time_start);
-  console.log("***********controller end", req.body.date_time_end);
+  console.log(req.body)
+  const startDateFormatted = new Date(req.body.date_time_start)
+  const endDateFormatted = new Date(req.body.date_time_end)
+  const stat = setStatus(startDateFormatted, endDateFormatted);
   try {
     const schedule = await Schedule.create({
-      date_time_start: req.body.date_time_start,
-      date_time_end: req.body.date_time_end,
+      date_time_start: startDateFormatted,
+      date_time_end: endDateFormatted,
       AnnouncementId: req.body.AnnouncementId
     });
 
@@ -55,11 +54,13 @@ const getScheduleById = async (req, res) => {
 };
 
 const updateSchedule = async (req, res) => {
+  const startDateFormatted = new Date(req.body.date_time_start)
+  const endDateFormatted = new Date(req.body.date_time_end)
   try {
     const schedule = await Schedule.update(
       {
-        date_time_start: req.body.date_time_start,
-        date_time_end: req.body.date_time_end
+        date_time_start: startDateFormatted,
+        date_time_end: endDateFormatted
       },
       {
         where: {
@@ -69,8 +70,8 @@ const updateSchedule = async (req, res) => {
     );
 
     const stat = await setStatus(
-      req.body.date_time_start,
-      req.body.date_time_end
+      startDateFormatted,
+      endDateFormatted
     );
     const statusUpdate = await Announcement.update(
       {
