@@ -3,7 +3,6 @@ import Announcement from "../models/announcementmodel";
 import { setStatus } from "./statusUpdateController";
 
 const createSchedule = async (req, res) => {
-  console.log(req.body)
   const startDateFormatted = new Date(req.body.date_time_start)
   const endDateFormatted = new Date(req.body.date_time_end)
   const stat = setStatus(startDateFormatted, endDateFormatted);
@@ -83,7 +82,6 @@ const updateSchedule = async (req, res) => {
         }
       }
     );
-    console.log(schedule);
     return res.status(200).send(schedule);
   } catch (error) {
     return res.status(400).send(error);
